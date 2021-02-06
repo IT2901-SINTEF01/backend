@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -21,7 +18,7 @@ namespace Backend.Controllers
         [HttpGet]
         public IndexResponse Get()
         {
-            return new IndexResponse()
+            return new()
             {
                 Date = DateTime.Now.AddDays(1),
                 Message = "Hello, Index World!"
