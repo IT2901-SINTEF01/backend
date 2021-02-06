@@ -1,45 +1,77 @@
+using Backend.API.Schemas;
+using GraphQL.Server;
+using GraphQL.Server.Transports.AspNetCore;
+using GraphQL.Server.Ui.Playground;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Backend
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Backend", Version = "v1"}); });
+            services
+                .AddSingleton<SampleSchema>()
+                .AddGraphQL((options, provider) =>
+                {
+                    options.EnableMetrics = Environment.IsDevelopment();
+                    var logger = provider.GetRequiredService<ILogger<Startup>>();
+                    options.UnhandledExceptionDelegate = ctx =>
+                        logger.LogError("{Error} occured", ctx.OriginalException.Message);
+                })
+                .AddSystemTextJson(deserializerSettings => { }, serializerSettings => { })
+                .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = Environment.IsDevelopment())
+                .AddWebSockets()
+                .AddDataLoader()
+                .AddGraphTypes(typeof(SampleSchema));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Backend v1"));
-            }
 
-            app.UseHttpsRedirection();
+            app.UseWebSockets();
+            app.UseGraphQLWebSockets<SampleSchema>();
 
-            app.UseRouting();
+            app.UseGraphQL<SampleSchema, GraphQLHttpMiddleware<SampleSchema>>();
 
-            app.UseAuthorization();
+            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
+            {
+                Path = "/ui/playground",
+                BetaUpdates = true,
+                RequestCredentials = RequestCredentials.Omit,
+                HideTracingResponse = false,
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+                EditorCursorShape = EditorCursorShape.Line,
+                EditorTheme = EditorTheme.Dark,
+                EditorFontSize = 14,
+                EditorReuseHeaders = true,
+
+                PrettierPrintWidth = 80,
+                PrettierTabWidth = 2,
+                PrettierUseTabs = true,
+
+                SchemaDisableComments = false,
+                SchemaPollingEnabled = true,
+                SchemaPollingEndpointFilter = "*localhost*",
+                SchemaPollingInterval = 5000
+            });
         }
     }
 }
