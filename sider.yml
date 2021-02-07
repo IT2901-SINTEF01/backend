@@ -12,7 +12,6 @@ linter:
 #       - another_target_directory/foo.rb
 #       - bar.rb
     locale: UK
-#     ignore: center,behavior
 
 #   # https://help.sider.review/tools/shellscript/shellcheck
 #   shellcheck:
