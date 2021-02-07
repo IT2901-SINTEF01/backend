@@ -29,7 +29,7 @@ statuses:
   no_differences: true
   error: true
 
-request_review: none
+request_review: author
 
 labels: [linting]
 
