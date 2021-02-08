@@ -5,7 +5,9 @@
 ![Apache 2 License](https://img.shields.io/github/license/IT2901-SINTEF01/backend)
 ![Latest Release](https://img.shields.io/github/v/release/IT2901-SINTEF01/backend?include_prereleases)
 
-This repository contains the backend for the "Open Data Visualisation Platform" developed in collaboration with SINTEF. You may find the frontend [here](https://github.com/IT2901-SINTEF01/frontend). Providing a GraphQL interface, it will supply the frontend with data from various open data sources as well as attached metadata for the data to simplify the visualisation of the raw data. Consult the [releases](https://github.com/IT2901-SINTEF01/backend/releases) page to get a local, stable copy of the service.
+<img src="./SINTEF_logo.png" alt="SINTEF" height=50 />
+
+_This repository contains the backend for the "Open Data Visualisation Platform" developed in collaboration with [SINTEF](https://sintef.no). You may find the frontend [here](https://github.com/IT2901-SINTEF01/frontend). Providing a GraphQL interface, it will supply the frontend with data from various open data sources as well as attached metadata for the data to simplify the visualisation of the raw data. Consult the [releases](https://github.com/IT2901-SINTEF01/backend/releases) page to get a local, stable copy of the service._
 
 ## Overview
 
