@@ -1,3 +1,4 @@
+using Backend.API.Queries.Resolvers;
 using Backend.API.Schemas;
 using GraphQL.Server;
 using GraphQL.Server.Transports.AspNetCore;
@@ -26,6 +27,7 @@ namespace Backend
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .AddSingleton<IWeatherPredictionResolver, WeatherPredictionResolver>()
                 .AddSingleton<SampleSchema>()
                 .AddGraphQL((options, provider) =>
                 {

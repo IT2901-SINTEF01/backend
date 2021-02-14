@@ -1,6 +1,8 @@
 using System;
 using Backend.API.Queries;
+using Backend.API.Queries.Resolvers;
 using GraphQL.Types;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Backend.API.Schemas
 {
@@ -8,7 +10,7 @@ namespace Backend.API.Schemas
     {
         public SampleSchema(IServiceProvider provider) : base(provider)
         {
-            Query = new SampleQuery();
+            Query = new Query(provider.GetService<IWeatherPredictionResolver>());
         }
     }
 }
