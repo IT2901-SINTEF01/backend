@@ -1,5 +1,6 @@
-using Backend.API.Queries.Resolvers;
+using Backend.API.Data;
 using Backend.API.Schemas;
+using Backend.API.Services;
 using GraphQL.Server;
 using GraphQL.Server.Transports.AspNetCore;
 using GraphQL.Server.Ui.Playground;
@@ -27,8 +28,8 @@ namespace Backend
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddSingleton<IWeatherPredictionResolver, WeatherPredictionResolver>()
-                .AddSingleton<SampleSchema>()
+                .AddSingleton<IDataRetrievalService, DataRetrievalService>()
+                .AddSingleton<Schema>()
                 .AddGraphQL((options, provider) =>
                 {
                     options.EnableMetrics = Environment.IsDevelopment();
@@ -40,7 +41,7 @@ namespace Backend
                 .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = Environment.IsDevelopment())
                 .AddWebSockets()
                 .AddDataLoader()
-                .AddGraphTypes(typeof(SampleSchema));
+                .AddGraphTypes(typeof(Schema));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -49,9 +50,9 @@ namespace Backend
                 app.UseDeveloperExceptionPage();
 
             app.UseWebSockets();
-            app.UseGraphQLWebSockets<SampleSchema>();
+            app.UseGraphQLWebSockets<Schema>();
 
-            app.UseGraphQL<SampleSchema, GraphQLHttpMiddleware<SampleSchema>>();
+            app.UseGraphQL<Schema, GraphQLHttpMiddleware<Schema>>();
 
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
             {
