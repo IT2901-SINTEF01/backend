@@ -10,7 +10,9 @@ namespace Backend.API.Services
     {
         HttpClient HttpClient { get; init; }
 
-        Task<Todo> GetTodo();
+        Task<Todo> GetTodo(int todoId);
+
+        Task<Todo[]> GetTodos();
     }
 
     public class DataRetrievalService : IDataRetrievalService
@@ -25,10 +27,16 @@ namespace Backend.API.Services
                 "Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0");
         }
 
-        public async Task<Todo> GetTodo()
+        public async Task<Todo> GetTodo(int todoId)
         {
-            HttpResponseMessage response = await this.HttpClient.GetAsync("https://jsonplaceholder.typicode.com/todos/1");
+            HttpResponseMessage response = await this.HttpClient.GetAsync($"https://jsonplaceholder.typicode.com/todos/{todoId}");
             return await response.Content.ReadFromJsonAsync<Todo>();
+        }
+
+        public async Task<Todo[]> GetTodos()
+        {
+            HttpResponseMessage response = await this.HttpClient.GetAsync("https://jsonplaceholder.typicode.com/posts");
+            return await response.Content.ReadFromJsonAsync<Todo[]>();
         }
     }
 }
