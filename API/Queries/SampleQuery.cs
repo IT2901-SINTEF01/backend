@@ -7,7 +7,7 @@ namespace Backend.API.Queries
     {
         public SampleQuery()
         {
-            Field<StringGraphType>("value", resolve: context => SampleResolver.Value());
+            Field<StringGraphType>("value", resolve: _ => SampleResolver.Value());
         }
     }
 }
