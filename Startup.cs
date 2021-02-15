@@ -1,4 +1,4 @@
-using Backend.API.Data;
+using Backend.API.MetAPI;
 using Backend.API.Schemas;
 using Backend.API.Services;
 using GraphQL.Server;
@@ -28,8 +28,12 @@ namespace Backend
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                // The example API is commented out for now.
                 .AddSingleton<IDataRetrievalService, DataRetrievalService>()
+                .AddSingleton<IForecastDataRetrievalService, ForecastDataRetrievalService>()
+                .AddSingleton<TodoSchema>()
                 .AddSingleton<Schema>()
+
                 .AddGraphQL((options, provider) =>
                 {
                     options.EnableMetrics = Environment.IsDevelopment();
@@ -37,11 +41,13 @@ namespace Backend
                     options.UnhandledExceptionDelegate = ctx =>
                         logger.LogError("{Error} occured", ctx.OriginalException.Message);
                 })
+
                 .AddSystemTextJson(deserializerSettings => { }, serializerSettings => { })
                 .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = Environment.IsDevelopment())
                 .AddWebSockets()
                 .AddDataLoader()
-                .AddGraphTypes(typeof(Schema));
+                .AddGraphTypes(typeof(Schema))
+                .AddGraphTypes(typeof(TodoSchema));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -53,6 +59,9 @@ namespace Backend
             app.UseGraphQLWebSockets<Schema>();
 
             app.UseGraphQL<Schema, GraphQLHttpMiddleware<Schema>>();
+            app.UseGraphQLWebSockets<TodoSchema>();
+
+            app.UseGraphQL<TodoSchema, GraphQLHttpMiddleware<TodoSchema>>();
 
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
             {

@@ -8,7 +8,7 @@ namespace Backend.API.Services
 {
     public interface IDataRetrievalService
     {
-        HttpClient HttpClient { get; init; }
+        //HttpClient HttpClient { get; init; }
 
         Task<Todo> GetTodo(int todoId);
 

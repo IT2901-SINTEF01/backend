@@ -6,9 +6,10 @@ namespace Backend.API.Schemas
 {
     public class Schema : GraphQL.Types.Schema
     {
-        public Schema(IDataRetrievalService dataRetrievalService, IServiceProvider provider) : base(provider)
+        public Schema(IForecastDataRetrievalService forecastDataRetrievalService, IServiceProvider provider) : base(provider)
         {
-            Query = new Query(dataRetrievalService);
+            Query = new ForecastQuery(forecastDataRetrievalService);
+            //Query = new TodoQuery(dataRetrievalService);
         }
     }
 }
