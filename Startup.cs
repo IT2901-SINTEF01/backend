@@ -1,4 +1,6 @@
+using Backend.API.Data;
 using Backend.API.Schemas;
+using Backend.API.Services;
 using GraphQL.Server;
 using GraphQL.Server.Transports.AspNetCore;
 using GraphQL.Server.Ui.Playground;
@@ -26,7 +28,8 @@ namespace Backend
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddSingleton<SampleSchema>()
+                .AddSingleton<IDataRetrievalService, DataRetrievalService>()
+                .AddSingleton<RootSchema>()
                 .AddGraphQL((options, provider) =>
                 {
                     options.EnableMetrics = Environment.IsDevelopment();
@@ -38,7 +41,7 @@ namespace Backend
                 .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = Environment.IsDevelopment())
                 .AddWebSockets()
                 .AddDataLoader()
-                .AddGraphTypes(typeof(SampleSchema));
+                .AddGraphTypes(typeof(RootSchema));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -47,9 +50,9 @@ namespace Backend
                 app.UseDeveloperExceptionPage();
 
             app.UseWebSockets();
-            app.UseGraphQLWebSockets<SampleSchema>();
+            app.UseGraphQLWebSockets<RootSchema>();
 
-            app.UseGraphQL<SampleSchema, GraphQLHttpMiddleware<SampleSchema>>();
+            app.UseGraphQL<RootSchema, GraphQLHttpMiddleware<RootSchema>>();
 
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
             {
