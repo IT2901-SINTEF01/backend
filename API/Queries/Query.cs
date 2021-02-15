@@ -1,5 +1,8 @@
+using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Backend.API.Data;
+using Backend.API.Data.GeographicalModels;
 using Backend.API.Services;
 using GraphQL;
 using GraphQL.Types;
@@ -17,6 +20,11 @@ namespace Backend.API.Queries
             }, resolve: context => dataRetrievalService.GetTodo(context.GetArgument<int>("id")));
 
             Field<ListGraphType<TodoType>>("todos", resolve: _ => dataRetrievalService.GetTodos());
+            Field<ListGraphType<MetApiCompactType>>("geomet", resolve: _ =>
+            {
+                var jsonAsString = File.ReadAllText(Tools.Tools.AssetsPath + "MetApiTestData.json");
+                return JsonSerializer.Deserialize<MetApiCompact.Root[]>(jsonAsString);
+            });
         }
     }
 }
