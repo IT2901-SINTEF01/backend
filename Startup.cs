@@ -29,7 +29,7 @@ namespace Backend
         {
             services
                 .AddSingleton<IDataRetrievalService, DataRetrievalService>()
-                .AddSingleton<Schema>()
+                .AddSingleton<RootSchema>()
                 .AddGraphQL((options, provider) =>
                 {
                     options.EnableMetrics = Environment.IsDevelopment();
@@ -41,7 +41,7 @@ namespace Backend
                 .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = Environment.IsDevelopment())
                 .AddWebSockets()
                 .AddDataLoader()
-                .AddGraphTypes(typeof(Schema));
+                .AddGraphTypes(typeof(RootSchema));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -50,9 +50,9 @@ namespace Backend
                 app.UseDeveloperExceptionPage();
 
             app.UseWebSockets();
-            app.UseGraphQLWebSockets<Schema>();
+            app.UseGraphQLWebSockets<RootSchema>();
 
-            app.UseGraphQL<Schema, GraphQLHttpMiddleware<Schema>>();
+            app.UseGraphQL<RootSchema, GraphQLHttpMiddleware<RootSchema>>();
 
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
             {
