@@ -1,8 +1,7 @@
-using Backend.API.Data;
+using Backend.API.Queries;
 using Backend.API.Schemas;
 using Backend.API.Services;
 using GraphQL.Server;
-using GraphQL.Server.Transports.AspNetCore;
 using GraphQL.Server.Ui.Playground;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,7 +28,13 @@ namespace Backend
         {
             services
                 .AddSingleton<IDataRetrievalService, DataRetrievalService>()
-                .AddSingleton<RootSchema>()
+                .AddSingleton<IForecastDataRetrievalService, ForecastDataRetrievalService>()
+                .AddSingleton<TodoSchema>()
+                .AddSingleton<TodoQuery>()
+                .AddSingleton<ForecastSchema>()
+                .AddSingleton<ForecastQuery>()
+                .AddHttpContextAccessor()
+
                 .AddGraphQL((options, provider) =>
                 {
                     options.EnableMetrics = Environment.IsDevelopment();
@@ -37,11 +42,13 @@ namespace Backend
                     options.UnhandledExceptionDelegate = ctx =>
                         logger.LogError("{Error} occured", ctx.OriginalException.Message);
                 })
+
                 .AddSystemTextJson(deserializerSettings => { }, serializerSettings => { })
                 .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = Environment.IsDevelopment())
                 .AddWebSockets()
                 .AddDataLoader()
-                .AddGraphTypes(typeof(RootSchema));
+                .AddGraphTypes(typeof(ForecastSchema))
+                .AddGraphTypes(typeof(TodoSchema));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -50,12 +57,43 @@ namespace Backend
                 app.UseDeveloperExceptionPage();
 
             app.UseWebSockets();
-            app.UseGraphQLWebSockets<RootSchema>();
+            // Replaced the HttpMiddleware with paths for each schema
+           // app.UseGraphQL<ForecastSchema, GraphQLHttpMiddleware<ForecastSchema>>();
+            app.UseGraphQL<ForecastSchema>("/api/forecast");
+            //app.UseGraphQL<TodoSchema, GraphQLHttpMiddleware<TodoSchema>>();
+            app.UseGraphQL<TodoSchema>("/api/todo");
 
-            app.UseGraphQL<RootSchema, GraphQLHttpMiddleware<RootSchema>>();
+            app.UseGraphQLWebSockets<ForecastSchema>();
+            app.UseGraphQLWebSockets<TodoSchema>();
 
+            /*
+             * This will create two endpoints, based on https://github.com/graphql-dotnet/examples/blob/master/src/AspNetCoreMulti/Example/Startup.cs
+             */
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
             {
+                GraphQLEndPoint = "/api/forecast",
+                Path = "/ui/playground",
+                BetaUpdates = true,
+                RequestCredentials = RequestCredentials.Omit,
+                HideTracingResponse = false,
+
+                EditorCursorShape = EditorCursorShape.Line,
+                EditorTheme = EditorTheme.Dark,
+                EditorFontSize = 14,
+                EditorReuseHeaders = true,
+
+                PrettierPrintWidth = 80,
+                PrettierTabWidth = 2,
+                PrettierUseTabs = true,
+
+                SchemaDisableComments = false,
+                SchemaPollingEnabled = true,
+                SchemaPollingEndpointFilter = "*localhost*",
+                SchemaPollingInterval = 5000
+            });
+            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
+            {
+                GraphQLEndPoint = "/api/todo",
                 Path = "/ui/playground",
                 BetaUpdates = true,
                 RequestCredentials = RequestCredentials.Omit,

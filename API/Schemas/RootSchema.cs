@@ -1,14 +1,15 @@
 using System;
-using Backend.API.Queries;
-using Backend.API.Services;
 
 namespace Backend.API.Schemas
 {
-    public class RootSchema : GraphQL.Types.Schema
+    public class Schema : GraphQL.Types.Schema
     {
-        public RootSchema(IDataRetrievalService dataRetrievalService, IServiceProvider provider) : base(provider)
+        /*
+         * template for making a new Schema
+        */
+        public Schema()
         {
-            Query = new Query(dataRetrievalService);
+            throw new NotImplementedException();
         }
     }
 }
