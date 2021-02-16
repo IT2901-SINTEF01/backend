@@ -1,8 +1,9 @@
-﻿using GraphQL.Types;
+﻿using Backend.API.MetAPI.SubClasses;
+using GraphQL.Types;
 
 namespace Backend.API.MetAPI
 {
-    public class UnitsType : ObjectGraphType<Forecast.Units>
+    public class UnitsType : ObjectGraphType<Units>
     {
         public UnitsType()
         {

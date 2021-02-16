@@ -1,8 +1,9 @@
-﻿using GraphQL.Types;
+﻿using Backend.API.MetAPI.SubClasses;
+using GraphQL.Types;
 
 namespace Backend.API.MetAPI
 {
-    public class GeometryType : ObjectGraphType<Forecast.Geometry>
+    public class GeometryType : ObjectGraphType<Geometry>
     {
         public GeometryType()
         {

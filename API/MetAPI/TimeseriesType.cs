@@ -1,8 +1,9 @@
-﻿using GraphQL.Types;
+﻿using Backend.API.MetAPI.SubClasses;
+using GraphQL.Types;
 
 namespace Backend.API.MetAPI
 {
-    public class TimeseriesType : ObjectGraphType<Forecast.Timeseries>
+    public class TimeseriesType : ObjectGraphType<Timeseries>
     {
         public TimeseriesType()
         {

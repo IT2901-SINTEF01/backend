@@ -1,8 +1,9 @@
-﻿using GraphQL.Types;
+﻿using Backend.API.MetAPI.SubClasses;
+using GraphQL.Types;
 
 namespace Backend.API.MetAPI
 {
-    public class InstantType : ObjectGraphType<Forecast.Instant>
+    public class InstantType : ObjectGraphType<Instant>
     {
         public InstantType()
         {

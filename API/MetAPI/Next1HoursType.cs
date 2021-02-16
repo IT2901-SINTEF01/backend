@@ -1,8 +1,9 @@
-﻿using GraphQL.Types;
+﻿using Backend.API.MetAPI.SubClasses;
+using GraphQL.Types;
 
 namespace Backend.API.MetAPI
 {
-    public class Next1HoursType : ObjectGraphType<Forecast.Next1Hours>
+    public class Next1HoursType : ObjectGraphType<Next1Hours>
     {
         public Next1HoursType()
         {

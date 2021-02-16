@@ -1,8 +1,9 @@
-﻿using GraphQL.Types;
+﻿using Backend.API.MetAPI.SubClasses;
+using GraphQL.Types;
 
 namespace Backend.API.MetAPI
 {
-    public class ForecastDataType : ObjectGraphType<Forecast.ForecastData>
+    public class ForecastDataType : ObjectGraphType<ForecastData>
     {
         public ForecastDataType()
         {
