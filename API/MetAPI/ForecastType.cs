@@ -6,8 +6,8 @@ namespace Backend.API.MetAPI
     {
         public ForecastType()
         { 
-            Field(forecast => forecast.ForecastGeometry, false, typeof(GeometryType));
-            Field(forecast => forecast.ForecastProperties, false, typeof(PropertiesType));
+            Field(forecast => forecast.ForecastGeometry, false, typeof(GeometryType)).Description("The Geo-Data used in the query");
+            Field(forecast => forecast.ForecastProperties, false, typeof(PropertiesType)).Description("Data and meta-data returned");
             Field(forecast => forecast.Type);
         }
         /*

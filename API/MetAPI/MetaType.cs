@@ -3,12 +3,12 @@ using GraphQL.Types;
 
 namespace Backend.API.MetAPI
 {
-    public class MetaType : ObjectGraphType<Meta>
+    public sealed class MetaType : ObjectGraphType<Meta>
     {
         public MetaType()
         {
-            Field(meta => meta.Units, false, typeof(UnitsType));
-            Field(meta => meta.UpdatedAt);
+            Field(meta => meta.Units, false, typeof(UnitsType)).Description("The units used in parameters returned");
+            Field(meta => meta.UpdatedAt).Description("Timeseries of when forecast was last updatet");
         }
     }
 }

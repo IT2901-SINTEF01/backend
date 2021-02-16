@@ -3,7 +3,7 @@ using GraphQL.Types;
 
 namespace Backend.API.MetAPI
 {
-    public class Next1HoursType : ObjectGraphType<Next1Hours>
+    public sealed class Next1HoursType : ObjectGraphType<Next1Hours>
     {
         public Next1HoursType()
         {

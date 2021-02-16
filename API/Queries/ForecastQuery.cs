@@ -9,10 +9,10 @@ namespace Backend.API.Queries
     {
         public ForecastQuery(IForecastDataRetrievalService forecastDataRetrievalService)
         {
-            Field<ForecastType>("forecast", arguments: new QueryArguments()
+            Field<ForecastType>("forecast",description:"Latitude and Longitude defaults to the coordinates of Trondheim", arguments: new QueryArguments()
                 {
-                    new QueryArgument<FloatGraphType>(){Name = "lat", Description = "The lat (dec) of the forecast to retrieve.", DefaultValue = 63},
-                    new QueryArgument<FloatGraphType>(){Name = "lon", Description = "The long (dec) of the forecast to retrieve.", DefaultValue = 10}
+                    new QueryArgument<FloatGraphType>(){Name = "lat", Description = "The lat (dec) of the forecast to retrieve.", DefaultValue = 63.446827},
+                    new QueryArgument<FloatGraphType>(){Name = "lon", Description = "The long (dec) of the forecast to retrieve.", DefaultValue = 10.421906}
                 },
                 // Two arguments that are used
                 // todo: Add support for decimals, only works with integers for now.

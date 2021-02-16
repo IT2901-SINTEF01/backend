@@ -3,7 +3,7 @@ using GraphQL.Types;
 
 namespace Backend.API.MetAPI
 {
-    public class DetailsType : ObjectGraphType<Details>
+    public sealed class DetailsType : ObjectGraphType<Details>
     {
         public DetailsType()
         {

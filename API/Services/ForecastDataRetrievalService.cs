@@ -1,4 +1,6 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Globalization;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -27,7 +29,9 @@ namespace Backend.API.Services
         public async Task<Forecast> GetForecast(float lat, float lon)
         {
             // todo: Add support for decimals to be used, also see ForecastQuery.cs
-            HttpResponseMessage response = await this.HttpClient.GetAsync($"https://api.met.no/weatherapi/locationforecast/2.0/compact?lat={lat}&lon={lon}");
+            var new_lat = lat.ToString(CultureInfo.InvariantCulture); // Converts input to a float that use . instead of , (gets converted by graphQL somehow.
+            var new_lon = lon.ToString(CultureInfo.InvariantCulture);
+            HttpResponseMessage response = await this.HttpClient.GetAsync($"https://api.met.no/weatherapi/locationforecast/2.0/compact?lat={new_lat}&lon={new_lon}");
             return await response.Content.ReadFromJsonAsync<Forecast>();
         }
     }

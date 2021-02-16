@@ -3,12 +3,12 @@ using GraphQL.Types;
 
 namespace Backend.API.MetAPI
 {
-    public class PropertiesType : ObjectGraphType<Properties>
+    public sealed class PropertiesType : ObjectGraphType<Properties>
     {
         public PropertiesType()
         {
             Field(properties => properties.Meta, false, typeof(MetaType));
-            Field(context => context.Timeseries, false, typeof(ListGraphType<TimeseriesType>));
+            Field(context => context.Timeseries, false, typeof(ListGraphType<TimeseriesType>)).Description("A list of forecast-data of each timeseries");
         }
     }
 }

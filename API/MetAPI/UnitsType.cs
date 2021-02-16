@@ -3,7 +3,7 @@ using GraphQL.Types;
 
 namespace Backend.API.MetAPI
 {
-    public class UnitsType : ObjectGraphType<Units>
+    public sealed class UnitsType : ObjectGraphType<Units>
     {
         public UnitsType()
         {
