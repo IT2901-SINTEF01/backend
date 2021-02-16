@@ -2,12 +2,12 @@ using System;
 
 namespace Backend.API.Schemas
 {
-    public class Schema : GraphQL.Types.Schema
+    public class RootSchema : GraphQL.Types.Schema
     {
         /*
          * template for making a new Schema
         */
-        public Schema()
+        public RootSchema()
         {
             throw new NotImplementedException();
         }
