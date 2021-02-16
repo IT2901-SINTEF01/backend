@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 
 namespace Backend.API.MetAPI
@@ -13,7 +13,7 @@ namespace Backend.API.MetAPI
         public Geometry geometry { get; set; } 
         
         [JsonPropertyName("type")]
-        public string type { get; set; } 
+        public string Type { get; set; } 
         
         
         public class Units    {
@@ -80,7 +80,7 @@ namespace Backend.API.MetAPI
 
     public class Meta    {
         [JsonPropertyName("units")]
-        public Units Units { get; set; } 
+        public Units Units { get; set; }
 
         [JsonPropertyName("updated_at")]
         public DateTime UpdatedAt { get; set; } 
@@ -182,7 +182,7 @@ namespace Backend.API.MetAPI
         public Summary Summary { get; set; } 
     }
 
-    public class Data    {
+    public class ForecastData    {
         [JsonPropertyName("instant")]
         public Instant Instant { get; set; } 
 
@@ -199,7 +199,7 @@ namespace Backend.API.MetAPI
     public class Timeseries 
     {
         [JsonPropertyName("data")]
-        public Data Data { get; set; } 
+        public ForecastData ForecastData { get; set; } 
 
         [JsonPropertyName("time")]
         public DateTime Time { get; set; }
@@ -211,13 +211,13 @@ namespace Backend.API.MetAPI
         public Meta Meta { get; set; } 
 
         [JsonPropertyName("timeseries")]
-        public List<Timeseries> Timeseries { get; set; }
+        public Collection<Timeseries> Timeseries { get; set; }
         
     }
 
     public class Geometry    {
         [JsonPropertyName("coordinates")]
-        public List<float> Coordinates { get; set; } 
+        public Collection<float> Coordinates { get; set; } 
 
         [JsonPropertyName("type")]
         public string Type { get; set; } 

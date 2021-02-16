@@ -6,7 +6,7 @@ namespace Backend.API.MetAPI
     {
         public GeometryType()
         {
-            Field(geometry => geometry.Coordinates);
+            Field(geometry => geometry.Coordinates, false, typeof(ListGraphType<FloatGraphType>));
             Field(geometry => geometry.Type);
         }
     }

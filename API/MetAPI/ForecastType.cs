@@ -1,5 +1,4 @@
-﻿using Backend.API.Data;
-using GraphQL.Types;
+﻿using GraphQL.Types;
 
 namespace Backend.API.MetAPI
 {
@@ -9,7 +8,7 @@ namespace Backend.API.MetAPI
         { 
             Field(forecast => forecast.geometry, false, typeof(GeometryType));
             Field(forecast => forecast.properties, false, typeof(PropertiesType));
-            Field(forecast => forecast.type);
+            Field(forecast => forecast.Type);
         }
         /*
          * The expression continues to resolve the type until the object is completely nested

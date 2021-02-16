@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Backend.API.Data;
+﻿using Backend.API.Data;
 using Backend.API.Services;
 using GraphQL;
 using GraphQL.Types;

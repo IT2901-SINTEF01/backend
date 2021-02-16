@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using Backend.API.Data;
-using GraphQL.Language.AST;
-using GraphQL.Types;
-using Newtonsoft.Json;
+﻿using GraphQL.Types;
 
 namespace Backend.API.MetAPI
 {
@@ -10,7 +6,7 @@ namespace Backend.API.MetAPI
     {
         public TimeseriesType()
         {
-            Field(timeseries => timeseries.Data, false, typeof(DataType));
+            Field(timeseries => timeseries.ForecastData, false, typeof(ForecastDataType));
             Field(timeseries => timeseries.Time);
         }
     }

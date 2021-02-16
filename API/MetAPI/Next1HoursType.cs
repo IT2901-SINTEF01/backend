@@ -1,5 +1,4 @@
-﻿using Backend.API.Data;
-using GraphQL.Types;
+﻿using GraphQL.Types;
 
 namespace Backend.API.MetAPI
 {

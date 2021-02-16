@@ -1,11 +1,10 @@
-﻿using Backend.API.Data;
-using GraphQL.Types;
+﻿using GraphQL.Types;
 
 namespace Backend.API.MetAPI
 {
-    public class DataType : ObjectGraphType<Forecast.Data>
+    public class ForecastDataType : ObjectGraphType<Forecast.ForecastData>
     {
-        public DataType()
+        public ForecastDataType()
         {
             Field(data => data.Instant, false, typeof(InstantType)); 
             Field(data => data.Next1Hours, false, typeof(Next1HoursType));
