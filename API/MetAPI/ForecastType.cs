@@ -6,8 +6,8 @@ namespace Backend.API.MetAPI
     {
         public ForecastType()
         { 
-            Field(forecast => forecast.geometry, false, typeof(GeometryType));
-            Field(forecast => forecast.properties, false, typeof(PropertiesType));
+            Field(forecast => forecast.ForecastGeometry, false, typeof(GeometryType));
+            Field(forecast => forecast.ForecastProperties, false, typeof(PropertiesType));
             Field(forecast => forecast.Type);
         }
         /*

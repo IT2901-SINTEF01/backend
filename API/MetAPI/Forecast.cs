@@ -7,10 +7,10 @@ namespace Backend.API.MetAPI
     public class Forecast
     {
         [JsonPropertyName("properties")]
-        public Properties properties { get; set; }
+        public Properties ForecastProperties { get; set; }
         
         [JsonPropertyName("geometry")]
-        public Geometry geometry { get; set; } 
+        public Geometry ForecastGeometry { get; set; } 
         
         [JsonPropertyName("type")]
         public string Type { get; set; } 
@@ -207,17 +207,27 @@ namespace Backend.API.MetAPI
     }
 
     public class Properties    {
+        public Properties(Collection<Timeseries> timeseries)
+        {
+            Timeseries = timeseries;
+        }
+
         [JsonPropertyName("meta")]
         public Meta Meta { get; set; } 
 
         [JsonPropertyName("timeseries")]
-        public Collection<Timeseries> Timeseries { get; set; }
+        public  Collection<Timeseries> Timeseries { get; }
         
     }
 
     public class Geometry    {
+        public Geometry(Collection<float> coordinates)
+        {
+            Coordinates = coordinates;
+        }
+
         [JsonPropertyName("coordinates")]
-        public Collection<float> Coordinates { get; set; } 
+        public Collection<float> Coordinates { get; } 
 
         [JsonPropertyName("type")]
         public string Type { get; set; } 
