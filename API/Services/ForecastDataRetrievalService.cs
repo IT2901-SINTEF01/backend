@@ -26,7 +26,7 @@ namespace Backend.API.Services
         }
         public async Task<Forecast> GetForecast(float lat, float lon)
         {
-            lon.ToString();
+            // todo: Add support for decimals to be used, also see ForecastQuery.cs
             HttpResponseMessage response = await this.HttpClient.GetAsync($"https://api.met.no/weatherapi/locationforecast/2.0/compact?lat={lat}&lon={lon}");
             return await response.Content.ReadFromJsonAsync<Forecast>();
         }

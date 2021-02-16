@@ -15,6 +15,7 @@ namespace Backend.API.Queries
                     new QueryArgument<FloatGraphType>(){Name = "lon", Description = "The long (dec) of the forecast to retrieve.", DefaultValue = 10}
                 },
                 // Two arguments that are used
+                // todo: Add support for decimals, only works with integers for now.
                 resolve: context =>
                     forecastDataRetrievalService.GetForecast(
                         context.GetArgument<float>("lat"),
