@@ -13,7 +13,7 @@ RUN dotnet publish -c Release -o out
 EXPOSE 80/tcp
 
 # Label for GCR
-LABEL org.opencontainers.image.source=https://github.com/IT2901-SINTEF01/backend
+LABEL org.opencontainers.image.source=https://github.com/it2901-sintef01/backend
 
 # Start server
 FROM mcr.microsoft.com/dotnet/sdk:5.0
