@@ -11,6 +11,7 @@ on:
 
 jobs:
     login:
+        name: Push built image to GHCR
         runs-on: ubuntu-latest
         steps:
             -   name: Set up QEMU
