@@ -3,7 +3,7 @@ name: Docker Registry
 on:
     workflow_dispatch:
     push:
-        branches: [ master ]
+        branches: [ master, 13-docker-take-two ]
 
 jobs:
     login:
