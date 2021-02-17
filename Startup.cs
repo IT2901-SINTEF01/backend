@@ -30,7 +30,7 @@ namespace Backend
             services
                 .AddSingleton<IDataRetrievalService, DataRetrievalService>()
                 .AddSingleton<RootSchema>()
-                .AddSingleton<ForecastQuery>()
+                .AddSingleton<RootQuery>()
                 .AddGraphQL((options, provider) =>
                 {
                     options.EnableMetrics = Environment.IsDevelopment();
@@ -38,7 +38,6 @@ namespace Backend
                     options.UnhandledExceptionDelegate = ctx =>
                         logger.LogError("{Error} occured", ctx.OriginalException.Message);
                 })
-
                 .AddSystemTextJson(deserializerSettings => { }, serializerSettings => { })
                 .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = Environment.IsDevelopment())
                 .AddWebSockets()
@@ -54,9 +53,9 @@ namespace Backend
             app.UseWebSockets();
             // Replaced the HttpMiddleware with paths for each schema
             app.UseGraphQL<RootSchema, GraphQLHttpMiddleware<RootSchema>>();
-            
+
             app.UseGraphQLWebSockets<RootSchema>();
-            
+
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
             {
                 Path = "/ui/playground",

@@ -7,8 +7,8 @@ namespace Backend.API.MetAPI
     {
         public InstantType()
         {
-            Field(instant => instant.Details, false, typeof(DetailsType)).Description("Details about the forecast, fields should be self explanatory");
+            Field(instant => instant.Details, false, typeof(DetailsType))
+                .Description("Details about the forecast, fields should be self explanatory");
         }
-        
     }
 }

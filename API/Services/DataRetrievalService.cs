@@ -9,12 +9,11 @@ namespace Backend.API.Services
 {
     public interface IDataRetrievalService
     {
-        Task<Forecast>  GetForecast(float lat, float lon);
+        Task<Forecast> GetForecast(float lat, float lon);
     }
 
     public class DataRetrievalService : IDataRetrievalService
     {
-        private HttpClient HttpClient { get; }
         public DataRetrievalService()
         {
             HttpClient = new HttpClient();
@@ -22,11 +21,18 @@ namespace Backend.API.Services
             HttpClient.DefaultRequestHeaders.UserAgent.ParseAdd(
                 "DVT/1.0 (fredrik.malmo@icloud.com)");
         }
+
+        private HttpClient HttpClient { get; }
+
         public async Task<Forecast> GetForecast(float lat, float lon)
         {
-            var newLat = lat.ToString(CultureInfo.InvariantCulture); // Converts input to a float that use . instead of , (gets converted by graphQL somehow.
+            var newLat =
+                lat.ToString(CultureInfo
+                    .InvariantCulture); // Converts input to a float that use . instead of , (gets converted by graphQL somehow.
             var newLon = lon.ToString(CultureInfo.InvariantCulture);
-            HttpResponseMessage response = await HttpClient.GetAsync($"https://api.met.no/weatherapi/locationforecast/2.0/compact?lat={newLat}&lon={newLon}");
+            var response =
+                await HttpClient.GetAsync(
+                    $"https://api.met.no/weatherapi/locationforecast/2.0/compact?lat={newLat}&lon={newLon}");
             return await response.Content.ReadFromJsonAsync<Forecast>();
         }
     }

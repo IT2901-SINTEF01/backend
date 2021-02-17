@@ -7,7 +7,8 @@ namespace Backend.API.MetAPI
     {
         public TimeseriesType()
         {
-            Field(timeseries => timeseries.ForecastData, false, typeof(ForecastDataType)).Description("The forecast-data");
+            Field(timeseries => timeseries.ForecastData, false, typeof(ForecastDataType))
+                .Description("The forecast-data");
             Field(timeseries => timeseries.Time).Description("The time for forecast-data");
         }
     }

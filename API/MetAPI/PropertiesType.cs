@@ -8,7 +8,8 @@ namespace Backend.API.MetAPI
         public PropertiesType()
         {
             Field(properties => properties.Meta, false, typeof(MetaType));
-            Field(context => context.Timeseries, false, typeof(ListGraphType<TimeseriesType>)).Description("A list of forecast-data of each timeseries");
+            Field(context => context.Timeseries, false, typeof(ListGraphType<TimeseriesType>))
+                .Description("A list of forecast-data of each timeseries");
         }
     }
 }

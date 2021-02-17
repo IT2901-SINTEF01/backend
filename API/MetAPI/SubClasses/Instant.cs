@@ -2,8 +2,8 @@
 
 namespace Backend.API.MetAPI.SubClasses
 {
-    public class Instant    {
-        [JsonPropertyName("details")]
-        public Details Details { get; set; } 
+    public class Instant
+    {
+        [JsonPropertyName("details")] public Details Details { get; set; }
     }
 }
