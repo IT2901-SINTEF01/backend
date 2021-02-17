@@ -1,14 +1,7 @@
-﻿using System;
-using System.Text.Json;
+﻿using System.Threading.Tasks;
 using Backend.API.MetAPI;
-using Backend.API.Queries;
-using Backend.API.Schemas;
 using Backend.API.Services;
-using GraphQL;
-using GraphQL.Client.Abstractions;
-using GraphQL.Client.Abstractions.Websocket;
-using GraphQL.Client.Http;
-using Moq;
+using BackendTests.tools;
 using NUnit.Framework;
 
 namespace BackendTests.UnitTests {
@@ -16,18 +9,36 @@ namespace BackendTests.UnitTests {
         private float _lon;
         private float _lat;
         private ForecastDataRetrievalService _service;
+        private Forecast _forecast;
 
         [SetUp]
-        public void Setup() {
+        public async Task Setup() {
             _lon = 63.446827f;
             _lat = 10.421906f;
             _service = new ForecastDataRetrievalService();
+            _forecast = await _service.GetForecast(_lat, _lon);
         }
 
         [Test]
-        public void MetAPI_ShouldReturnDefaultValues() {
-            var response = _service.GetForecast(_lat, _lon);
-            Console.WriteLine(response);
+        public void MetAPI_ShouldReturnData() {
+            Assert.NotNull(_forecast);
+        }
+
+        [Test]
+        public void MetAPI_ShouldReturnCorrectCoordinates() {
+            Assert.That("Feature", Is.EqualTo(_forecast.Type).NoClip);
+            Assert.That(_lon, Is.EqualTo(_forecast.ForecastGeometry.Coordinates[0]).Within(0.0001).Percent);
+            Assert.That(_lat, Is.EqualTo(_forecast.ForecastGeometry.Coordinates[1]).Within(0.0001).Percent);
+        }
+
+        [Test]
+        public void MetAPI_ShouldReturnCorrectSymbolCode() {
+            Assert.Contains(_forecast.ForecastProperties.Timeseries[0].ForecastData.Next1Hours.Summary.SymbolCode,
+                MetAPITools.VALID_SYMBOL_CODES);
+            Assert.Contains(_forecast.ForecastProperties.Timeseries[0].ForecastData.Next6Hours.Summary.SymbolCode,
+                MetAPITools.VALID_SYMBOL_CODES);
+            Assert.Contains(_forecast.ForecastProperties.Timeseries[0].ForecastData.Next12Hours.Summary.SymbolCode,
+                MetAPITools.VALID_SYMBOL_CODES);
         }
     }
 }

@@ -29,9 +29,9 @@ namespace Backend.API.Services
         public async Task<Forecast> GetForecast(float lat, float lon)
         {
             // todo: Add support for decimals to be used, also see ForecastQuery.cs
-            var new_lat = lat.ToString(CultureInfo.InvariantCulture); // Converts input to a float that use . instead of , (gets converted by graphQL somehow.
-            var new_lon = lon.ToString(CultureInfo.InvariantCulture);
-            HttpResponseMessage response = await HttpClient.GetAsync($"https://api.met.no/weatherapi/locationforecast/2.0/compact?lat={new_lat}&lon={new_lon}");
+            var newLat = lat.ToString(CultureInfo.InvariantCulture); // Converts input to a float that use . instead of , (gets converted by graphQL somehow.
+            var newLon = lon.ToString(CultureInfo.InvariantCulture);
+            var response = await HttpClient.GetAsync($"https://api.met.no/weatherapi/locationforecast/2.0/compact?lat={newLat}&lon={newLon}");
             return await response.Content.ReadFromJsonAsync<Forecast>();
         }
     }

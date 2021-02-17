@@ -4,5 +4,6 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 BackendTests/BackendTests.csproj
-
 Backend.sln.DotSettings.user
+Backend.csproj.user
+.vs/
