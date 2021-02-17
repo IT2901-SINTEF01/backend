@@ -7,7 +7,7 @@ namespace Backend.API.Queries
 {
     public class ForecastQuery : ObjectGraphType
     {
-        public ForecastQuery(IForecastDataRetrievalService forecastDataRetrievalService)
+        public ForecastQuery(IDataRetrievalService dataRetrievalService)
         {
             Field<ForecastType>("forecast",description:"Latitude and Longitude defaults to the coordinates of Trondheim", arguments: new QueryArguments()
                 {
@@ -17,7 +17,7 @@ namespace Backend.API.Queries
                 // Two arguments that are used
                 // todo: Add support for decimals, only works with integers for now.
                 resolve: context =>
-                    forecastDataRetrievalService.GetForecast(
+                    dataRetrievalService.GetForecast(
                         context.GetArgument<float>("lat"),
                         context.GetArgument<float>("lon")));
         }
