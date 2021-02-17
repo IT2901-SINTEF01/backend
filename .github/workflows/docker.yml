@@ -3,7 +3,11 @@ name: Docker Registry
 on:
     workflow_dispatch:
     push:
-        branches: [ master, 13-docker-take-two ]
+        branches: [ master ]
+        paths-ignore:
+            - "**.md"
+        tags:
+            - "*"
 
 jobs:
     login:
