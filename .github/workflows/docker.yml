@@ -31,4 +31,4 @@ jobs:
                 uses: docker/build-push-action@v2
                 with:
                     push: true
-                    tags: it2901-sintef01/backend:latest
+                    tags: ghcr.io/it2901-sintef01/backend:latest
