@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace BackendTests.tools {
+namespace BackendTests.utils {
     public static class MetAPITools {
         // This collection is sort of bloated, as some of these items can be removed, check out
         // https://api.met.no/weatherapi/weathericon/2.0/documentation.
