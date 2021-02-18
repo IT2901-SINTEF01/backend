@@ -20,25 +20,25 @@ namespace BackendTests.UnitTests {
         }
 
         [Test]
-        public void MetAPI_ShouldReturnData() {
+        public void MetAPIShouldReturnData() {
             Assert.NotNull(_forecast);
         }
 
         [Test]
-        public void MetAPI_ShouldReturnCorrectCoordinates() {
+        public void MetAPIShouldReturnCorrectCoordinates() {
             Assert.That("Feature", Is.EqualTo(_forecast.Type).NoClip);
             Assert.That(_lon, Is.EqualTo(_forecast.ForecastGeometry.Coordinates[0]).Within(0.0001).Percent);
             Assert.That(_lat, Is.EqualTo(_forecast.ForecastGeometry.Coordinates[1]).Within(0.0001).Percent);
         }
 
         [Test]
-        public void MetAPI_ShouldReturnCorrectSymbolCode() {
+        public void MetAPIShouldReturnCorrectSymbolCode() {
             Assert.Contains(_forecast.ForecastProperties.Timeseries[0].ForecastData.Next1Hours.Summary.SymbolCode,
-                MetAPITools.VALID_SYMBOL_CODES);
+                MetAPITools.ValidSymbolCodes);
             Assert.Contains(_forecast.ForecastProperties.Timeseries[0].ForecastData.Next6Hours.Summary.SymbolCode,
-                MetAPITools.VALID_SYMBOL_CODES);
+                MetAPITools.ValidSymbolCodes);
             Assert.Contains(_forecast.ForecastProperties.Timeseries[0].ForecastData.Next12Hours.Summary.SymbolCode,
-                MetAPITools.VALID_SYMBOL_CODES);
+                MetAPITools.ValidSymbolCodes);
         }
     }
 }
