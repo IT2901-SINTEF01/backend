@@ -38,7 +38,7 @@ namespace Backend.API.Services
     {
         public async Task<Forecast> GetCompactForecast(float lat, float lon)
         {
-            return Compact.GenerateSampleForecast(lon, lat);
+            return await Task.Run(() => Compact.GenerateSampleForecast(lon, lat));
         }
     }
 }
