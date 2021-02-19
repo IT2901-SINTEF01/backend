@@ -8,7 +8,7 @@ using Bogus;
 namespace Backend.Mocks.MetAPI
 {
     [SuppressMessage("Rule Category", "CA5394", Justification = "No security threat on data mocking.")]
-    public class Compact
+    public sealed class Compact
     {
         public static Forecast GenerateSampleForecast(float lon, float lat)
         {
