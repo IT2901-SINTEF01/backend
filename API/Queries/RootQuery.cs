@@ -1,5 +1,6 @@
-﻿using Backend.API.MetAPI;
-using Backend.API.Services;
+﻿using Backend.API.Services;
+using Backend.Models.MetAPI;
+using Backend.Models.MetAPI.GraphQLTypes;
 using GraphQL;
 using GraphQL.Types;
 
