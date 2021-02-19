@@ -1,7 +1,7 @@
+using System.Net.Http.Headers;
 using Backend.API.Queries;
 using Backend.API.Schemas;
 using Backend.API.Services;
-using BackendTests.utils;
 using GraphQL.Server;
 using GraphQL.Server.Transports.AspNetCore;
 using GraphQL.Server.Ui.Playground;
@@ -11,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.FeatureManagement;
 
 namespace Backend
 {
@@ -29,8 +28,20 @@ namespace Backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // If configuration specifies mocking should be enabled, don't create HTTP clients and simply inject
+            // mocked services as singletons.
+            if (Configuration.GetValue<bool>("MockRequests"))
+                services.AddSingleton<IMetAPIService, MetAPIServiceMocked>();
+            else
+                services.AddHttpClient<IMetAPIService, MetAPIService>(client =>
+                {
+                    client.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.UserAgent.ParseAdd(
+                        "DVT/1.0 (fredrik.malmo@icloud.com)"); // api.met.no requires contact email
+                });
+
             services
-                .AddSingleton<IDataRetrievalService, DataRetrievalServiceMocked>()
                 .AddSingleton<RootSchema>()
                 .AddSingleton<RootQuery>()
                 .AddGraphQL((options, provider) =>
@@ -45,8 +56,6 @@ namespace Backend
                 .AddWebSockets()
                 .AddDataLoader()
                 .AddGraphTypes(typeof(RootSchema));
-
-            services.AddFeatureManagement();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
