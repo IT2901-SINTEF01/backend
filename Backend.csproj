@@ -11,7 +11,6 @@
         <PackageReference Include="GraphQL.Server.Transports.AspNetCore.SystemTextJson" Version="4.4.1" />
         <PackageReference Include="GraphQL.Server.Transports.WebSockets" Version="4.4.1" />
         <PackageReference Include="GraphQL.Server.Ui.Playground" Version="4.4.1" />
-        <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="2.2.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.0.7" />
     </ItemGroup>
 

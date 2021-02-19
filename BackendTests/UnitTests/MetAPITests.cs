@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using Backend.Mocks.MetAPI;
 using Backend.Models.MetAPI.POCO;
 using BackendTests.utils;
 using NUnit.Framework;
-using Backend.Mocks.MetAPI;
 
 namespace BackendTests.UnitTests
 {

@@ -1,5 +1,5 @@
-﻿using Backend.API.Services;
-using Backend.Models.MetAPI;
+﻿using System;
+using Backend.API.Services;
 using Backend.Models.MetAPI.GraphQLTypes;
 using GraphQL;
 using GraphQL.Types;
@@ -8,8 +8,10 @@ namespace Backend.API.Queries
 {
     public class RootQuery : ObjectGraphType
     {
-        public RootQuery(IDataRetrievalService dataRetrievalService)
+        public RootQuery(IServiceProvider serviceProvider)
         {
+            var metAPIService = (IMetAPIService) serviceProvider.GetService(typeof(IMetAPIService));
+
             Field<ForecastType>("forecast", "Latitude and Longitude defaults to the coordinates of Trondheim",
                 new QueryArguments
                 {
@@ -25,7 +27,7 @@ namespace Backend.API.Queries
                     }
                 },
                 context =>
-                    dataRetrievalService.GetForecast(
+                    metAPIService?.GetCompactForecast(
                         context.GetArgument<float>("lat"),
                         context.GetArgument<float>("lon")));
         }
