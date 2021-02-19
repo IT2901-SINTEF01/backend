@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
 using Backend.API.MetAPI;
 using Backend.API.MetAPI.SubClasses;
-using Backend.API.Services;
 using BackendTests.utils;
 using Bogus;
 using NUnit.Framework;
 
+
 namespace BackendTests.UnitTests {
+    [SuppressMessage("Rule Category", "CA5394", Justification = "No security threat on data mocking.")]
     public class MetAPITests {
         private float _lon;
         private float _lat;
-        private DataRetrievalService _service;
         private Forecast _forecast;
+        private Random _random;
 
         [SetUp]
         public void Setup() {
-            _lon = 63.446827f;
-            _lat = 10.421906f;
-            _service = new DataRetrievalService();
+            _random = new Random();
+            _lon = (float) _random.NextDouble() * (63.433f - 63.42f) + 63.42f;
+            _lat = (float) _random.NextDouble() * (10.4f - 10.38f) + 10.38f;
             _forecast = GenerateSampleForecast(); //await _service.GetForecast(_lat, _lon);
         }
 
@@ -48,12 +47,9 @@ namespace BackendTests.UnitTests {
         }
 
         private Forecast GenerateSampleForecast() {
-            var random = new Random();
             var forecastGeometry = new Faker<Geometry>()
                 .StrictMode(true)
                 .RuleFor(o => o.Coordinates, f => new Collection<float> {
-                    /*(float) random.NextDouble() * (63.433f - 63.42f) + 63.42f,
-                    (float) random.NextDouble() * (10.4f - 10.38f) + 10.38f*/
                     _lon, _lat
                 })
                 .RuleFor(o => o.Type, f => "Point");
@@ -71,20 +67,20 @@ namespace BackendTests.UnitTests {
                 .RuleFor(o => o.UpdatedAt, f => DateTime.Now);
 
             var forecastDetails = new Faker<Details>()
-                .RuleFor(o => o.AirTemperature, f => (float) random.NextDouble() * (50 - 30) + 30)
-                .RuleFor(o => o.AirPressureAtSeaLevel, f => (float) random.NextDouble() * (1100 + 900) - 900)
-                .RuleFor(o => o.CloudAreaFraction, f => (float) random.NextDouble() * (100 + 50) - 50)
-                .RuleFor(o => o.PrecipitationAmount, f => (float) random.NextDouble())
-                .RuleFor(o => o.RelativeHumidity, f => (float) random.NextDouble() * 100)
-                .RuleFor(o => o.WindFromDirection, f => (float) random.NextDouble() * 360)
-                .RuleFor(o => o.WindSpeed, f => (float) random.NextDouble() * 32.7);
+                .RuleFor(o => o.AirTemperature, f => (float) _random.NextDouble() * (50 - 30) + 30)
+                .RuleFor(o => o.AirPressureAtSeaLevel, f => (float) _random.NextDouble() * (1100 + 900) - 900)
+                .RuleFor(o => o.CloudAreaFraction, f => (float) _random.NextDouble() * (100 + 50) - 50)
+                .RuleFor(o => o.PrecipitationAmount, f => (float) _random.NextDouble())
+                .RuleFor(o => o.RelativeHumidity, f => (float) _random.NextDouble() * 100)
+                .RuleFor(o => o.WindFromDirection, f => (float) _random.NextDouble() * 360)
+                .RuleFor(o => o.WindSpeed, f => (float) _random.NextDouble() * 32.7);
 
             var forecastInstant = new Faker<Instant>()
                 .RuleFor(o => o.Details, f => forecastDetails.Generate());
 
             var forecastSummary = new Faker<Summary>()
                 .RuleFor(o => o.SymbolCode,
-                    f => MetAPITools.ValidSymbolCodes[random.Next(MetAPITools.ValidSymbolCodes.Count)]);
+                    f => MetAPITools.ValidSymbolCodes[_random.Next(MetAPITools.ValidSymbolCodes.Count)]);
 
             var next1Hours = new Faker<Next1Hours>()
                 .RuleFor(o => o.Details, f => forecastDetails.Generate())
