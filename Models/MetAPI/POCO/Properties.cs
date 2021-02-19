@@ -1,12 +1,16 @@
 ﻿using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 
-namespace Backend.API.MetAPI.SubClasses {
-    public class Properties {
-        public Properties() {
+namespace Backend.Models.MetAPI.POCO
+{
+    public class Properties
+    {
+        public Properties()
+        {
         }
 
-        public Properties(Collection<Timeseries> timeseries) {
+        public Properties(Collection<Timeseries> timeseries)
+        {
             Timeseries = timeseries;
         }
 

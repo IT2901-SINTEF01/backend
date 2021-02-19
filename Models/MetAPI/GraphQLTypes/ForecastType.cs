@@ -1,6 +1,7 @@
-﻿using GraphQL.Types;
+﻿using Backend.Models.MetAPI.POCO;
+using GraphQL.Types;
 
-namespace Backend.API.MetAPI
+namespace Backend.Models.MetAPI.GraphQLTypes
 {
     public sealed class ForecastType : ObjectGraphType<Forecast>
     {

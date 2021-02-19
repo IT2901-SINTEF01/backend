@@ -1,7 +1,6 @@
 ﻿using System.Text.Json.Serialization;
-using Backend.API.MetAPI.SubClasses;
 
-namespace Backend.API.MetAPI
+namespace Backend.Models.MetAPI.POCO
 {
     public class Forecast
     {
