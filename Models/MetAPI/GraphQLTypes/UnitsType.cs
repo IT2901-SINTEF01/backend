@@ -1,7 +1,7 @@
-﻿using Backend.API.MetAPI.SubClasses;
+﻿using Backend.Models.MetAPI.POCO;
 using GraphQL.Types;
 
-namespace Backend.API.MetAPI
+namespace Backend.Models.MetAPI.GraphQLTypes
 {
     public sealed class UnitsType : ObjectGraphType<Units>
     {

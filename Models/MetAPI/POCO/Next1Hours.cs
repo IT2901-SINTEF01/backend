@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Backend.API.MetAPI.SubClasses
+namespace Backend.Models.MetAPI.POCO
 {
     public class Next1Hours
     {

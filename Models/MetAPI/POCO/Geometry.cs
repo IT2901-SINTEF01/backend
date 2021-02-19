@@ -1,12 +1,16 @@
 ﻿using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 
-namespace Backend.API.MetAPI.SubClasses {
-    public class Geometry {
-        public Geometry() {
+namespace Backend.Models.MetAPI.POCO
+{
+    public class Geometry
+    {
+        public Geometry()
+        {
         }
 
-        public Geometry(Collection<float> coordinates) {
+        public Geometry(Collection<float> coordinates)
+        {
             Coordinates = coordinates;
         }
 
