@@ -19,7 +19,7 @@ namespace Backend.Mocks.MetAPI
                     lon, lat
                 })
                 .RuleFor(o => o.Type, f => "Point");
-            
+
             var forecastUnits = new Faker<Units>()
                 .RuleFor(o => o.AirTemperature, f => "celsius")
                 .RuleFor(o => o.AirPressureAtSeaLevel, f => "hPa")
@@ -34,12 +34,12 @@ namespace Backend.Mocks.MetAPI
                 .RuleFor(o => o.UpdatedAt, f => DateTime.Now);
 
             var forecastDetails = new Faker<Details>()
-                .RuleFor(o => o.AirTemperature, f => (float) random.NextDouble() * (50 - 30) + 30)
-                .RuleFor(o => o.AirPressureAtSeaLevel, f => (float) random.NextDouble() * (1100 + 900) - 900)
-                .RuleFor(o => o.CloudAreaFraction, f => (float) random.NextDouble() * (100 + 50) - 50)
+                .RuleFor(o => o.AirTemperature, f => (float) random.Next(-30, 49) + random.NextDouble())
+                .RuleFor(o => o.AirPressureAtSeaLevel, f => (float) random.Next(900, 1100) + random.NextDouble())
+                .RuleFor(o => o.CloudAreaFraction, f => (float) random.Next(50, 100) + random.NextDouble())
                 .RuleFor(o => o.PrecipitationAmount, f => (float) random.NextDouble())
                 .RuleFor(o => o.RelativeHumidity, f => (float) random.NextDouble() * 100)
-                .RuleFor(o => o.WindFromDirection, f => (float) random.NextDouble() * 360)
+                .RuleFor(o => o.WindFromDirection, f => (float) random.NextDouble() * 359)
                 .RuleFor(o => o.WindSpeed, f => (float) random.NextDouble() * 32.7);
 
             var forecastInstant = new Faker<Instant>()
@@ -72,8 +72,7 @@ namespace Backend.Mocks.MetAPI
 
             var forecastProperties = new Faker<Properties>()
                 .RuleFor(o => o.Meta, f => forecastMeta.Generate())
-                .RuleFor(o => o.Timeseries, f =>
-                {
+                .RuleFor(o => o.Timeseries, f => {
                     var outCollection = new Collection<Timeseries>();
                     foreach (var timeseries in forecastTimeseries.Generate(10)) outCollection.Add(timeseries);
 
@@ -85,7 +84,7 @@ namespace Backend.Mocks.MetAPI
                 .RuleFor(o => o.Type, f => "Feature")
                 .RuleFor(o => o.ForecastGeometry, f => forecastGeometry.Generate())
                 .RuleFor(o => o.ForecastProperties, f => forecastProperties.Generate());
-            
+
             return outForecast;
         }
     }
