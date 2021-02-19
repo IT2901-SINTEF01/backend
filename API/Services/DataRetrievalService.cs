@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using Backend.API.MetAPI;
+using Backend.Models.MetAPI.POCO;
 
 namespace Backend.API.Services
 {
