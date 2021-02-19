@@ -2,11 +2,10 @@
 
 namespace Backend.API.MetAPI.SubClasses
 {
-    public class Next12Hours    {
-        [JsonPropertyName("summary")]
-        public Summary Summary { get; set; } 
+    public class Next12Hours
+    {
+        [JsonPropertyName("summary")] public Summary Summary { get; set; }
 
-        [JsonPropertyName("details")]
-        public Details Details { get; set; } 
+        [JsonPropertyName("details")] public Details Details { get; set; }
     }
 }

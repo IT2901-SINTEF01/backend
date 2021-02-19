@@ -28,6 +28,5 @@ namespace Backend.API.MetAPI
             Field(units => units.AirPressureAtSeaLevel);
             Field(units => units.UltravioletIndexClearSkyMax);
         }
-        
     }
 }
