@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Backend.Mocks.MetAPI;
 using Backend.Models.MetAPI.POCO;
 
 namespace Backend.API.Services
@@ -34,6 +35,14 @@ namespace Backend.API.Services
                 await HttpClient.GetAsync(
                     $"https://api.met.no/weatherapi/locationforecast/2.0/compact?lat={newLat}&lon={newLon}");
             return await response.Content.ReadFromJsonAsync<Forecast>();
+        }
+    }
+
+    public class DataRetrievalServiceMocked : IDataRetrievalService
+    {
+        public async Task<Forecast> GetForecast(float lat, float lon)
+        {
+            return await Task.Run(() => Compact.GenerateSampleForecast(lon, lat));
         }
     }
 }

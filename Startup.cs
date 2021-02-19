@@ -1,6 +1,7 @@
 using Backend.API.Queries;
 using Backend.API.Schemas;
 using Backend.API.Services;
+using BackendTests.utils;
 using GraphQL.Server;
 using GraphQL.Server.Transports.AspNetCore;
 using GraphQL.Server.Ui.Playground;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.FeatureManagement;
 
 namespace Backend
 {
@@ -28,7 +30,7 @@ namespace Backend
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddSingleton<IDataRetrievalService, DataRetrievalService>()
+                .AddSingleton<IDataRetrievalService, DataRetrievalServiceMocked>()
                 .AddSingleton<RootSchema>()
                 .AddSingleton<RootQuery>()
                 .AddGraphQL((options, provider) =>
@@ -43,6 +45,8 @@ namespace Backend
                 .AddWebSockets()
                 .AddDataLoader()
                 .AddGraphTypes(typeof(RootSchema));
+
+            services.AddFeatureManagement();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
