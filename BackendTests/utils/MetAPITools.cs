@@ -1,10 +1,13 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace BackendTests.utils {
-    public static class MetAPITools {
+namespace BackendTests.utils
+{
+    public static class MetAPITools
+    {
         // This collection is sort of bloated, as some of these items can be removed, check out
         // https://api.met.no/weatherapi/weathericon/2.0/documentation.
-        public static readonly Collection<string> ValidSymbolCodes = new() {
+        public static readonly Collection<string> ValidSymbolCodes = new()
+        {
             "clearsky_day",
             "cloudy",
             "fair_day",

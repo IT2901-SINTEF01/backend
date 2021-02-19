@@ -8,16 +8,19 @@ using Bogus;
 using NUnit.Framework;
 
 
-namespace BackendTests.UnitTests {
+namespace BackendTests.UnitTests
+{
     [SuppressMessage("Rule Category", "CA5394", Justification = "No security threat on data mocking.")]
-    public class MetAPITests {
+    public class MetAPITests
+    {
         private float _lon;
         private float _lat;
         private Forecast _forecast;
         private Random _random;
 
         [SetUp]
-        public void Setup() {
+        public void Setup()
+        {
             _random = new Random();
             _lon = (float) _random.NextDouble() * (63.433f - 63.42f) + 63.42f;
             _lat = (float) _random.NextDouble() * (10.4f - 10.38f) + 10.38f;
@@ -25,19 +28,22 @@ namespace BackendTests.UnitTests {
         }
 
         [Test]
-        public void MetAPIShouldReturnData() {
+        public void MetAPIShouldReturnData()
+        {
             Assert.NotNull(_forecast);
         }
 
         [Test]
-        public void MetAPIShouldReturnCorrectCoordinates() {
+        public void MetAPIShouldReturnCorrectCoordinates()
+        {
             Assert.That("Feature", Is.EqualTo(_forecast.Type).NoClip);
             Assert.That(_lon, Is.EqualTo(_forecast.ForecastGeometry.Coordinates[0]).Within(0.0001).Percent);
             Assert.That(_lat, Is.EqualTo(_forecast.ForecastGeometry.Coordinates[1]).Within(0.0001).Percent);
         }
 
         [Test]
-        public void MetAPIShouldReturnCorrectSymbolCode() {
+        public void MetAPIShouldReturnCorrectSymbolCode()
+        {
             Assert.Contains(_forecast.ForecastProperties.Timeseries[0].ForecastData.Next1Hours.Summary.SymbolCode,
                 MetAPITools.ValidSymbolCodes);
             Assert.Contains(_forecast.ForecastProperties.Timeseries[0].ForecastData.Next6Hours.Summary.SymbolCode,
@@ -46,10 +52,12 @@ namespace BackendTests.UnitTests {
                 MetAPITools.ValidSymbolCodes);
         }
 
-        private Forecast GenerateSampleForecast() {
+        private Forecast GenerateSampleForecast()
+        {
             var forecastGeometry = new Faker<Geometry>()
                 .StrictMode(true)
-                .RuleFor(o => o.Coordinates, f => new Collection<float> {
+                .RuleFor(o => o.Coordinates, f => new Collection<float>
+                {
                     _lon, _lat
                 })
                 .RuleFor(o => o.Type, f => "Point");
