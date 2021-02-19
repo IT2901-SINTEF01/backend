@@ -1,11 +1,13 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using Backend.Models.MetAPI.POCO;
 using BackendTests.utils;
 using Bogus;
 
 namespace Backend.Mocks.MetAPI
 {
+    [SuppressMessage("Rule Category", "CA5394", Justification = "No security threat on data mocking.")]
     public class Compact
     {
         public static Forecast GenerateSampleForecast(float lon, float lat)
