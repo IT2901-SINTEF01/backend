@@ -13,6 +13,10 @@ namespace Backend.Mocks.MetAPI
         public static Forecast GenerateSampleForecast(float lon, float lat)
         {
             Random random = new();
+            var numInTimeseries = 0;
+            var startTime = DateTime.Now.AddMinutes(random.Next(-120, 0));
+            var timeseriesDateTime = startTime.AddMinutes(-startTime.Minute).AddSeconds(-startTime.Second)
+                .AddMilliseconds(-startTime.Millisecond);
 
             var forecastGeometry = new Faker<Geometry>()
                 .StrictMode(true)
@@ -33,7 +37,7 @@ namespace Backend.Mocks.MetAPI
 
             var forecastMeta = new Faker<Meta>()
                 .RuleFor(o => o.Units, f => forecastUnits.Generate())
-                .RuleFor(o => o.UpdatedAt, f => DateTime.Now);
+                .RuleFor(o => o.UpdatedAt, f => startTime);
 
             var forecastDetails = new Faker<Details>()
                 .RuleFor(o => o.AirTemperature, f => (float) random.Next(-30, 49) + random.NextDouble())
@@ -69,14 +73,27 @@ namespace Backend.Mocks.MetAPI
                 .RuleFor(o => o.Next6Hours, f => next6Hours.Generate())
                 .RuleFor(o => o.Next12Hours, f => next12Hours.Generate());
 
-            var forecastTimeseries = new Faker<Timeseries>().RuleFor(o => o.Time, f => DateTime.Now)
+            var forecastTimeseries = new Faker<Timeseries>().RuleFor(o => o.Time, f => {
+                    numInTimeseries++;
+                    switch (numInTimeseries) {
+                        case < 56:
+                            timeseriesDateTime = timeseriesDateTime.AddHours(1);
+                            return timeseriesDateTime;
+                        case 56:
+                            timeseriesDateTime = timeseriesDateTime.AddHours(-(timeseriesDateTime.Hour % 6) + 6);
+                            return timeseriesDateTime;
+                        default:
+                            timeseriesDateTime = timeseriesDateTime.AddHours(6);
+                            return timeseriesDateTime;
+                    }
+                })
                 .RuleFor(o => o.ForecastData, f => forecastData.Generate());
 
             var forecastProperties = new Faker<Properties>()
                 .RuleFor(o => o.Meta, f => forecastMeta.Generate())
                 .RuleFor(o => o.Timeseries, f => {
                     var outCollection = new Collection<Timeseries>();
-                    foreach (var timeseries in forecastTimeseries.Generate(10)) outCollection.Add(timeseries);
+                    foreach (var timeseries in forecastTimeseries.Generate(85)) outCollection.Add(timeseries);
 
                     return outCollection;
                 });
