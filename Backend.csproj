@@ -2,6 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <Company>SINTEF</Company>
+        <Product>DVT - Backend</Product>
     </PropertyGroup>
 
     <ItemGroup>
