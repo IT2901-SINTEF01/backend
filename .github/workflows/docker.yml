@@ -1,19 +1,33 @@
 name: Docker Registry
 
 on:
+    schedule:
+        # https://crontab.guru/#0_8_*_*_*
+        - cron: '0 8 * * *' # everyday at 08AM 
     workflow_dispatch:
     push:
-        branches: [ master ]
-        paths-ignore:
-            - "**.md"
+        branches:
+            - '**'
         tags:
-            - "*"
+            - "v*.*.*"
+    pull_request:
+        branches:
+            - 'master'
 
 jobs:
-    login:
-        name: Push built image to GHCR
+    docker:
+        name: Build image and push to GCR
         runs-on: ubuntu-latest
         steps:
+            -   name: Checkout
+                uses: actions/checkout@v2
+            -   name: Docker metainformation
+                id: docker_meta
+                uses: crazy-max/ghaction-docker-meta@v1
+                with:
+                    images: |
+                        ghcr.io/it2901-sintef01/backend
+                    tag-sha: true
             -   name: Set up QEMU
                 uses: docker/setup-qemu-action@v1
             -   name: Set up Docker Buildx
@@ -26,6 +40,7 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-buildx-
             -   name: Login to GitHub Container Registry
+                if: github.event_name != 'pull_request'
                 uses: docker/login-action@v1
                 with:
                     registry: ghcr.io
@@ -35,5 +50,7 @@ jobs:
                 id: docker_build
                 uses: docker/build-push-action@v2
                 with:
-                    push: true
-                    tags: ghcr.io/it2901-sintef01/backend:latest
+                    context: .
+                    push: ${{ github.event_name != 'pull_request' }}
+                    tags: ${{ steps.docker_meta.outputs.tags }}
+                    labels: ${{ steps.docker_meta.outputs.labels }}
