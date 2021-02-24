@@ -7,7 +7,7 @@ RUN dotnet restore
 
 # Copy all files to container and create production build
 COPY . ./
-RUN dotnet publish -c Release -o out
+RUN dotnet publish Backend.csproj -c Release -o out
 
 # This is the port the server uses
 EXPOSE 80/tcp
