@@ -55,7 +55,7 @@ jobs:
                     tags: ${{ steps.docker_meta.outputs.tags }}
                     labels: ${{ steps.docker_meta.outputs.labels }}
             -   name: Build and push development image
-                id: docker_build
+                id: docker_build_mocked
                 uses: docker/build-push-action@v2
                 with:
                     context: .
