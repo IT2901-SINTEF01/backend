@@ -14,6 +14,19 @@ _This repository contains the backend for the "Open Data Visualisation Platform"
 The backend is built on ASP.Net Core with `GraphQL.Server` and written in C#.
 Refer to the [wiki](https://github.com/IT2901-SINTEF01/backend/wiki) for more information such as architecture and structure.
 
+## Quick setup with Docker
+
+Refer to [the wiki page](https://github.com/IT2901-SINTEF01/backend/wiki/Docker) for more information;
+
+You can run the project in production mode (making actual requests to the APIs) with:
+
+```bash
+docker pull ghcr.io/it2901-sintef01/backend:latest
+docker run -p 5000:80 ghcr.io/it2901-sintef01/backend:latest
+```
+
+Creation of mocked images are scheduled for development ([#50](https://github.com/IT2901-SINTEF01/backend/issues/50)).
+
 ## Development
 
 Refer to the `.editorconfig` file for code style setup. 
