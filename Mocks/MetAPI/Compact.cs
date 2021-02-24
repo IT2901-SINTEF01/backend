@@ -73,9 +73,11 @@ namespace Backend.Mocks.MetAPI
                 .RuleFor(o => o.Next6Hours, f => next6Hours.Generate())
                 .RuleFor(o => o.Next12Hours, f => next12Hours.Generate());
 
-            var forecastTimeseries = new Faker<Timeseries>().RuleFor(o => o.Time, f => {
+            var forecastTimeseries = new Faker<Timeseries>().RuleFor(o => o.Time, f =>
+                {
                     numInTimeseries++;
-                    switch (numInTimeseries) {
+                    switch (numInTimeseries)
+                    {
                         case < 56:
                             timeseriesDateTime = timeseriesDateTime.AddHours(1);
                             return timeseriesDateTime;
@@ -91,7 +93,8 @@ namespace Backend.Mocks.MetAPI
 
             var forecastProperties = new Faker<Properties>()
                 .RuleFor(o => o.Meta, f => forecastMeta.Generate())
-                .RuleFor(o => o.Timeseries, f => {
+                .RuleFor(o => o.Timeseries, f =>
+                {
                     var outCollection = new Collection<Timeseries>();
                     foreach (var timeseries in forecastTimeseries.Generate(85)) outCollection.Add(timeseries);
 
