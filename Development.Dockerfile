@@ -7,7 +7,7 @@ RUN dotnet restore
 
 # Copy all files to container and create production build
 COPY . ./
-RUN dotnet publish -c Release -o out
+RUN dotnet publish Backend.csproj -c Debug -o out
 
 # This is the port the server uses
 EXPOSE 80/tcp
@@ -21,4 +21,4 @@ LABEL org.opencontainers.image.source=https://github.com/it2901-sintef01/backend
 WORKDIR /app
 COPY --from=build-env /app/out .
 # Run on port 80 locally
-ENTRYPOINT ["dotnet", "Backend.dll", "--urls", "http://*:80"] 
+ENTRYPOINT ["dotnet", "Backend.dll", "--urls", "http://*:80", "--environment=Development"] 
