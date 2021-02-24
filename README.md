@@ -18,14 +18,14 @@ Refer to the [wiki](https://github.com/IT2901-SINTEF01/backend/wiki) for more in
 
 Refer to [the wiki page](https://github.com/IT2901-SINTEF01/backend/wiki/Docker) for more information;
 
-You can run the project in production mode (making actual requests to the APIs) with:
+You can run the project in production mode (making actual requests to the APIs) with.
+
+This pulls the latest stable build (released with a tag):
 
 ```bash
 docker pull ghcr.io/it2901-sintef01/backend:latest
 docker run -p 5000:80 ghcr.io/it2901-sintef01/backend:latest
 ```
-
-Creation of mocked images are scheduled for development ([#50](https://github.com/IT2901-SINTEF01/backend/issues/50)).
 
 ## Development
 
