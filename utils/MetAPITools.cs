@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace BackendTests.utils
+namespace Backend.utils
 {
     public static class MetAPITools
     {
