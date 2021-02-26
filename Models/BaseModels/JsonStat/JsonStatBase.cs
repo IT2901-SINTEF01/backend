@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
+using Backend.Models.SSB;
 
 namespace Backend.Models.JsonStat
 {
@@ -31,4 +32,9 @@ namespace Backend.Models.JsonStat
         [JsonPropertyName("index")] public Dictionary<string, int> Index { get; set; }
         [JsonPropertyName("label")] public Dictionary<string, string> Label { get; set; }
     }
+    
+        public sealed class JsonStatDataset<T> : AbstractJsonStatDataSet where T : AbstractJsonStatDimension
+        {
+            [JsonPropertyName("dimension")] public T Dimension { get; set; }
+        }
 }
