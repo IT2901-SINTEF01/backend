@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
-using Backend.Models.SSB;
 
-namespace Backend.Models.JsonStat
+namespace Backend.Models.Base.JsonStat
 {
     public abstract class AbstractJsonStatDataSet
     {
