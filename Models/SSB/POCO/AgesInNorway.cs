@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Backend.Models.Base.JsonStat;
 
-namespace Backend.Models.SSB
+namespace Backend.Models.SSB.POCO
 {
     public class AgesInNorway
     {
