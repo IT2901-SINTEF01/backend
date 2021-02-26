@@ -1,7 +1,5 @@
 using Backend.Models.Base.JsonStat;
 using Backend.Models.SSB.POCO;
-using GraphQL.Language.AST;
-using GraphQL.Types;
 
 namespace Backend.Models.SSB.GraphQLTypes
 {
