@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Backend.Models.JsonStat
 {
-    public abstract class JsonStatGenericDataset
+    public abstract class AbstractJsonStatDataSet
     {
         [JsonPropertyName("label")] public string Label { get; set; }
         [JsonPropertyName("source")] public string Source { get; set; }
@@ -13,7 +13,7 @@ namespace Backend.Models.JsonStat
         [JsonPropertyName("value")] public Collection<int> Value { get; set; }
     }
 
-    public abstract class JsonStatGenericDimension
+    public abstract class AbstractJsonStatDimension
     {
         [JsonPropertyName("id")] public Collection<string> Id { get; set; }
         [JsonPropertyName("size")] public Collection<int> Size { get; set; }
