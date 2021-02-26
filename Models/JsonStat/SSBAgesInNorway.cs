@@ -13,12 +13,12 @@ namespace Backend.Models.JsonStat
          */
         [JsonPropertyName("dataset")] public JsonStatDataset Dataset { get; set; }
 
-        public class JsonStatDataset : JsonStatGenericDataset
+        public sealed class JsonStatDataset : JsonStatGenericDataset
         {
             [JsonPropertyName("dimension")] public JsonStatSpecificDimension Dimension { get; set; }
         }
 
-        public class JsonStatSpecificDimension : JsonStatGenericDimension
+        public sealed class JsonStatSpecificDimension : JsonStatGenericDimension
         {
             /*
              * Changes are done here, the rest _should_ be equivalent for other json-stat objects
