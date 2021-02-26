@@ -13,12 +13,7 @@ namespace Backend.Models.SSB
          * that has to be changed when creating a new JSON-stat object, only the dimension
          * needs to be changed.
          */
-        [JsonPropertyName("dataset")] public JsonStatDataset Dataset { get; set; }
-
-        public sealed class JsonStatDataset : AbstractJsonStatDataSet
-        {
-            [JsonPropertyName("dimension")] public JsonStatSpecificDimension Dimension { get; set; }
-        }
+        [JsonPropertyName("dataset")] public JsonStatDataset<JsonStatSpecificDimension> Dataset { get; set; }
 
         public sealed class JsonStatSpecificDimension : AbstractJsonStatDimension
         {
