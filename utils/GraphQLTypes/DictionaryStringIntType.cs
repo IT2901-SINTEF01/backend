@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using GraphQL.Types;
 
 namespace Backend.utils.GraphQLTypes
 {
-    internal class DictionaryStringIntType : ObjectGraphType<Dictionary<string, int>>
+    [SuppressMessage("Rule Category", "CA1812", Justification = "The class is instantiated by GraphQL.")]
+    class DictionaryStringIntType : ObjectGraphType<Dictionary<string, int>>
     {
         public DictionaryStringIntType()
         {
