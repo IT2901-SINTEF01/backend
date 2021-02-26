@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-using Backend.Models.JsonStat;
+using Backend.Models.Base.JsonStat;
 
 namespace Backend.Models.SSB
 {
