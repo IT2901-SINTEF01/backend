@@ -3,7 +3,7 @@ name: Docker Registry
 on:
     schedule:
         # https://crontab.guru/#0_8_*_*_*
-        - cron: '0 8 * * *' # everyday at 08AM 
+        - cron: '0 4 * * *' # everyday at 04AM 
     workflow_dispatch:
     push:
         branches:
