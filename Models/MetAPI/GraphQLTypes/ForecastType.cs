@@ -23,7 +23,7 @@ namespace Backend.Models.MetAPI.GraphQLTypes
             // connect using MongoClient
             var dbClient =
                 new MongoClient(
-                    "mongodb+srv://new_user_31:c3iBC0U6ZD4Uv0fe@cluster0.3cgl6.mongodb.net/metadata?retryWrites=true&w=majority");
+                    "mongodb+srv://new_user_31:<password>@cluster0.3cgl6.mongodb.net/metadata?retryWrites=true&w=majority");
             var database = dbClient.GetDatabase("metadata");
             var collection = database.GetCollection<BsonDocument>("meta");
             var firstDocument = collection.Find(new BsonDocument()).FirstOrDefault();
