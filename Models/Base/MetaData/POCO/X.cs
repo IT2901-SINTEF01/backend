@@ -3,10 +3,12 @@ using System.Text.Json.Serialization;
 
 namespace Backend.Models.Base.MetaData.POCO
 {
-    public class Segment
+    public class X
     {
         [JsonPropertyName("name")] public string Name { get; set; }
 
-        [JsonPropertyName("value")] public List<Value> Value { get; set; }
+        [JsonPropertyName("type")] public string Type { get; set; }
+
+        [JsonPropertyName("limit")] public List<Limit> Limit { get; set; }
     }
 }
