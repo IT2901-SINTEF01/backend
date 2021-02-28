@@ -1,5 +1,5 @@
 ﻿using System.Text.Json.Serialization;
-using Backend.Models.Base.Metadata.POCO;
+using Backend.Models.Base.MetaData.POCO;
 
 namespace Backend.Models.MetAPI.POCO
 {
@@ -11,6 +11,6 @@ namespace Backend.Models.MetAPI.POCO
 
         [JsonPropertyName("type")] public string Type { get; set; }
 
-        [JsonPropertyName("metadata")] public StoredMetadata StoredMetadata { get; set; }
+        [JsonPropertyName("metadata")] public StoredMetaData StoredMetaData { get; set; }
     }
 }
