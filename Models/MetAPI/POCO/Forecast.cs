@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using Backend.Models.Base.MetaData.POCO;
 
 namespace Backend.Models.MetAPI.POCO
 {
@@ -9,5 +10,7 @@ namespace Backend.Models.MetAPI.POCO
         [JsonPropertyName("geometry")] public Geometry ForecastGeometry { get; set; }
 
         [JsonPropertyName("type")] public string Type { get; set; }
+
+        [JsonPropertyName("metadata")] public StoredMetaData StoredMetaData { get; set; }
     }
 }
