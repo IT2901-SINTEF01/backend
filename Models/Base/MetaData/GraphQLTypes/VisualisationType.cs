@@ -7,9 +7,9 @@ namespace Backend.Models.Base.MetaData.GraphQLTypes
     {
         public VisualisationType()
         {
-            Field(visualisation => visualisation.Axes, false, typeof(AxesType));
-            Field(visualisation => visualisation.Segments, false, typeof(SegmentType));
-            Field(visualisation => visualisation.Threshold, false, typeof(StringGraphType));
+            Field(visualisation => visualisation.Axes, false, typeof(ListGraphType<AxesType>));
+            Field(visualisation => visualisation.Segments, false, typeof(ListGraphType<SegmentType>));
+            Field(visualisation => visualisation.Threshold);
             Field(visualisation => visualisation.Type);
         }
     }

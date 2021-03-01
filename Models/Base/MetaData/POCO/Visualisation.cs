@@ -1,21 +1,25 @@
 using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Backend.Models.Base.MetaData.POCO
 {
     public class Visualisation
     {
-        public Visualisation(Collection<Segment> segments)
-        {
-            Segments = segments;
-        }
+        [BsonElement("type")]
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
 
-        [JsonPropertyName("type")] public string Type { get; set; }
+        [BsonElement("axes")]
+        [JsonPropertyName("axes")]
+        public Axes Axes { get; set; }
 
-        [JsonPropertyName("axes")] public Axes Axes { get; set; }
+        [BsonElement("segments")]
+        [JsonPropertyName("segments")]
+        public Collection<Segment> Segments { get; set; }
 
-        [JsonPropertyName("segments")] public Collection<Segment> Segments { get; }
-
-        [JsonPropertyName("threshold")] public Threshold Threshold { get; set; }
+        [BsonElement("threshold")]
+        [JsonPropertyName("threshold")]
+        public int Threshold { get; set; }
     }
 }

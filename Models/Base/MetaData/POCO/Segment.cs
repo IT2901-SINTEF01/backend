@@ -1,17 +1,17 @@
 using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Backend.Models.Base.MetaData.POCO
 {
     public class Segment
     {
-        public Segment(Collection<Value> value)
-        {
-            Value = value;
-        }
+        [BsonElement("name")]
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
 
-        [JsonPropertyName("name")] public string Name { get; set; }
-
-        [JsonPropertyName("value")] public Collection<Value> Value { get; }
+        [BsonElement("value")]
+        [JsonPropertyName("value")]
+        public Collection<int> Value { get; set; }
     }
 }
