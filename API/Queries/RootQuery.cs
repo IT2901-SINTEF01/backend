@@ -1,6 +1,6 @@
 ﻿using System;
 using Backend.API.Services;
-using Backend.Models.Base.Metadata.GraphQLTypes;
+using Backend.Models.Base.MetaData.GraphQLTypes;
 using Backend.Models.MetAPI.GraphQLTypes;
 using GraphQL;
 using GraphQL.Types;
@@ -12,7 +12,7 @@ namespace Backend.API.Queries
         public RootQuery(IServiceProvider serviceProvider)
         {
             var metAPIService = (IMetAPIService) serviceProvider.GetService(typeof(IMetAPIService));
-            var metadataService = (IMetadataService) serviceProvider.GetService(typeof(IMetadataService));
+            var metaDataService = (IMetaDataService) serviceProvider.GetService(typeof(IMetaDataService));
 
             Field<ForecastType>("forecast", "Latitude and Longitude defaults to the coordinates of Trondheim",
                 new QueryArguments
@@ -33,7 +33,7 @@ namespace Backend.API.Queries
                         context.GetArgument<float>("lat"),
                         context.GetArgument<float>("lon")));
 
-            Field<StoredMetadataType>("metadata", "metadata for the different data sources",
+            Field<StoredMetaDataType>("metadata", "metadata for the different data sources",
                 new QueryArguments
                 {
                     new QueryArgument<StringGraphType>
@@ -42,7 +42,7 @@ namespace Backend.API.Queries
                         DefaultValue = "befolkningstall"
                     }
                 },
-                context => metadataService?.GetMetadata(
+                context => metaDataService?.GetMetaData(
                     context.GetArgument<string>("name")));
         }
     }

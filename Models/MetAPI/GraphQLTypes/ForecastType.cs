@@ -1,8 +1,5 @@
-﻿using Backend.Models.Base.MetaData.GraphQLTypes;
-using Backend.Models.MetAPI.POCO;
+﻿using Backend.Models.MetAPI.POCO;
 using GraphQL.Types;
-using MongoDB.Bson;
-using MongoDB.Driver;
 
 namespace Backend.Models.MetAPI.GraphQLTypes
 {
@@ -17,13 +14,14 @@ namespace Backend.Models.MetAPI.GraphQLTypes
             Field(forecast => forecast.Type);
 
             // What the actual metadata should look like, is hopefully compatible with most databases 
-            Field(forecast => forecast.StoredMetaData, false, typeof(StoredMetaDataType));
+            // Field(forecast => forecast.StoredMetaData, false, typeof(StoredMetaDataType));
 
+            /*
             // Very bad and temporarily workaround connecting to a Atlas Cluster containing some metadata documents 
             // connect using MongoClient
             var dbClient =
                 new MongoClient(
-                    "mongodb+srv://new_user_31:<password>@cluster0.3cgl6.mongodb.net/metadata?retryWrites=true&w=majority");
+                    "mongodb+srv://new_user_31:c3iBC0U6ZD4Uv0fe@cluster0.3cgl6.mongodb.net/metadata?retryWrites=true&w=majority");
             var database = dbClient.GetDatabase("metadata");
             var collection = database.GetCollection<BsonDocument>("meta");
             var firstDocument = collection.Find(new BsonDocument()).FirstOrDefault();
@@ -52,6 +50,7 @@ namespace Backend.Models.MetAPI.GraphQLTypes
             // The whole document as a string
             var stringDocument = firstDocument.ToString();
             Field(forecast => stringDocument);
+            */
         }
 
         /*

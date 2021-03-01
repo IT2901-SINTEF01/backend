@@ -3,9 +3,9 @@ using GraphQL.Types;
 
 namespace Backend.Models.Base.MetaData.GraphQLTypes
 {
-    public sealed class AxesDescType : ObjectGraphType<Axis>
+    public sealed class AxisType : ObjectGraphType<Axis>
     {
-        public AxesDescType()
+        public AxisType()
         {
             Field(axis => axis.Name);
             Field(axis => axis.Limit, false, typeof(LimitType));

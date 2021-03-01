@@ -1,24 +1,43 @@
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Backend.Models.Base.MetaData.POCO
 {
     public class StoredMetaData
     {
-        [JsonPropertyName("_id")] public Id Id { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        [JsonPropertyName("_id")]
+        public string Id { get; set; }
 
-        [JsonPropertyName("name")] public string Name { get; set; }
+        [BsonElement("name")]
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
 
-        [JsonPropertyName("description")] public string Description { get; set; }
+        [BsonElement("description")]
+        [JsonPropertyName("description")]
+        public string Description { get; set; }
 
-        [JsonPropertyName("tags")] public List<string> Tags { get; set; }
+        [BsonElement("tags")]
+        [JsonPropertyName("tags")]
+        public Collection<string> Tags { get; set; }
 
-        [JsonPropertyName("source")] public string Source { get; set; }
+        [BsonElement("source")]
+        [JsonPropertyName("source")]
+        public string Source { get; set; }
 
-        [JsonPropertyName("updated")] public string Updated { get; set; }
+        [BsonElement("updated")]
+        [JsonPropertyName("updated")]
+        public string Updated { get; set; }
 
-        [JsonPropertyName("published")] public string Published { get; set; }
+        [BsonElement("published")]
+        [JsonPropertyName("published")]
+        public string Published { get; set; }
 
-        [JsonPropertyName("visualisations")] public List<Visualisation> Visualisations { get; set; }
+        [BsonElement("visualisations")]
+        [JsonPropertyName("visualisations")]
+        public Collection<Visualisation> Visualisations { get; set; }
     }
 }

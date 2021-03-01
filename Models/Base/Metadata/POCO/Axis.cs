@@ -2,10 +2,15 @@ using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Backend.Models.Base.Metadata.POCO
+namespace Backend.Models.Base.MetaData.POCO
 {
     public class Axis
     {
+        public Axis(Collection<Limit> limit)
+        {
+            Limit = limit;
+        }
+
         [BsonElement("name")]
         [JsonPropertyName("name")]
         public string Name { get; set; }
@@ -16,6 +21,6 @@ namespace Backend.Models.Base.Metadata.POCO
 
         [BsonElement("limit")]
         [JsonPropertyName("limit")]
-        public Collection<int> Limit { get; set; }
+        public Collection<Limit> Limit { get; }
     }
 }
