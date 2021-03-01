@@ -2,6 +2,7 @@ using System.Net.Http.Headers;
 using Backend.API.Queries;
 using Backend.API.Schemas;
 using Backend.API.Services;
+using Backend.Models.Base.MetaData;
 using GraphQL.Server;
 using GraphQL.Server.Transports.AspNetCore;
 using GraphQL.Server.Ui.Playground;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Backend
 {
@@ -28,6 +30,15 @@ namespace Backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // DP on database
+            services.Configure<MetaDataDatabaseSettings>(
+                Configuration.GetSection(nameof(MetaDataDatabaseSettings)));
+
+            services.AddSingleton<IMetaDataDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<MetaDataDatabaseSettings>>().Value);
+
+            services.AddSingleton<IMetaDataService, MetaDataService>();
+
             // If configuration specifies mocking should be enabled, don't create HTTP clients and simply inject
             // mocked services as singletons.
             if (Configuration.GetValue<bool>("MockRequests"))

@@ -1,11 +1,16 @@
 using System.Text.Json.Serialization;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Backend.Models.Base.MetaData.POCO
 {
     public class Axes
     {
-        [JsonPropertyName("x")] public Axis X { get; set; }
+        [BsonElement("x")]
+        [JsonPropertyName("x")]
+        public Axis X { get; set; }
 
-        [JsonPropertyName("y")] public Axis Y { get; set; }
+        [BsonElement("y")]
+        [JsonPropertyName("y")]
+        public Axis Y { get; set; }
     }
 }

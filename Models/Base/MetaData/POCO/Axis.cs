@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Backend.Models.Base.MetaData.POCO
 {
@@ -10,10 +11,16 @@ namespace Backend.Models.Base.MetaData.POCO
             Limit = limit;
         }
 
-        [JsonPropertyName("name")] public string Name { get; set; }
+        [BsonElement("name")]
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
 
-        [JsonPropertyName("type")] public string Type { get; set; }
+        [BsonElement("type")]
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
 
-        [JsonPropertyName("limit")] public Collection<Limit> Limit { get; }
+        [BsonElement("limit")]
+        [JsonPropertyName("limit")]
+        public Collection<Limit> Limit { get; }
     }
 }

@@ -8,7 +8,7 @@ namespace Backend.Models.Base.MetaData.GraphQLTypes
         public SegmentType()
         {
             Field(segment => segment.Name);
-            Field(segment => segment.Value, false, typeof(SegmentValueType));
+            Field(segment => segment.Value, false, typeof(ListGraphType<IntGraphType>));
         }
     }
 }
