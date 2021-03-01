@@ -4,8 +4,8 @@ namespace Backend.Models.Base.MetaData.POCO
 {
     public class Axes
     {
-        [JsonPropertyName("x")] public X X { get; set; }
+        [JsonPropertyName("x")] public Axis X { get; set; }
 
-        [JsonPropertyName("y")] public Y Y { get; set; }
+        [JsonPropertyName("y")] public Axis Y { get; set; }
     }
 }
