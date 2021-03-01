@@ -7,10 +7,11 @@ namespace Backend.Models.Base.MetaData.POCO
 {
     public class StoredMetaData
     {
-        public StoredMetaData(Collection<string> tags, string updated)
+        public StoredMetaData(Collection<string> tags, string updated, Collection<Visualisation> visualisations)
         {
             Tags = tags;
             Updated = updated;
+            Visualisations = visualisations;
         }
 
         [BsonId]
@@ -29,6 +30,6 @@ namespace Backend.Models.Base.MetaData.POCO
 
         [JsonPropertyName("published")] public string Published { get; set; }
 
-        [JsonPropertyName("visualisations")] public Collection<Visualisation> Visualisations { get; set; }
+        [JsonPropertyName("visualisations")] public Collection<Visualisation> Visualisations { get; }
     }
 }
