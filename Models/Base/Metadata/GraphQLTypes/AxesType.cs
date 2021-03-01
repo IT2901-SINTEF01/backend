@@ -7,8 +7,8 @@ namespace Backend.Models.Base.MetaData.GraphQLTypes
     {
         public AxesType()
         {
-            Field(axes => axes.X, false, typeof(AxesDescType));
-            Field(axes => axes.Y, false, typeof(AxesDescType));
+            Field(axes => axes.X, false, typeof(AxisType));
+            Field(axes => axes.Y, false, typeof(AxisType));
         }
     }
 }
