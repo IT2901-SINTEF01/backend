@@ -6,11 +6,6 @@ namespace Backend.Models.Base.Metadata.POCO
 {
     public class Axis
     {
-        public Axis(Collection<Limit> limit)
-        {
-            Limit = limit;
-        }
-
         [BsonElement("name")]
         [JsonPropertyName("name")]
         public string Name { get; set; }
@@ -21,6 +16,6 @@ namespace Backend.Models.Base.Metadata.POCO
 
         [BsonElement("limit")]
         [JsonPropertyName("limit")]
-        public Collection<Limit> Limit { get; }
+        public Collection<int> Limit { get; set; }
     }
 }
