@@ -14,8 +14,9 @@ namespace Backend.Models.MetAPI.GraphQLTypes
             Field(forecast => forecast.Type);
 
             // TODO: Implement metadata into the query
-            // Field(forecast => forecast.StoredMetaData, false, typeof(StoredMetaDataType));
+            // Field(forecast => forecast.StoredMetadata, false, typeof(StoredMetadataType));
         }
+
         /*
          * The expression continues to resolve the type until the object is completely nested
          */
