@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Backend.Models.Base.MetaData.POCO
+namespace Backend.Models.Base.Metadata.POCO
 {
     public class Segment
     {
