@@ -37,7 +37,11 @@ namespace Backend
             services.AddSingleton<IMetadataDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<MetadataDatabaseSettings>>().Value);
 
-            services.AddSingleton<IMetaDataService, MetaDataService>();
+            // Handle metadata setup (with database)
+            if (Configuration.GetValue<bool>("MockRequests"))
+                services.AddSingleton<IMetadataService, MetadataServiceMocked>();
+            else
+                services.AddSingleton<IMetadataService, MetadataService>();
 
             // If configuration specifies mocking should be enabled, don't create HTTP clients and simply inject
             // mocked services as singletons.
