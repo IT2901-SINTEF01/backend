@@ -2,7 +2,7 @@ using System.Net.Http.Headers;
 using Backend.API.Queries;
 using Backend.API.Schemas;
 using Backend.API.Services;
-using Backend.Models.Base.MetaData;
+using Backend.Models.Base.Metadata;
 using GraphQL.Server;
 using GraphQL.Server.Transports.AspNetCore;
 using GraphQL.Server.Ui.Playground;
@@ -31,11 +31,11 @@ namespace Backend
         public void ConfigureServices(IServiceCollection services)
         {
             // DP on database
-            services.Configure<MetaDataDatabaseSettings>(
-                Configuration.GetSection(nameof(MetaDataDatabaseSettings)));
+            services.Configure<MetadataDatabaseSettings>(
+                Configuration.GetSection(nameof(MetadataDatabaseSettings)));
 
-            services.AddSingleton<IMetaDataDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<MetaDataDatabaseSettings>>().Value);
+            services.AddSingleton<IMetadataDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<MetadataDatabaseSettings>>().Value);
 
             services.AddSingleton<IMetaDataService, MetaDataService>();
 
@@ -62,7 +62,7 @@ namespace Backend
                     options.UnhandledExceptionDelegate = ctx =>
                         logger.LogError("{Error} occured", ctx.OriginalException.Message);
                 })
-                .AddSystemTextJson(deserializerSettings => { }, serializerSettings => { })
+                .AddSystemTextJson(_ => { }, _ => { })
                 .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = Environment.IsDevelopment())
                 .AddWebSockets()
                 .AddDataLoader()
