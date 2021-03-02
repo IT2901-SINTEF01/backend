@@ -1,11 +1,11 @@
-using Backend.Models.Base.MetaData.POCO;
+using Backend.Models.Base.Metadata.POCO;
 using GraphQL.Types;
 
-namespace Backend.Models.Base.MetaData.GraphQLTypes
+namespace Backend.Models.Base.Metadata.GraphQLTypes
 {
-    public sealed class StoredMetaDataType : ObjectGraphType<StoredMetaData>
+    public sealed class StoredMetadataType : ObjectGraphType<StoredMetadata>
     {
-        public StoredMetaDataType()
+        public StoredMetadataType()
         {
             Field(data => data.Id);
             Field(data => data.Name);

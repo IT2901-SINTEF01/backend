@@ -1,34 +1,34 @@
 using System;
 using System.Threading.Tasks;
-using Backend.Models.Base.MetaData;
-using Backend.Models.Base.MetaData.POCO;
+using Backend.Models.Base.Metadata;
+using Backend.Models.Base.Metadata.POCO;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Backend.API.Services
 {
-    public interface IMetaDataService
+    public interface IMetadataService
     {
-        public Task<StoredMetaData> GetMetaData(string name);
+        public Task<StoredMetadata> GetMetadata(string name);
     }
 
-    public class MetaDataService : IMetaDataService
+    public class MetadataService : IMetadataService
     {
-        private readonly IMongoCollection<StoredMetaData> _storedMetaData;
+        private readonly IMongoCollection<StoredMetadata> _storedMetadata;
 
-        public MetaDataService(IMetaDataDatabaseSettings settings)
+        public MetadataService(IMetadataDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
-            _storedMetaData = database.GetCollection<StoredMetaData>(settings.MetaDataCollectionName);
+            _storedMetadata = database.GetCollection<StoredMetadata>(settings.MetadataCollectionName);
         }
 
-        public async Task<StoredMetaData> GetMetaData(string name)
+        public async Task<StoredMetadata> GetMetadata(string name)
         {
-            Console.WriteLine(_storedMetaData.Find(new BsonDocument()).FirstOrDefault().ToString());
-            var response = await Task.FromResult(_storedMetaData.Find(data => data.Name == name).FirstOrDefault());
-            return response;
+            Console.WriteLine(_storedMetadata.Find(new BsonDocument()).FirstOrDefault().ToString());
+            
+            return await Task.FromResult(_storedMetadata.Find(data => data.Name == name).FirstOrDefault());
         }
     }
 }

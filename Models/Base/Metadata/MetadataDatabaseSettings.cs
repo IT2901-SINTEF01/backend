@@ -1,15 +1,15 @@
-namespace Backend.Models.Base.MetaData
+namespace Backend.Models.Base.Metadata
 {
-    public class MetaDataDatabaseSettings : IMetaDataDatabaseSettings
+    public class MetadataDatabaseSettings : IMetadataDatabaseSettings
     {
-        public string MetaDataCollectionName { get; set; }
+        public string MetadataCollectionName { get; set; }
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }
     }
 
-    public interface IMetaDataDatabaseSettings
+    public interface IMetadataDatabaseSettings
     {
-        string MetaDataCollectionName { get; set; }
+        string MetadataCollectionName { get; set; }
         string ConnectionString { get; set; }
         string DatabaseName { get; set; }
     }
