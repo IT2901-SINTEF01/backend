@@ -20,20 +20,20 @@ namespace Backend.Mocks.MetAPI
 
             var forecastGeometry = new Faker<Geometry>()
                 .StrictMode(true)
-                .RuleFor(o => o.Coordinates, f => new Collection<float>
+                .RuleFor(o => o.Coordinates, _ => new Collection<float>
                 {
                     lon, lat
                 })
-                .RuleFor(o => o.Type, f => "Point");
+                .RuleFor(o => o.Type, _ => "Point");
 
             var forecastUnits = new Faker<Units>()
-                .RuleFor(o => o.AirTemperature, f => "celsius")
-                .RuleFor(o => o.AirPressureAtSeaLevel, f => "hPa")
-                .RuleFor(o => o.CloudAreaFraction, f => "%")
-                .RuleFor(o => o.PrecipitationAmount, f => "mm")
-                .RuleFor(o => o.RelativeHumidity, f => "%")
-                .RuleFor(o => o.WindFromDirection, f => "degrees")
-                .RuleFor(o => o.WindSpeed, f => "m/s");
+                .RuleFor(o => o.AirTemperature, _ => "celsius")
+                .RuleFor(o => o.AirPressureAtSeaLevel, _ => "hPa")
+                .RuleFor(o => o.CloudAreaFraction, _ => "%")
+                .RuleFor(o => o.PrecipitationAmount, _ => "mm")
+                .RuleFor(o => o.RelativeHumidity, _ => "%")
+                .RuleFor(o => o.WindFromDirection, _ => "degrees")
+                .RuleFor(o => o.WindSpeed, _ => "m/s");
 
             var forecastMeta = new Faker<Meta>()
                 .RuleFor(o => o.Units, f => forecastUnits.Generate())
@@ -105,7 +105,8 @@ namespace Backend.Mocks.MetAPI
                 .StrictMode(true)
                 .RuleFor(o => o.Type, f => "Feature")
                 .RuleFor(o => o.ForecastGeometry, f => forecastGeometry.Generate())
-                .RuleFor(o => o.ForecastProperties, f => forecastProperties.Generate());
+                .RuleFor(o => o.ForecastProperties, f => forecastProperties.Generate())
+                .RuleFor(o => o.StoredMetadata, Metadata.Metadata.GenerateStoredMetadata());
 
             return outForecast;
         }
