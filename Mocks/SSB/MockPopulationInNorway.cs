@@ -27,7 +27,7 @@ namespace Backend.Mocks.SSB
             const int approxPopulationNorway = 5391369;
 
             var region = new Faker<JsonStatDimensionContent>()
-                .RuleFor(o => o.Category, f => new JsonStatDimensionCategory()
+                .RuleFor(o => o.Category, _ => new JsonStatDimensionCategory()
                 {
                     Index = NorwayTools.MunicipalityCodeToIndex,
                     Label = NorwayTools.MunicipalityCodeToMunicipalityName
@@ -39,7 +39,7 @@ namespace Backend.Mocks.SSB
                     Index = NorwayTools.YearToIndex,
                     Label = NorwayTools.YearToYearString
                 })
-                .RuleFor(o => o.Label, f => "År");
+                .RuleFor(o => o.Label, _ => "År");
 
             var dimension = new Faker<PopulationPerMunicipalityNorway.PopulationInNorwayDimension>()
                 .RuleFor(o => o.Region, _ => region)
