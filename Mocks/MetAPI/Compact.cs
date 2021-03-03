@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
+using Backend.Mocks.Metadata;
 using Backend.Models.MetAPI.POCO;
 using Backend.utils;
 using Bogus;
@@ -20,60 +21,60 @@ namespace Backend.Mocks.MetAPI
 
             var forecastGeometry = new Faker<Geometry>()
                 .StrictMode(true)
-                .RuleFor(o => o.Coordinates, f => new Collection<float>
+                .RuleFor(o => o.Coordinates, _ => new Collection<float>
                 {
                     lon, lat
                 })
-                .RuleFor(o => o.Type, f => "Point");
+                .RuleFor(o => o.Type, _ => "Point");
 
             var forecastUnits = new Faker<Units>()
-                .RuleFor(o => o.AirTemperature, f => "celsius")
-                .RuleFor(o => o.AirPressureAtSeaLevel, f => "hPa")
-                .RuleFor(o => o.CloudAreaFraction, f => "%")
-                .RuleFor(o => o.PrecipitationAmount, f => "mm")
-                .RuleFor(o => o.RelativeHumidity, f => "%")
-                .RuleFor(o => o.WindFromDirection, f => "degrees")
-                .RuleFor(o => o.WindSpeed, f => "m/s");
+                .RuleFor(o => o.AirTemperature, _ => "celsius")
+                .RuleFor(o => o.AirPressureAtSeaLevel, _ => "hPa")
+                .RuleFor(o => o.CloudAreaFraction, _ => "%")
+                .RuleFor(o => o.PrecipitationAmount, _ => "mm")
+                .RuleFor(o => o.RelativeHumidity, _ => "%")
+                .RuleFor(o => o.WindFromDirection, _ => "degrees")
+                .RuleFor(o => o.WindSpeed, _ => "m/s");
 
             var forecastMeta = new Faker<Meta>()
-                .RuleFor(o => o.Units, f => forecastUnits.Generate())
-                .RuleFor(o => o.UpdatedAt, f => startTime);
+                .RuleFor(o => o.Units, _ => forecastUnits.Generate())
+                .RuleFor(o => o.UpdatedAt, _ => startTime);
 
             var forecastDetails = new Faker<Details>()
-                .RuleFor(o => o.AirTemperature, f => (float) random.Next(-30, 49) + random.NextDouble())
-                .RuleFor(o => o.AirPressureAtSeaLevel, f => (float) random.Next(900, 1100) + random.NextDouble())
-                .RuleFor(o => o.CloudAreaFraction, f => (float) random.Next(50, 100) + random.NextDouble())
-                .RuleFor(o => o.PrecipitationAmount, f => (float) random.NextDouble())
-                .RuleFor(o => o.RelativeHumidity, f => (float) random.NextDouble() * 100)
-                .RuleFor(o => o.WindFromDirection, f => (float) random.NextDouble() * 359)
-                .RuleFor(o => o.WindSpeed, f => (float) random.NextDouble() * 32.7);
+                .RuleFor(o => o.AirTemperature, _ => (float) random.Next(-30, 49) + random.NextDouble())
+                .RuleFor(o => o.AirPressureAtSeaLevel, _ => (float) random.Next(900, 1100) + random.NextDouble())
+                .RuleFor(o => o.CloudAreaFraction, _ => (float) random.Next(50, 100) + random.NextDouble())
+                .RuleFor(o => o.PrecipitationAmount, _ => (float) random.NextDouble())
+                .RuleFor(o => o.RelativeHumidity, _ => (float) random.NextDouble() * 100)
+                .RuleFor(o => o.WindFromDirection, _ => (float) random.NextDouble() * 359)
+                .RuleFor(o => o.WindSpeed, _ => (float) random.NextDouble() * 32.7);
 
             var forecastInstant = new Faker<Instant>()
-                .RuleFor(o => o.Details, f => forecastDetails.Generate());
+                .RuleFor(o => o.Details, _ => forecastDetails.Generate());
 
             var forecastSummary = new Faker<Summary>()
                 .RuleFor(o => o.SymbolCode,
-                    f => MetAPITools.ValidSymbolCodes[random.Next(MetAPITools.ValidSymbolCodes.Count)]);
+                    _ => MetAPITools.ValidSymbolCodes[random.Next(MetAPITools.ValidSymbolCodes.Count)]);
 
             var next1Hours = new Faker<Next1Hours>()
-                .RuleFor(o => o.Details, f => forecastDetails.Generate())
-                .RuleFor(o => o.Summary, f => forecastSummary.Generate());
+                .RuleFor(o => o.Details, _ => forecastDetails.Generate())
+                .RuleFor(o => o.Summary, _ => forecastSummary.Generate());
 
             var next6Hours = new Faker<Next6Hours>()
-                .RuleFor(o => o.Details, f => forecastDetails.Generate())
-                .RuleFor(o => o.Summary, f => forecastSummary.Generate());
+                .RuleFor(o => o.Details, _ => forecastDetails.Generate())
+                .RuleFor(o => o.Summary, _ => forecastSummary.Generate());
 
             var next12Hours = new Faker<Next12Hours>()
-                .RuleFor(o => o.Details, f => forecastDetails.Generate())
-                .RuleFor(o => o.Summary, f => forecastSummary.Generate());
+                .RuleFor(o => o.Details, _ => forecastDetails.Generate())
+                .RuleFor(o => o.Summary, _ => forecastSummary.Generate());
 
             var forecastData = new Faker<ForecastData>()
-                .RuleFor(o => o.Instant, f => forecastInstant.Generate())
-                .RuleFor(o => o.Next1Hours, f => next1Hours.Generate())
-                .RuleFor(o => o.Next6Hours, f => next6Hours.Generate())
-                .RuleFor(o => o.Next12Hours, f => next12Hours.Generate());
+                .RuleFor(o => o.Instant, _ => forecastInstant.Generate())
+                .RuleFor(o => o.Next1Hours, _ => next1Hours.Generate())
+                .RuleFor(o => o.Next6Hours, _ => next6Hours.Generate())
+                .RuleFor(o => o.Next12Hours, _ => next12Hours.Generate());
 
-            var forecastTimeseries = new Faker<Timeseries>().RuleFor(o => o.Time, f =>
+            var forecastTimeseries = new Faker<Timeseries>().RuleFor(o => o.Time, _ =>
                 {
                     numInTimeseries++;
                     switch (numInTimeseries)
@@ -89,11 +90,11 @@ namespace Backend.Mocks.MetAPI
                             return timeseriesDateTime;
                     }
                 })
-                .RuleFor(o => o.ForecastData, f => forecastData.Generate());
+                .RuleFor(o => o.ForecastData, _ => forecastData.Generate());
 
             var forecastProperties = new Faker<Properties>()
-                .RuleFor(o => o.Meta, f => forecastMeta.Generate())
-                .RuleFor(o => o.Timeseries, f =>
+                .RuleFor(o => o.Meta, _ => forecastMeta.Generate())
+                .RuleFor(o => o.Timeseries, _ =>
                 {
                     var outCollection = new Collection<Timeseries>();
                     foreach (var timeseries in forecastTimeseries.Generate(85)) outCollection.Add(timeseries);
@@ -103,9 +104,10 @@ namespace Backend.Mocks.MetAPI
 
             var outForecast = new Faker<Forecast>()
                 .StrictMode(true)
-                .RuleFor(o => o.Type, f => "Feature")
-                .RuleFor(o => o.ForecastGeometry, f => forecastGeometry.Generate())
-                .RuleFor(o => o.ForecastProperties, f => forecastProperties.Generate());
+                .RuleFor(o => o.Type, _ => "Feature")
+                .RuleFor(o => o.ForecastGeometry, _ => forecastGeometry.Generate())
+                .RuleFor(o => o.ForecastProperties, _ => forecastProperties.Generate())
+                .RuleFor(o => o.StoredMetadata, MockMetadata.GenerateStoredMetadata());
 
             return outForecast;
         }

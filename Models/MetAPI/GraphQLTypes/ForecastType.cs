@@ -12,6 +12,9 @@ namespace Backend.Models.MetAPI.GraphQLTypes
             Field(forecast => forecast.ForecastProperties, false, typeof(PropertiesType))
                 .Description("Data and meta-data returned");
             Field(forecast => forecast.Type);
+
+            // TODO: Implement metadata into the query
+            // Field(forecast => forecast.StoredMetadata, false, typeof(StoredMetadataType));
         }
 
         /*

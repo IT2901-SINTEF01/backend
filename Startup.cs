@@ -2,6 +2,7 @@ using System.Net.Http.Headers;
 using Backend.API.Queries;
 using Backend.API.Schemas;
 using Backend.API.Services;
+using Backend.Models.Base.Metadata;
 using GraphQL.Server;
 using GraphQL.Server.Transports.AspNetCore;
 using GraphQL.Server.Ui.Playground;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Backend
 {
@@ -28,6 +30,19 @@ namespace Backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // DP on database
+            services.Configure<MetadataDatabaseSettings>(
+                Configuration.GetSection(nameof(MetadataDatabaseSettings)));
+
+            services.AddSingleton<IMetadataDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<MetadataDatabaseSettings>>().Value);
+
+            // Handle metadata setup (with database)
+            if (Configuration.GetValue<bool>("MockRequests"))
+                services.AddSingleton<IMetadataService, MetadataServiceMocked>();
+            else
+                services.AddSingleton<IMetadataService, MetadataService>();
+
             // If configuration specifies mocking should be enabled, don't create HTTP clients and simply inject
             // mocked services as singletons.
             if (Configuration.GetValue<bool>("MockRequests"))
@@ -51,7 +66,7 @@ namespace Backend
                     options.UnhandledExceptionDelegate = ctx =>
                         logger.LogError("{Error} occured", ctx.OriginalException.Message);
                 })
-                .AddSystemTextJson(deserializerSettings => { }, serializerSettings => { })
+                .AddSystemTextJson(_ => { }, _ => { })
                 .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = Environment.IsDevelopment())
                 .AddWebSockets()
                 .AddDataLoader()
