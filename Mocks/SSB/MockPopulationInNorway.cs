@@ -18,7 +18,7 @@ namespace Backend.Mocks.SSB
     public sealed class MockPopulationInNorway
     {
         [SuppressMessage("Rule Category", "CA5394", Justification = "No security threat on data mocking.")]
-        public static PopulationPerMunicipalityNorway GenerateSampleAgesInNorway()
+        public static PopulationPerMunicipalityNorway GenerateSamplePopulationsInNorway()
         {
             var numYears = NorwayTools.YearToIndex.Count;
             var numMunicipalities = NorwayTools.MunicipalityCodeToIndex.Count;
