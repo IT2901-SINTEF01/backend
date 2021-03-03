@@ -4,6 +4,7 @@
 ![Open issues](https://img.shields.io/github/issues/IT2901-SINTEF01/backend)
 ![Apache 2 License](https://img.shields.io/github/license/IT2901-SINTEF01/backend)
 ![Latest Release](https://img.shields.io/github/v/release/IT2901-SINTEF01/backend?include_prereleases)
+[![Coverage Status](https://coveralls.io/repos/github/IT2901-SINTEF01/backend/badge.svg?branch=master)](https://coveralls.io/github/IT2901-SINTEF01/backend?branch=master)
 
 <img src="./SINTEF_logo.png" alt="SINTEF" height=50 />
 
