@@ -1,5 +1,6 @@
 ﻿using Backend.API.Services;
 using Backend.Models.Base.Metadata.GraphQLTypes;
+using Backend.Models.Base.Metadata.POCO;
 using Backend.Models.MetAPI.POCO;
 using GraphQL.Types;
 
@@ -14,7 +15,7 @@ namespace Backend.Models.MetAPI.GraphQLTypes
             Field(forecast => forecast.ForecastProperties, false, typeof(PropertiesType))
                 .Description("Data and meta-data returned");
             Field(forecast => forecast.Type);
-            Field<StoredMetadataType>().ResolveAsync(context => metadataService.GetMetadata("MetAPI Forecast"))
+            Field<StoredMetadataType>().ResolveAsync(async _ => await metadataService.GetMetadata("MetAPI Forecast"))
                 .Name("metadata").Description("Metadata for the forecast data source");
         }
 
