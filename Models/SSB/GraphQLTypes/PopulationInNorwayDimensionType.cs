@@ -3,9 +3,10 @@ using Backend.Models.SSB.POCO;
 
 namespace Backend.Models.SSB.GraphQLTypes
 {
-    public class AgesInNorwayDimensionType : AbstractJsonStatDimensionType<AgesInNorway.AgesInNorwayDimension>
+    public class PopulationInNorwayDimensionType : AbstractJsonStatDimensionType<
+        PopulationPerMunicipalityNorway.PopulationInNorwayDimension>
     {
-        public AgesInNorwayDimensionType()
+        public PopulationInNorwayDimensionType()
         {
             Field(poco => poco.Region, false, typeof(JsonStatDimensionContentType));
             Field(poco => poco.Tid, false, typeof(JsonStatDimensionContentType));
