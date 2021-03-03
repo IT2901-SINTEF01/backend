@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using Backend.Models.Base.Metadata.POCO;
 using GraphQL.Types;
 

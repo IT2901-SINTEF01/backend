@@ -25,7 +25,7 @@ namespace Backend.API.Services
         {
             var newLat =
                 lat.ToString(CultureInfo
-                    .InvariantCulture); // Converts input to a float that use . instead of , (gets converted by graphQL somehow.
+                    .InvariantCulture); // Converts input to a float that use . instead of , (gets converted by graphQL somehow.)
             var newLon = lon.ToString(CultureInfo.InvariantCulture);
             var response =
                 await _httpClient.GetAsync(
