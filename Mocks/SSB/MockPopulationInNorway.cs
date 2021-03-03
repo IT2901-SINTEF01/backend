@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using Backend.Models.Base.JsonStat;
-using Backend.Models.SSB;
 using Backend.Models.SSB.POCO;
 using Backend.utils;
 using Bogus;
@@ -21,7 +20,6 @@ namespace Backend.Mocks.SSB
         [SuppressMessage("Rule Category", "CA5394", Justification = "No security threat on data mocking.")]
         public static PopulationPerMunicipalityNorway GenerateSampleAgesInNorway()
         {
-            Random random = new();
             var numYears = NorwayTools.YearToIndex.Count;
             var numMunicipalities = NorwayTools.MunicipalityCodeToIndex.Count;
             const int approxPopulationNorway = 5391369;
@@ -59,8 +57,8 @@ namespace Backend.Mocks.SSB
                 .RuleFor(o => o.Source, _ => "Statistisk sentralbyrå")
                 .RuleFor(o => o.Updated,
                     _ => dateNow.AddDays(-dateNow.Day).AddHours(-dateNow.Hour).AddMinutes(-dateNow.Minute)
-                        .AddMilliseconds(-dateNow.Millisecond))
-                .RuleFor(o => o.Value, _ =>
+                        .AddSeconds(-dateNow.Second).AddMilliseconds(-dateNow.Millisecond))
+                .RuleFor(o => o.Value, f =>
                 {
                     var outArray = new Collection<int>();
                     var approximatePopulationPerMunicipality =
@@ -68,7 +66,7 @@ namespace Backend.Mocks.SSB
 
                     for (var i = 0; i < numMunicipalities; i++)
                     {
-                        outArray.Add(approximatePopulationPerMunicipality + random.Next(-13000, 13000));
+                        outArray.Add(approximatePopulationPerMunicipality + f.Random.Int(-13000, 13000));
                     }
 
                     for (var i = 0; i < numYears - 1; i++)
@@ -77,7 +75,7 @@ namespace Backend.Mocks.SSB
                         {
                             var currentLength = outArray.Count;
                             var prevPopulationInThisMunicipality = outArray[currentLength - numMunicipalities];
-                            outArray.Add(prevPopulationInThisMunicipality + random.Next(1, 500));
+                            outArray.Add(prevPopulationInThisMunicipality + f.Random.Int(1, 500));
                         }
                     }
 
