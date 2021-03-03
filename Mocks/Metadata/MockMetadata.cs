@@ -5,7 +5,7 @@ using Bogus;
 
 namespace Backend.Mocks.Metadata
 {
-    public static class Metadata
+    public static class MockMetadata
     {
         public static StoredMetadata GenerateStoredMetadata()
         {
