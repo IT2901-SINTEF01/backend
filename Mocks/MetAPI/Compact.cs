@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
+using Backend.Mocks.Metadata;
 using Backend.Models.MetAPI.POCO;
 using Backend.utils;
 using Bogus;
@@ -106,7 +107,7 @@ namespace Backend.Mocks.MetAPI
                 .RuleFor(o => o.Type, f => "Feature")
                 .RuleFor(o => o.ForecastGeometry, f => forecastGeometry.Generate())
                 .RuleFor(o => o.ForecastProperties, f => forecastProperties.Generate())
-                .RuleFor(o => o.StoredMetadata, Metadata.Metadata.GenerateStoredMetadata());
+                .RuleFor(o => o.StoredMetadata, MockMetadata.GenerateStoredMetadata());
 
             return outForecast;
         }
