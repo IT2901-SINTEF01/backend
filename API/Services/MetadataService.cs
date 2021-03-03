@@ -1,10 +1,7 @@
-using System;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Backend.Mocks.Metadata;
 using Backend.Models.Base.Metadata;
 using Backend.Models.Base.Metadata.POCO;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Backend.API.Services
@@ -28,8 +25,6 @@ namespace Backend.API.Services
 
         public async Task<StoredMetadata> GetMetadata(string name)
         {
-            Console.WriteLine(_storedMetadata.Find(new BsonDocument()).FirstOrDefault().ToString());
-
             return await Task.FromResult(_storedMetadata.Find(data => data.Name == name).FirstOrDefault());
         }
     }
@@ -38,7 +33,7 @@ namespace Backend.API.Services
     {
         public async Task<StoredMetadata> GetMetadata(string name)
         {
-            return await Task.FromResult(Metadata.GenerateStoredMetadata());
+            return await Task.FromResult(MockMetadata.GenerateStoredMetadata());
         }
     }
 }
