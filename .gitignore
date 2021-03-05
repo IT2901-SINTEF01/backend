@@ -7,3 +7,7 @@ Backend.sln.DotSettings.user
 Backend.csproj.user
 .vs/
 .idea/
+BackendTests/TestResults
+.DS_Store
+
+tmp.json
