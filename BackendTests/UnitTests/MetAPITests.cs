@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using Backend.Mocks.MetAPI;
 using Backend.Models.MetAPI.POCO;
 using Backend.utils;
-using NUnit.Framework;
+using Xunit;
 
 namespace BackendTests.UnitTests
 {
@@ -15,8 +15,7 @@ namespace BackendTests.UnitTests
         private float _lon;
         private Random _random;
 
-        [SetUp]
-        public void Setup()
+        public MetAPITests()
         {
             _random = new Random();
             _lon = (float) _random.NextDouble() * (63.433f - 63.42f) + 63.42f;
@@ -24,21 +23,21 @@ namespace BackendTests.UnitTests
             _forecast = Compact.GenerateSampleForecast(_lon, _lat);
         }
 
-        [Test]
+        [Fact]
         public void MetAPIShouldReturnData()
         {
             Assert.NotNull(_forecast);
         }
 
-        [Test]
+        [Fact]
         public void MetAPIShouldReturnCorrectCoordinates()
         {
-            Assert.That("Feature", Is.EqualTo(_forecast.Type).NoClip);
-            Assert.That(_lon, Is.EqualTo(_forecast.ForecastGeometry.Coordinates[0]).Within(0.0001).Percent);
-            Assert.That(_lat, Is.EqualTo(_forecast.ForecastGeometry.Coordinates[1]).Within(0.0001).Percent);
+            Assert.Equal("Feature", _forecast.Type);
+            Assert.Equal(_lon, _forecast.ForecastGeometry.Coordinates[0], 3);
+            Assert.Equal(_lat, _forecast.ForecastGeometry.Coordinates[1], 3);
         }
 
-        [Test]
+        [Fact]
         public void MetAPIShouldReturnCorrectSymbolCode()
         {
             Assert.Contains(_forecast.ForecastProperties.Timeseries[0].ForecastData.Next1Hours.Summary.SymbolCode,

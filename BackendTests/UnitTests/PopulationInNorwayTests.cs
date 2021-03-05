@@ -2,52 +2,52 @@ using System;
 using Backend.Mocks.SSB;
 using Backend.Models.SSB.POCO;
 using Backend.utils;
-using NUnit.Framework;
+using Xunit;
 
 namespace BackendTests.UnitTests
 {
     public class PopulationInNorwayTests
     {
-        private Random _r;
+        private readonly Random _r;
         private readonly int _numMunicipalities = NorwayTools.MunicipalityCodeToIndex.Count;
         private readonly int _numYears = NorwayTools.YearToIndex.Count;
-        private PopulationPerMunicipalityNorway _population;
+        private readonly PopulationPerMunicipalityNorway _population;
 
-        [SetUp]
-        public void Setup()
+        public PopulationInNorwayTests()
         {
             _r = new Random();
             _population = MockPopulationInNorway.GenerateSamplePopulationsInNorway();
         }
 
-        [Test]
+        [Fact]
         public void PopulationInNorwayAPIShouldReturnData()
         {
             Assert.NotNull(_population);
         }
 
-        [Test]
+        [Fact]
         public void PopulationInNorwayShouldIncreasePerMunicipality()
         {
             var randomSample = _r.Next(_numMunicipalities, _population.Dataset.Value.Count - 1);
             var currYearPopulation = _population.Dataset.Value[randomSample];
             var prevYearPopulation = _population.Dataset.Value[randomSample - _numMunicipalities];
-            Assert.Greater(currYearPopulation, prevYearPopulation);
-            Assert.That(currYearPopulation - prevYearPopulation <= 500);
-            Assert.That(currYearPopulation - prevYearPopulation >= 1);
+            
+            Assert.True(currYearPopulation > prevYearPopulation);
+            Assert.True(currYearPopulation - prevYearPopulation <= 500);
+            Assert.True(currYearPopulation - prevYearPopulation >= 1);
         }
 
-        [Test]
+        [Fact]
         public void PopulationInNorwayCorrectLabelAndSource()
         {
-            Assert.AreEqual("07459: Befolkning, etter region, år og statistikkvariabel", _population.Dataset.Label);
-            Assert.AreEqual("Statistisk sentralbyrå", _population.Dataset.Source);
+            Assert.Equal("07459: Befolkning, etter region, år og statistikkvariabel", _population.Dataset.Label);
+            Assert.Equal("Statistisk sentralbyrå", _population.Dataset.Source);
         }
 
-        [Test]
+        [Fact]
         public void PopulationInNorwayGeneratesCorrectAmountOfData()
         {
-            Assert.AreEqual(_numMunicipalities * _numYears, _population.Dataset.Value.Count);
+            Assert.Equal(_numMunicipalities * _numYears, _population.Dataset.Value.Count);
         }
     }
 }
