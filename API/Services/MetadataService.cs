@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Backend.Mocks.Metadata;
@@ -33,11 +32,11 @@ namespace Backend.API.Services
 
         public async Task<Collection<StoredMetadata>> GetAllMetadata()
         {
-            var result = await Task.FromResult(_storedMetadata.Find(metadata => true).ToList());
+            var result = await Task.FromResult(_storedMetadata.Find(metadata => true).ToList()).ConfigureAwait(false);
             var collectionResult = new Collection<StoredMetadata>();
-            for (var i = 0; i < result.Count; i++)
+            foreach (var t in result)
             {
-                collectionResult.Add(result[i]);
+                collectionResult.Add(t);
             }
             return collectionResult;
         }
@@ -52,7 +51,7 @@ namespace Backend.API.Services
 
         public async Task<Collection<StoredMetadata>> GetAllMetadata()
         {
-            return await Task.FromResult(MockMetadata.GenerateMultipleStoredMetadata());
+            return await Task.FromResult(MockMetadata.GenerateMultipleStoredMetadata()).ConfigureAwait(false);
         }
     }
 }
