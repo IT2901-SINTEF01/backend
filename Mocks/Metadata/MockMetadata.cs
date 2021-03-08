@@ -42,5 +42,12 @@ namespace Backend.Mocks.Metadata
 
             return storedMetadata;
         }
+
+        public static List<StoredMetadata> GenerateMultipleStoredMetadata()
+        {
+            var metadataList = new List<StoredMetadata>();
+            for (var i = 0; i < 10; i++) metadataList.Add(GenerateStoredMetadata());
+            return metadataList;
+        }
     }
 }
