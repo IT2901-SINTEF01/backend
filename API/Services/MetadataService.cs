@@ -33,9 +33,7 @@ namespace Backend.API.Services
         public async Task<Collection<StoredMetadata>> GetAllMetadata()
         {
             var result = await Task.FromResult(_storedMetadata.Find(metadata => true).ToList()).ConfigureAwait(false);
-            var collectionResult = new Collection<StoredMetadata>();
-            foreach (var t in result) {collectionResult.Add(t);}
-            return collectionResult;
+            return new Collection<StoredMetadata>(result);
         }
     }
 
