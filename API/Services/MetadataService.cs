@@ -34,7 +34,7 @@ namespace Backend.API.Services
         {
             var result = await Task.FromResult(_storedMetadata.Find(metadata => true).ToList()).ConfigureAwait(false);
             var collectionResult = new Collection<StoredMetadata>();
-            foreach (var t in result) collectionResult.Add(t);
+            foreach (var t in result) {collectionResult.Add(t);}
             return collectionResult;
         }
     }
