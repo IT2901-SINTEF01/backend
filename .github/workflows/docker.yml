@@ -71,4 +71,4 @@ jobs:
                 app-name: 'sintef01'
                 slot-name: 'production'
                 publish-profile: ${{ secrets.AzureAppService_PublishProfile_dd3ecfac72f8439fba924ded08761b45 }}
-                images: 'ghcr.io/it2901-sintef01/backend:${{ github.sha }}'
+                images: 'ghcr.io/it2901-sintef01/backend:master'
