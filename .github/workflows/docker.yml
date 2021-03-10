@@ -55,7 +55,7 @@ jobs:
                     tags: ${{ steps.docker_meta.outputs.tags }}
                     labels: ${{ steps.docker_meta.outputs.labels }}
             - name: Deploy to Azure Web App
-              if: github.ref == ‘refs/heads/master’ && github.event_name == ‘push’ # only deploy to azure on master
+              if: github.ref == 'refs/heads/master' && github.event_name == 'push' # only deploy to azure on master
               uses: azure/webapps-deploy@v2
               with:
                 app-name: 'sintef01'
