@@ -54,8 +54,18 @@ jobs:
                     push: ${{ github.event_name != 'pull_request' }}
                     tags: ${{ steps.docker_meta.outputs.tags }}
                     labels: ${{ steps.docker_meta.outputs.labels }}
+    azure:
+      name: Deploy Docker image to Azure
+      runs-on: ubuntu-latest
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push' # only deploy to azure on master
+      needs: docker
+      steps:
+            - uses: azure/docker-login@v1
+              with:
+                login-server: contoso.azurecr.io
+                username: ${{ github.repository_owner }}
+                password: ${{ secrets.CR_PAT }}
             - name: Deploy to Azure Web App
-              if: github.ref == 'refs/heads/master' && github.event_name == 'push' # only deploy to azure on master
               uses: azure/webapps-deploy@v2
               with:
                 app-name: 'sintef01'
