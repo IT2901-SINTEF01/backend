@@ -7,7 +7,7 @@ namespace Backend.Mocks.Metadata
 {
     public static class MockMetadata
     {
-        public static StoredMetadata GenerateStoredMetadata()
+        public static Faker<StoredMetadata> GenerateStoredMetadata()
         {
             var axis = new Faker<Axis>()
                 .RuleFor(o => o.Limit, f => new Collection<int> {f.Random.Int(0, 10), f.Random.Int(20, 50)})
@@ -45,9 +45,7 @@ namespace Backend.Mocks.Metadata
 
         public static Collection<StoredMetadata> GenerateMultipleStoredMetadata()
         {
-            var metadataList = new Collection<StoredMetadata>();
-            for (var i = 0; i < 10; i++) {metadataList.Add(GenerateStoredMetadata());}
-            return metadataList;
+            return new(GenerateStoredMetadata().Generate(10));
         }
     }
 }
