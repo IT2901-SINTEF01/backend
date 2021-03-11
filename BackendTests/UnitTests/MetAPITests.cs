@@ -10,10 +10,10 @@ namespace BackendTests.UnitTests
     [SuppressMessage("Rule Category", "CA5394", Justification = "No security threat on data mocking.")]
     public class MetAPITests
     {
-        private Forecast _forecast;
-        private float _lat;
-        private float _lon;
-        private Random _random;
+        private readonly Forecast _forecast;
+        private readonly float _lat;
+        private readonly float _lon;
+        private readonly Random _random;
 
         public MetAPITests()
         {
