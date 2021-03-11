@@ -25,14 +25,19 @@ namespace Backend.utils
 
         private Task BeginInvoke(HttpContext context)
         {
-            if (context.Request.Method != "OPTIONS") return _next.Invoke(context);
-
             context.Response.Headers.Add("Access-Control-Allow-Origin",
-                new[] { (string)context.Request.Headers["Origin"] }); // This accepts all origins as it simply echoes the origin back
+                new[]
+                {
+                    (string) context.Request.Headers["Origin"]
+                }); // This accepts all origins as it simply echoes the origin back
             context.Response.Headers.Add("Access-Control-Allow-Headers",
                 new[] {"Origin, X-Requested-With, Content-Type, Accept"});
             context.Response.Headers.Add("Access-Control-Allow-Methods", new[] {"GET, POST, OPTIONS"});
             context.Response.Headers.Add("Access-Control-Allow-Credentials", new[] {"true"});
+
+            // For non-OPTIONS requests we want to continue the network pipeline, but for OPTIONS we want to terminate with 204 No Content.
+            // Without this, GraphQL server gets very(!) upset and tells the client that it only accepts GET and POST requests. What a picky eater.
+            if (context.Request.Method != "OPTIONS") return _next.Invoke(context);
 
             context.Response.StatusCode = 204; // No Content
 
