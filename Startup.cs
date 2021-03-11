@@ -120,7 +120,7 @@ namespace Backend
                 SchemaPollingInterval = 5000
             });
 
-            app.UseCors();
+            app.UseCors(FrontendOrigins);
         }
     }
 }
