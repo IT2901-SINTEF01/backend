@@ -119,6 +119,8 @@ namespace Backend
                 SchemaPollingEndpointFilter = "*localhost*",
                 SchemaPollingInterval = 5000
             });
+
+            app.UseCors();
         }
     }
 }
