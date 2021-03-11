@@ -52,7 +52,7 @@ jobs:
                 with:
                     context: .
                     push: ${{ github.event_name != 'pull_request' }}
-                    tags: ${{ steps.docker_meta.outputs.tags }},ghcr.io/it2901-sintef01:${{ github.sha }} # Add the SHA as a tag 
+                    tags: ${{ steps.docker_meta.outputs.tags }},ghcr.io/${{ github.repository }}:${{ github.sha }} # Add the SHA as a tag 
                     labels: ${{ steps.docker_meta.outputs.labels }}
     azure:
       name: Deploy Docker image to Azure
