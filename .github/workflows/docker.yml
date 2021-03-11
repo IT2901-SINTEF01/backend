@@ -17,7 +17,7 @@ on:
 jobs:
     docker:
         name: Build image and push to GCR
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-20.04
         steps:
             -   name: Checkout
                 uses: actions/checkout@v2
@@ -52,11 +52,11 @@ jobs:
                 with:
                     context: .
                     push: ${{ github.event_name != 'pull_request' }}
-                    tags: ${{ steps.docker_meta.outputs.tags }},${{ github.sha }} # Add the SHA as a tag 
+                    tags: ${{ steps.docker_meta.outputs.tags }},ghcr.io/it2901-sintef01:${{ github.sha }} # Add the SHA as a tag 
                     labels: ${{ steps.docker_meta.outputs.labels }}
     azure:
       name: Deploy Docker image to Azure
-      runs-on: ubuntu-latest
+      runs-on: ubuntu-20.04
       if: github.ref == 'refs/heads/master' # only deploy to azure on master
       needs: docker
       steps:
