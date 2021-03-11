@@ -18,6 +18,8 @@ namespace Backend
 {
     public class Startup
     {
+        private readonly string FrontendOrigins = "frontend_origins";
+
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
@@ -30,6 +32,18 @@ namespace Backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: FrontendOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("https://*.vercel.app")
+                            .SetIsOriginAllowedToAllowWildcardSubdomains()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                    });
+            });
+
             // DP on database
             services.Configure<MetadataDatabaseSettings>(
                 Configuration.GetSection(nameof(MetadataDatabaseSettings)));
