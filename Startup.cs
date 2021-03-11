@@ -3,6 +3,7 @@ using Backend.API.Queries;
 using Backend.API.Schemas;
 using Backend.API.Services;
 using Backend.Models.Base.Metadata;
+using Backend.utils;
 using GraphQL.Server;
 using GraphQL.Server.Transports.AspNetCore;
 using GraphQL.Server.Ui.Playground;
@@ -18,8 +19,6 @@ namespace Backend
 {
     public class Startup
     {
-        private readonly string FrontendOrigins = "frontend_origins";
-
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
@@ -32,18 +31,6 @@ namespace Backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
-            {
-                options.AddPolicy(name: FrontendOrigins,
-                    builder =>
-                    {
-                        builder.WithOrigins("https://*.vercel.app")
-                            .SetIsOriginAllowedToAllowWildcardSubdomains()
-                            .AllowAnyMethod()
-                            .AllowAnyHeader();
-                    });
-            });
-
             // DP on database
             services.Configure<MetadataDatabaseSettings>(
                 Configuration.GetSection(nameof(MetadataDatabaseSettings)));
@@ -89,6 +76,8 @@ namespace Backend
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseOptions();
+
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
@@ -119,8 +108,6 @@ namespace Backend
                 SchemaPollingEndpointFilter = "*localhost*",
                 SchemaPollingInterval = 5000
             });
-
-            app.UseCors(FrontendOrigins);
         }
     }
 }
