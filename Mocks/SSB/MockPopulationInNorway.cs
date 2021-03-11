@@ -10,10 +10,10 @@ using Bogus;
 namespace Backend.Mocks.SSB
 {
     /// <summary>
-    /// This class contains logic for mocking the population in Norway
-    /// by municipality, using the JSON-stat format. The municipalities
-    /// and their codes are hardcoded, and the population rates ascending
-    /// in a pseudorandom fashion.
+    ///     This class contains logic for mocking the population in Norway
+    ///     by municipality, using the JSON-stat format. The municipalities
+    ///     and their codes are hardcoded, and the population rates ascending
+    ///     in a pseudorandom fashion.
     /// </summary>
     public sealed class MockPopulationInNorway
     {
@@ -25,14 +25,14 @@ namespace Backend.Mocks.SSB
             const int approxPopulationNorway = 5391369;
 
             var region = new Faker<JsonStatDimensionContent>()
-                .RuleFor(o => o.Category, _ => new JsonStatDimensionCategory()
+                .RuleFor(o => o.Category, _ => new JsonStatDimensionCategory
                 {
                     Index = NorwayTools.MunicipalityCodeToIndex,
                     Label = NorwayTools.MunicipalityCodeToMunicipalityName
                 })
                 .RuleFor(o => o.Label, _ => "Label");
             var time = new Faker<JsonStatDimensionContent>()
-                .RuleFor(o => o.Category, _ => new JsonStatDimensionCategory()
+                .RuleFor(o => o.Category, _ => new JsonStatDimensionCategory
                 {
                     Index = NorwayTools.YearToIndex,
                     Label = NorwayTools.YearToYearString
@@ -65,18 +65,14 @@ namespace Backend.Mocks.SSB
                         (int) Math.Floor((float) approxPopulationNorway / numMunicipalities);
 
                     for (var i = 0; i < numMunicipalities; i++)
-                    {
                         outArray.Add(approximatePopulationPerMunicipality + f.Random.Int(-13000, 13000));
-                    }
 
                     for (var i = 0; i < numYears - 1; i++)
+                    for (var j = 0; j < numMunicipalities; j++)
                     {
-                        for (var j = 0; j < numMunicipalities; j++)
-                        {
-                            var currentLength = outArray.Count;
-                            var prevPopulationInThisMunicipality = outArray[currentLength - numMunicipalities];
-                            outArray.Add(prevPopulationInThisMunicipality + f.Random.Int(1, 500));
-                        }
+                        var currentLength = outArray.Count;
+                        var prevPopulationInThisMunicipality = outArray[currentLength - numMunicipalities];
+                        outArray.Add(prevPopulationInThisMunicipality + f.Random.Int(1, 500));
                     }
 
                     return outArray;

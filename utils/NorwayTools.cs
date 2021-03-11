@@ -727,7 +727,7 @@ namespace Backend.utils
             {"K-5444", "Sør-Varanger"},
             {"K-21-22", "Svalbard og Jan Mayen"},
             {"K-23", "Kontinentalsokkelen"},
-            {"K-Rest", "Delte kommuner og uoppgitt"},
+            {"K-Rest", "Delte kommuner og uoppgitt"}
         };
 
         public static readonly Dictionary<string, int> YearToIndex = new()
