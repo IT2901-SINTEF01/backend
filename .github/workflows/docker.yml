@@ -52,12 +52,12 @@ jobs:
                 with:
                     context: .
                     push: ${{ github.event_name != 'pull_request' }}
-                    tags: ${{ steps.docker_meta.outputs.tags }}
+                    tags: ${{ steps.docker_meta.outputs.tags }},${{ github.sha }} # Add the SHA as a tag 
                     labels: ${{ steps.docker_meta.outputs.labels }}
     azure:
       name: Deploy Docker image to Azure
       runs-on: ubuntu-latest
-      if: github.ref == 'refs/heads/master' && github.event_name == 'push' # only deploy to azure on master
+      if: github.ref == 'refs/heads/master' # only deploy to azure on master
       needs: docker
       steps:
             - uses: azure/docker-login@v1
@@ -71,4 +71,4 @@ jobs:
                 app-name: 'sintef01'
                 slot-name: 'production'
                 publish-profile: ${{ secrets.AzureAppService_PublishProfile_dd3ecfac72f8439fba924ded08761b45 }}
-                images: 'ghcr.io/it2901-sintef01/backend:master'
+                images: 'ghcr.io/it2901-sintef01/backend:${{ github.sha }}'
