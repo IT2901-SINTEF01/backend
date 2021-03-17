@@ -9,7 +9,7 @@ namespace Backend.utils
     /// our own middleware which intercepts the requests and applies preflight information in the case where the method
     /// is OPTIONS.
     /// </summary>
-    public class OptionsMiddleware
+    public class OptionsMiddleware : IMiddleware
     {
         private readonly RequestDelegate _next;
 
@@ -20,10 +20,10 @@ namespace Backend.utils
 
         public Task Invoke(HttpContext context)
         {
-            return BeginInvoke(context);
+            return InvokeAsync(context, _next);
         }
 
-        private Task BeginInvoke(HttpContext context)
+        public Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
             context.Response.Headers.Add("Access-Control-Allow-Origin",
                 new[]
