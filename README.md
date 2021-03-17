@@ -5,6 +5,7 @@
 ![Apache 2 License](https://img.shields.io/github/license/IT2901-SINTEF01/backend)
 ![Latest Release](https://img.shields.io/github/v/release/IT2901-SINTEF01/backend?include_prereleases)
 [![codecov](https://codecov.io/gh/IT2901-SINTEF01/backend/branch/master/graph/badge.svg)](https://codecov.io/gh/IT2901-SINTEF01/backend)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/80baa14e3a6a4f138ae383c66baf1935)](https://www.codacy.com/gh/IT2901-SINTEF01/backend/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=IT2901-SINTEF01/backend&amp;utm_campaign=Badge_Grade)
 
 <img src="./SINTEF_logo.png" alt="SINTEF" height=50 />
 
