@@ -35,6 +35,14 @@ Refer to the `.editorconfig` file for code style setup.
 
 The initial development team use [Rider](https://www.jetbrains.com/rider/) for development.
 
+If you wish to use a MongoDB server, add it's URI to an environment variable named:
+
+```env
+DATABASE__MONGODB_ATLAS__URL=...
+```
+
+Either in a `.env` file or with environment variable in a terminal session.
+
 ## Running
 
 You can run the project with
