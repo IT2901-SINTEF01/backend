@@ -1,9 +1,9 @@
-using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Backend.Mocks.Metadata;
 using Backend.Models.Base.Metadata;
 using Backend.Models.Base.Metadata.POCO;
+using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 
 namespace Backend.API.Services
@@ -18,9 +18,11 @@ namespace Backend.API.Services
     {
         private readonly IMongoCollection<StoredMetadata> _storedMetadata;
 
-        public MetadataService(IMetadataDatabaseSettings settings)
+        public MetadataService(IMetadataDatabaseSettings settings, IConfiguration configuration)
         {
-            var client = new MongoClient(Environment.GetEnvironmentVariable("DATABASE__MONGODB_ATLAS__URL"));
+            // The : is actually a __ in the environment variables, but it's converted. Ref.
+            // https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows
+            var client = new MongoClient(configuration.GetValue<string>("DATABASE:MONGODB_ATLAS:URL"));
             var database = client.GetDatabase(settings.DatabaseName);
 
             _storedMetadata = database.GetCollection<StoredMetadata>(settings.MetadataCollectionName);
