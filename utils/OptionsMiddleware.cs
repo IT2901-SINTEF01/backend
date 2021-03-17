@@ -37,7 +37,7 @@ namespace Backend.utils
 
             // For non-OPTIONS requests we want to continue the network pipeline, but for OPTIONS we want to terminate with 204 No Content.
             // Without this, GraphQL server gets very(!) upset and tells the client that it only accepts GET and POST requests. What a picky eater.
-            if (context.Request.Method != "OPTIONS") return _next.Invoke(context);
+            if (context.Request.Method != "OPTIONS") return next.Invoke(context);
 
             context.Response.StatusCode = 204; // No Content
 
