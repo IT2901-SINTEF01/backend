@@ -33,18 +33,6 @@ namespace Backend.API.Queries
                         context.GetArgument<float>("lat"),
                         context.GetArgument<float>("lon")));
 
-            Field<StoredMetadataType>("metadata", "metadata for a data source",
-                new QueryArguments
-                {
-                    new QueryArgument<StringGraphType>
-                    {
-                        Name = "name", Description = "The name of the metadata document to use",
-                        DefaultValue = "befolkningstall"
-                    }
-                },
-                context => metadataService?.GetMetadata(
-                    context.GetArgument<string>("name")));
-
             Field<ListGraphType<StoredMetadataType>>("allMetadata",
                 "All metadata for every data source, Development mode will return 10 documents", null,
                 _ => metadataService?.GetAllMetadata());
