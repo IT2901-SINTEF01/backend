@@ -11,3 +11,5 @@ BackendTests/TestResults
 .DS_Store
 
 tmp.json
+
+.env

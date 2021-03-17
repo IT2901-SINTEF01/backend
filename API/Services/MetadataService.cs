@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Backend.Mocks.Metadata;
@@ -19,7 +20,7 @@ namespace Backend.API.Services
 
         public MetadataService(IMetadataDatabaseSettings settings)
         {
-            var client = new MongoClient(settings.ConnectionString);
+            var client = new MongoClient(Environment.GetEnvironmentVariable("DATABASE__MONGODB_ATLAS__URL"));
             var database = client.GetDatabase(settings.DatabaseName);
 
             _storedMetadata = database.GetCollection<StoredMetadata>(settings.MetadataCollectionName);
