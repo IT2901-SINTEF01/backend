@@ -18,12 +18,12 @@ namespace Backend.utils
             _next = next;
         }
 
-        public Task Invoke(HttpContext context)
+        public async Task Invoke(HttpContext context)
         {
-            return InvokeAsync(context, _next);
+            await InvokeAsync(context, _next);
         }
 
-        public Task InvokeAsync(HttpContext context, RequestDelegate next)
+        public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
             context.Response.Headers.Add("Access-Control-Allow-Origin",
                 new[]
@@ -37,11 +37,15 @@ namespace Backend.utils
 
             // For non-OPTIONS requests we want to continue the network pipeline, but for OPTIONS we want to terminate with 204 No Content.
             // Without this, GraphQL server gets very(!) upset and tells the client that it only accepts GET and POST requests. What a picky eater.
-            if (context.Request.Method != "OPTIONS") return next.Invoke(context);
-
-            context.Response.StatusCode = 204; // No Content
-
-            return context.Response.CompleteAsync();
+            if (context.Request.Method != "OPTIONS")
+            {
+                await next.Invoke(context);
+            }
+            else
+            {
+                context.Response.StatusCode = 204; // No Content
+                await context.Response.CompleteAsync();
+            }
         }
     }
 
