@@ -5,11 +5,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Backend.API.Services;
-using Backend.Models.SSB.POCO;
 using BackendTests.MockHelpers;
-using Moq;
-using Moq.Protected;
-using Newtonsoft.Json;
 using Xunit;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
