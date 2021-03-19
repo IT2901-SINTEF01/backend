@@ -9,7 +9,7 @@ using Xunit;
 
 namespace BackendTests.GraphQLTests
 {
-    public class FieldBuilderTests
+    public static class FieldBuilderTests
     {
         [Fact]
         public static void ShouldHaveDescriptionAndType()
