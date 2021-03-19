@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using Backend.API.Services;
 using Moq;
@@ -6,6 +7,7 @@ using Xunit;
 
 namespace BackendTests.UnitTests
 {
+    [SuppressMessage("Rule Category", "CA5394", Justification = "No security threat on data mocking.")]
     public class MetAPIServiceTests
     {
         private readonly float _lat;

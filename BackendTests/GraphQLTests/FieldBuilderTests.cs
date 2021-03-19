@@ -12,10 +12,9 @@ namespace BackendTests.GraphQLTests
     public class FieldBuilderTests
     {
         [Fact]
-        public void should_have_description_and_type()
+        public static void ShouldHaveDescriptionAndType()
         {
             var forecastObjectType = new ForecastType(new MetadataServiceMocked());
-
             var fields = forecastObjectType.Fields.ToList();
             fields.Count.ShouldBe(4);
             fields[0].Description.ShouldBe("Metadata for a data source with the name MetAPI Forecast.");
@@ -25,7 +24,7 @@ namespace BackendTests.GraphQLTests
         }
 
         [Fact]
-        public void can_access_object()
+        public static void CanAccessObject()
         {
             var forecastObjectType = new ForecastType(new MetadataServiceMocked());
             forecastObjectType.Field<GeometryType>().Resolve(context =>

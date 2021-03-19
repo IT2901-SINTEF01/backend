@@ -28,13 +28,13 @@ namespace BackendTests.UnitTests
         }
 
         [Fact]
-        public void RootQueryHasField_allMetadata()
+        public void RootQueryHasFieldAllMetadata()
         {
             Assert.True(_rootQuery.HasField("allMetadata"));
         }
 
         [Fact]
-        public void RootQueryHasField_forecast()
+        public void RootQueryHasFieldForecast()
         {
             Assert.True(_rootQuery.HasField("forecast"));
         }
