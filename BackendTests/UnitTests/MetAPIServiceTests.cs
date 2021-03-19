@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using Backend.API.Services;
@@ -14,15 +13,13 @@ namespace BackendTests.UnitTests
         private readonly float _lon;
         private readonly MetAPIService _metAPIService;
         private readonly MetAPIServiceMocked _metAPIServiceMocked;
-        private readonly Random _random;
 
 
         public MetAPIServiceTests()
         {
             _metAPIServiceMocked = new MetAPIServiceMocked();
-            _random = new Random();
-            _lon = (float) _random.NextDouble() * (63.433f - 63.42f) + 63.42f;
-            _lat = (float) _random.NextDouble() * (10.4f - 10.38f) + 10.38f;
+            _lon = 63.42f;
+            _lat = 10.38f;
             var httpClient = Mock.Of<HttpClient>();
             _metAPIService = new MetAPIService(httpClient);
         }
