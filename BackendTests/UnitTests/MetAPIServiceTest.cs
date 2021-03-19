@@ -21,7 +21,7 @@ namespace BackendTests.UnitTests
         {
             _mockedService = new MetAPIServiceMocked();
 
-            _httpClient = HttpClientMocker.SetupHttpClientMock(URL, await CreateForecastAsString());
+            _httpClient = HttpClientMocker.SetupHttpClientMock(URL, await CreateForecastAsString().ConfigureAwait(false));
 
             _service = new MetAPIService(_httpClient);
 
