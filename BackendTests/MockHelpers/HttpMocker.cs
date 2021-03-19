@@ -14,7 +14,7 @@ namespace BackendTests.MockHelpers
         /// Creates a HTTP-client with overridden return value used for mocking purposes.
         /// </summary>
         /// <param name="url">URL that should be mocked.</param>
-        /// <param name="responseValue">Serialized object that should be returned.</param>
+        /// <param name="responseValue">Serialised object that should be returned.</param>
         /// <returns></returns>
         public static HttpClient SetupHttpClientMock(string url, string responseValue)
         {
