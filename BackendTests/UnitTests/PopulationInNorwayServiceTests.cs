@@ -16,7 +16,7 @@ namespace BackendTests.UnitTests
         private PopulationInNorwayService _service;
         private PopulationInNorwayServiceMocked _mockedService;
         private HttpClient _httpClient;
-        private readonly string URL = "https://data.ssb.no/api/v0/dataset/26975.json?lang=no";
+        private const string URL = "https://data.ssb.no/api/v0/dataset/26975.json?lang=no";
 
         [Fact]
         public async Task PopulationInNorwayServiceShouldReturnData()
