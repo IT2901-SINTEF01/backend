@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using Moq;
 using Moq.Protected;
 
-namespace BackendTests.HttpMocker
+namespace BackendTests.MockHelpers
 {
-    public static class HttpMocker
+    public static class HttpClientMocker
     {
         /// <summary>
-        /// Creates a HTTP-client with overriden return value used for mocking purposes.
+        /// Creates a HTTP-client with overridden return value used for mocking purposes.
         /// </summary>
         /// <param name="url">URL that should be mocked.</param>
         /// <param name="responseValue">Serialized object that should be returned.</param>

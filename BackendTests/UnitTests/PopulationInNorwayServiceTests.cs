@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Backend.API.Services;
 using Backend.Models.SSB.POCO;
+using BackendTests.MockHelpers;
 using Moq;
 using Moq.Protected;
 using Newtonsoft.Json;
@@ -26,7 +27,8 @@ namespace BackendTests.UnitTests
         {
             _mockedService = new PopulationInNorwayServiceMocked();
 
-            _httpClient = HttpMocker.HttpMocker.SetupHttpClientMock(URL, await CreatePopulationInNorwayAsString());
+            _httpClient =
+                HttpClientMocker.SetupHttpClientMock(URL, await CreatePopulationInNorwayAsString().ConfigureAwait(false));
 
             _service = new PopulationInNorwayService(_httpClient);
 
