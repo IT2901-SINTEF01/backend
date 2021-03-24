@@ -7,8 +7,8 @@ namespace Backend.Models.SSBPopulationStatistics.GraphQLTypes
     {
         public LabeledValueType()
         {
-            Field(poco => poco.municipality);
-            Field(poco => poco.populationForYear, false, typeof(ListGraphType<PopulationForYearType>));
+            Field(poco => poco.Municipality);
+            Field(poco => poco.PopulationForYear, false, typeof(ListGraphType<PopulationForYearType>));
         }
     }
 }

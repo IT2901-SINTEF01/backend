@@ -1,9 +1,11 @@
+using System.Text.Json.Serialization;
+
 namespace Backend.Models.SSBPopulationStatistics.POCO
 {
     public class PopulationForYear
     {
-        public string year;
+        [JsonPropertyName("year")] public string Year;
 
-        public int population;
+        [JsonPropertyName("population")] public int Population;
     }
 }

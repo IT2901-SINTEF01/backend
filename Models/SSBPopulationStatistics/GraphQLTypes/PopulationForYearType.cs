@@ -7,8 +7,8 @@ namespace Backend.Models.SSBPopulationStatistics.GraphQLTypes
     {
         public PopulationForYearType()
         {
-            Field(poco => poco.population);
-            Field(poco => poco.year);
+            Field(poco => poco.Population);
+            Field(poco => poco.Year);
         }
     }
 }

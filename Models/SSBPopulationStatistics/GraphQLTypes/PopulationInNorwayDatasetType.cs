@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Backend.Models.Base.JsonStat;
 using Backend.Models.SSBPopulationStatistics.POCO;
@@ -31,9 +32,11 @@ namespace Backend.Models.SSBPopulationStatistics.GraphQLTypes
                             .ToList()
                         select new LabeledValue()
                         {
-                            municipality = NorwayTools.MunicipalityCodeToMunicipalityName[municipality],
-                            populationForYear = years.Select(year => new PopulationForYear()
-                                {year = year, population = municipalityYears[NorwayTools.YearToIndex[year]]}).ToList()
+                            Municipality = NorwayTools.MunicipalityCodeToMunicipalityName[municipality],
+                            PopulationForYear = new Collection<PopulationForYear>(years.Select(year =>
+                                    new PopulationForYear()
+                                        {Year = year, Population = municipalityYears[NorwayTools.YearToIndex[year]]})
+                                .ToList())
                         }).ToList();
                 }
             );
