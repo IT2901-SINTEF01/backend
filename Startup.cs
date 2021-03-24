@@ -103,9 +103,8 @@ namespace Backend
 
             app.UseGraphQLWebSockets<RootSchema>();
 
-            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
+            app.UseGraphQLPlayground(new PlaygroundOptions
             {
-                Path = "/ui/playground",
                 BetaUpdates = true,
                 RequestCredentials = RequestCredentials.Omit,
                 HideTracingResponse = false,
