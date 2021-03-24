@@ -60,5 +60,53 @@ namespace BackendTests.UnitTests
             actual[0].PopulationForYear[0].Population.ShouldBe(expected.PopulationForYear[0].Population);
             actual[0].PopulationForYear[0].Year.ShouldBe(expected.PopulationForYear[0].Year);
         }
+
+        [Fact]
+        public void PopulationInNorwayDatasetCorrectOutputSecondMunicipality()
+        {
+            var actor = new PopulationInNorwayDatasetType();
+
+            Assert.NotNull(actor.GetField("value"));
+
+            var expected = new LabeledValue()
+            {
+                Municipality = "Moss",
+                PopulationForYear = new Collection<PopulationForYear>()
+                {
+                    new()
+                    {
+                        Population = 37,
+                        Year = "1987"
+                    }
+                }
+            };
+
+            var actual = (List<LabeledValue>) actor.GetField("value").Resolver.Resolve(new ResolveFieldContext()
+            {
+                Parent = new ResolveFieldContext()
+                {
+                    Arguments = new Dictionary<string, ArgumentValue>()
+                    {
+                        {
+                            "municipalities",
+                            new ArgumentValue(new List<string>() {"K-3002"}, ArgumentSource.Variable)
+                        },
+                        {"years", new ArgumentValue(new List<string>() {"1987"}, ArgumentSource.Variable)}
+                    }
+                },
+                Source = new JsonStatDataset<PopulationPerMunicipalityNorway.PopulationInNorwayDimension>()
+                {
+                    Dimension = new PopulationPerMunicipalityNorway.PopulationInNorwayDimension()
+                    {
+                        Size = new Collection<int>() {359, 36, 1}
+                    },
+                    Value = new Collection<int>(Enumerable.Range(0, 360).ToList())
+                }
+            });
+
+            actual[0].Municipality.ShouldBe(expected.Municipality);
+            actual[0].PopulationForYear[0].Population.ShouldBe(expected.PopulationForYear[0].Population);
+            actual[0].PopulationForYear[0].Year.ShouldBe(expected.PopulationForYear[0].Year);
+        }
     }
 }
