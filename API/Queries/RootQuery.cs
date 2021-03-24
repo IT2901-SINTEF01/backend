@@ -2,7 +2,7 @@
 using Backend.API.Services;
 using Backend.Models.Base.Metadata.GraphQLTypes;
 using Backend.Models.MetAPI.GraphQLTypes;
-using Backend.Models.SSB.GraphQLTypes;
+using Backend.Models.SSBPopulationStatistics.GraphQLTypes;
 using GraphQL;
 using GraphQL.Types;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using Backend.Models.Base.JsonStat;
-using Backend.Models.SSB.POCO;
+using Backend.Models.SSBPopulationStatistics.POCO;
 using Backend.utils;
 using Bogus;
 
