@@ -8,7 +8,7 @@ namespace Backend
     {
         public static void Main(string[] args)
         {
-            DotEnv.Config(false);
+            DotEnv.Load();
             CreateHostBuilder(args).Build().Run();
         }
 

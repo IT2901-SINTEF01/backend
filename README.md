@@ -26,7 +26,7 @@ This pulls the latest stable build (released with a tag):
 
 ```bash
 docker pull ghcr.io/it2901-sintef01/backend:latest
-docker run -p 5000:80 ghcr.io/it2901-sintef01/backend:latest
+docker run -e DATABASE__MONGODB_ATLAS__URL=... -p 5000:80 ghcr.io/it2901-sintef01/backend:latest
 ```
 
 ## Development

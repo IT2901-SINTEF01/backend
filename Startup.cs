@@ -50,15 +50,28 @@ namespace Backend
             // If configuration specifies mocking should be enabled, don't create HTTP clients and simply inject
             // mocked services as singletons.
             if (Configuration.GetValue<bool>("MockRequests"))
+            {
                 services.AddSingleton<IMetAPIService, MetAPIServiceMocked>();
+                services.AddSingleton<IPopulationInNorwayService, PopulationInNorwayServiceMocked>();
+            }
             else
+            {
                 services.AddHttpClient<IMetAPIService, MetAPIService>(client =>
                 {
                     client.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));
                     client.DefaultRequestHeaders.UserAgent.ParseAdd(
-                        "DVT/1.0 (fredrik.malmo@icloud.com)"); // api.met.no requires contact email
+                        "DVT/1.0 (fredrik.malmo@icloud.com)");
                 });
+                services.AddHttpClient<IPopulationInNorwayService, PopulationInNorwayService>(client =>
+                    {
+                        client.DefaultRequestHeaders.Accept.Add(
+                            new MediaTypeWithQualityHeaderValue("application/json"));
+                        client.DefaultRequestHeaders.UserAgent.ParseAdd(
+                            "DVT/1.0 (fredrik.malmo@icloud.com)");
+                    }
+                );
+            }
 
             services
                 .AddSingleton<RootSchema>()
@@ -90,9 +103,8 @@ namespace Backend
 
             app.UseGraphQLWebSockets<RootSchema>();
 
-            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
+            app.UseGraphQLPlayground(new PlaygroundOptions
             {
-                Path = "/ui/playground",
                 BetaUpdates = true,
                 RequestCredentials = RequestCredentials.Omit,
                 HideTracingResponse = false,
