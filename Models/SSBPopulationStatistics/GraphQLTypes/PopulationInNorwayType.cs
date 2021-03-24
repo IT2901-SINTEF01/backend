@@ -15,6 +15,12 @@ namespace Backend.Models.SSBPopulationStatistics.GraphQLTypes
         {
             Field(poco => poco.Dataset,
                     false, typeof(PopulationInNorwayDatasetType))
+                .Argument<ListGraphType<StringGraphType>>(Name = "municipalities",
+                    Description = "Which municipalities to get the population for.",
+                    argument => { argument.DefaultValue = new List<string>(); })
+                .Argument<ListGraphType<StringGraphType>>(Name = "years",
+                    Description = "Which years to get the population for.",
+                    argument => { argument.DefaultValue = new List<string>(); })
                 .Description("Dataset containing population statistics for Norway.");
 
             Field<ListGraphType<ListGraphType<StringGraphType>>>("municipalitiesWithKeys",
