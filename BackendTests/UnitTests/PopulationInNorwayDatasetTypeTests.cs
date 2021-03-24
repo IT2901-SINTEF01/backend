@@ -14,7 +14,7 @@ namespace BackendTests.UnitTests
     public class PopulationInNorwayDatasetTypeTests
     {
         [Fact]
-        public void PopulationInNorwayDatasetCorrectOutput()
+        public static void PopulationInNorwayDatasetCorrectOutput()
         {
             var actor = new PopulationInNorwayDatasetType();
 
@@ -62,7 +62,7 @@ namespace BackendTests.UnitTests
         }
 
         [Fact]
-        public void PopulationInNorwayDatasetCorrectOutputSecondMunicipality()
+        public static void PopulationInNorwayDatasetCorrectOutputSecondMunicipality()
         {
             var actor = new PopulationInNorwayDatasetType();
 
