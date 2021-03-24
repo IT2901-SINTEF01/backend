@@ -1,7 +1,7 @@
 using Backend.Models.Base.JsonStat;
-using Backend.Models.SSB.POCO;
+using Backend.Models.SSBPopulationStatistics.POCO;
 
-namespace Backend.Models.SSB.GraphQLTypes
+namespace Backend.Models.SSBPopulationStatistics.GraphQLTypes
 {
     public sealed class
         PopulationInNorwayDatasetType : JsonStatDatasetType<PopulationPerMunicipalityNorway.PopulationInNorwayDimension,

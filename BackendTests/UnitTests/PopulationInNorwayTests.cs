@@ -1,6 +1,6 @@
 using System;
 using Backend.Mocks.SSB;
-using Backend.Models.SSB.POCO;
+using Backend.Models.SSBPopulationStatistics.POCO;
 using Backend.utils;
 using Xunit;
 

@@ -2,7 +2,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Backend.Mocks.SSB;
-using Backend.Models.SSB.POCO;
+using Backend.Models.SSBPopulationStatistics.POCO;
 
 namespace Backend.API.Services
 {
