@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Backend.API.Services;
 using Backend.Models.SSBPopulationStatistics.POCO;
@@ -14,7 +13,8 @@ namespace Backend.Models.SSBPopulationStatistics.GraphQLTypes
         public PopulationInNorwayType(IMetadataService metadataService) : base(metadataService,
             "Befolkning. Kommuner, pr. 1.1., 1986 - siste år")
         {
-            Field(poco => poco.Dataset, false, typeof(PopulationInNorwayDatasetType))
+            Field(poco => poco.Dataset,
+                    false, typeof(PopulationInNorwayDatasetType))
                 .Description("Dataset containing population statistics for Norway.");
 
             Field<ListGraphType<ListGraphType<StringGraphType>>>("municipalitiesWithKeys",
@@ -27,6 +27,12 @@ namespace Backend.Models.SSBPopulationStatistics.GraphQLTypes
                         .Select<(string, string), List<string>>(el => new List<string>() {el.Item1, el.Item2});
                 }
             );
+
+            Field<ListGraphType<StringGraphType>>(
+                "years",
+                "The available years from which to retrieve population statistics",
+                null,
+                _ => NorwayTools.YearToYearString.Keys);
         }
     }
 }
