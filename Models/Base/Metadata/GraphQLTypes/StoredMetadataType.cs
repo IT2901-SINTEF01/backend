@@ -8,6 +8,7 @@ namespace Backend.Models.Base.Metadata.GraphQLTypes
         public StoredMetadataType()
         {
             Field(data => data.Id);
+            Field(data => data.DatasourceId);
             Field(data => data.Name);
             Field(data => data.Description);
             Field(data => data.Tags, false, typeof(ListGraphType<StringGraphType>));
