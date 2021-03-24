@@ -14,7 +14,8 @@ namespace Backend.API.Queries
         {
             var metAPIService = (IMetAPIService) serviceProvider.GetService(typeof(IMetAPIService));
             var metadataService = (IMetadataService) serviceProvider.GetService(typeof(IMetadataService));
-            var populationService = (IPopulationInNorwayService) serviceProvider.GetService(typeof(IPopulationInNorwayService));
+            var populationService =
+                (IPopulationInNorwayService) serviceProvider.GetService(typeof(IPopulationInNorwayService));
 
             Field<ForecastType>("forecast", "Latitude and Longitude defaults to the coordinates of Trondheim",
                 new QueryArguments

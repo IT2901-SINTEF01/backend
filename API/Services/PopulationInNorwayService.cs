@@ -32,7 +32,8 @@ namespace Backend.API.Services
     {
         public async Task<PopulationPerMunicipalityNorway> GetPopulationsInNorway()
         {
-            return await Task.FromResult(MockPopulationInNorway.GenerateSamplePopulationsInNorway()).ConfigureAwait(false);
+            return await Task.FromResult(MockPopulationInNorway.GenerateSamplePopulationsInNorway())
+                .ConfigureAwait(false);
         }
     }
 }
