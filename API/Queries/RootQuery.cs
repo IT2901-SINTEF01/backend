@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Backend.API.Services;
 using Backend.Models.Base.Metadata.GraphQLTypes;
 using Backend.Models.MetAPI.GraphQLTypes;
@@ -41,7 +42,8 @@ namespace Backend.API.Queries
                 _ => metadataService?.GetAllMetadata());
 
             Field<PopulationInNorwayType>("populationsInNorway",
-                "Populations in Norway per municipality from 1986 to this year.", null,
+                "Populations in Norway per municipality from 1986 to this year.",
+                null,
                 _ => populationService?.GetPopulationsInNorway());
         }
     }
