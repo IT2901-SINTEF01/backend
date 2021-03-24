@@ -11,7 +11,7 @@ using Xunit;
 
 namespace BackendTests.UnitTests
 {
-    public class PopulationInNorwayDatasetTypeTests
+    public static class PopulationInNorwayDatasetTypeTests
     {
         [Fact]
         public static void PopulationInNorwayDatasetCorrectOutput()
