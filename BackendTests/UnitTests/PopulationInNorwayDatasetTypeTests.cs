@@ -6,6 +6,7 @@ using Backend.Models.SSBPopulationStatistics.GraphQLTypes;
 using Backend.Models.SSBPopulationStatistics.POCO;
 using GraphQL;
 using GraphQL.Execution;
+using Shouldly;
 using Xunit;
 
 namespace BackendTests.UnitTests
@@ -55,7 +56,9 @@ namespace BackendTests.UnitTests
                 }
             });
 
-            Assert.Equal(expected, actual[0]);
+            actual[0].Municipality.ShouldBe(expected.Municipality);
+            actual[0].PopulationForYear[0].Population.ShouldBe(expected.PopulationForYear[0].Population);
+            actual[0].PopulationForYear[0].Year.ShouldBe(expected.PopulationForYear[0].Year);
         }
     }
 }
