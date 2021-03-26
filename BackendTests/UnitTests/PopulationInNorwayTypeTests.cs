@@ -13,7 +13,7 @@ namespace BackendTests.UnitTests
         private readonly PopulationInNorwayType _objectGraph = new(new MetadataServiceMocked());
         
         [Fact]
-        public void MunicipalitiesWithKeys()
+        public void EnsureMunicipalitiesAreResolvedWithKeys()
         {
             var field = _objectGraph.GetField("municipalitiesWithKeys");
             field.ShouldNotBeNull();
@@ -26,7 +26,7 @@ namespace BackendTests.UnitTests
         }
 
         [Fact]
-        public void Years()
+        public void EnsureCorrectYearsAreReturnedFromResolver()
         {
             var field = _objectGraph.GetField("years");
             field.ShouldNotBeNull();
