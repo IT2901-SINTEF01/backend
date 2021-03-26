@@ -20,10 +20,10 @@ namespace BackendTests.UnitTests
 
             Assert.NotNull(actor.GetField("value"));
 
-            var expected = new LabeledValue()
+            var expected = new LabeledValue
             {
                 Municipality = "Halden",
-                PopulationForYear = new Collection<PopulationForYear>()
+                PopulationForYear = new Collection<PopulationForYear>
                 {
                     new()
                     {
@@ -33,26 +33,26 @@ namespace BackendTests.UnitTests
                 }
             };
 
-            var actual = (List<LabeledValue>) actor.GetField("value").Resolver.Resolve(new ResolveFieldContext()
+            var actual = (List<LabeledValue>) actor.GetField("value").Resolver.Resolve(new ResolveFieldContext
             {
-                Parent = new ResolveFieldContext()
+                Parent = new ResolveFieldContext
                 {
-                    Arguments = new Dictionary<string, ArgumentValue>()
+                    Arguments = new Dictionary<string, ArgumentValue>
                     {
                         {
                             "municipalities",
-                            new ArgumentValue(new List<string>() {"K-3001"}, ArgumentSource.Variable)
+                            new ArgumentValue(new List<string> {"K-3001"}, ArgumentSource.Variable)
                         },
-                        {"years", new ArgumentValue(new List<string>() {"1986"}, ArgumentSource.Variable)}
+                        {"years", new ArgumentValue(new List<string> {"1986"}, ArgumentSource.Variable)}
                     }
                 },
-                Source = new JsonStatDataset<PopulationPerMunicipalityNorway.PopulationInNorwayDimension>()
+                Source = new JsonStatDataset<PopulationPerMunicipalityNorway.PopulationInNorwayDimension>
                 {
-                    Dimension = new PopulationPerMunicipalityNorway.PopulationInNorwayDimension()
+                    Dimension = new PopulationPerMunicipalityNorway.PopulationInNorwayDimension
                     {
-                        Size = new Collection<int>() {359, 36, 1}
+                        Size = new Collection<int> {359, 36, 1}
                     },
-                    Value = new Collection<int>() {100}
+                    Value = new Collection<int> {100}
                 }
             });
 
@@ -68,10 +68,10 @@ namespace BackendTests.UnitTests
 
             Assert.NotNull(actor.GetField("value"));
 
-            var expected = new LabeledValue()
+            var expected = new LabeledValue
             {
                 Municipality = "Moss",
-                PopulationForYear = new Collection<PopulationForYear>()
+                PopulationForYear = new Collection<PopulationForYear>
                 {
                     new()
                     {
@@ -81,24 +81,24 @@ namespace BackendTests.UnitTests
                 }
             };
 
-            var actual = (List<LabeledValue>) actor.GetField("value").Resolver.Resolve(new ResolveFieldContext()
+            var actual = (List<LabeledValue>) actor.GetField("value").Resolver.Resolve(new ResolveFieldContext
             {
-                Parent = new ResolveFieldContext()
+                Parent = new ResolveFieldContext
                 {
-                    Arguments = new Dictionary<string, ArgumentValue>()
+                    Arguments = new Dictionary<string, ArgumentValue>
                     {
                         {
                             "municipalities",
-                            new ArgumentValue(new List<string>() {"K-3002"}, ArgumentSource.Variable)
+                            new ArgumentValue(new List<string> {"K-3002"}, ArgumentSource.Variable)
                         },
-                        {"years", new ArgumentValue(new List<string>() {"1987"}, ArgumentSource.Variable)}
+                        {"years", new ArgumentValue(new List<string> {"1987"}, ArgumentSource.Variable)}
                     }
                 },
-                Source = new JsonStatDataset<PopulationPerMunicipalityNorway.PopulationInNorwayDimension>()
+                Source = new JsonStatDataset<PopulationPerMunicipalityNorway.PopulationInNorwayDimension>
                 {
-                    Dimension = new PopulationPerMunicipalityNorway.PopulationInNorwayDimension()
+                    Dimension = new PopulationPerMunicipalityNorway.PopulationInNorwayDimension
                     {
-                        Size = new Collection<int>() {359, 36, 1}
+                        Size = new Collection<int> {359, 36, 1}
                     },
                     Value = new Collection<int>(Enumerable.Range(0, 360).ToList())
                 }
