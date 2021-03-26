@@ -31,7 +31,7 @@ namespace Backend.API.Services
         public async Task<StoredMetadata> GetMetadata(string datasourceId)
         {
             return await Task.FromResult(_storedMetadata.Find(data => data.DatasourceId == datasourceId)
-                .FirstOrDefault());
+                .FirstOrDefault()).ConfigureAwait(false);
         }
 
         public async Task<Collection<StoredMetadata>> GetAllMetadata()
