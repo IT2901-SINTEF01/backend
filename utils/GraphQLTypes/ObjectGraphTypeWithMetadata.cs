@@ -5,17 +5,17 @@ using GraphQL.Types;
 namespace Backend.utils.GraphQLTypes
 {
     /// <summary>
-    /// Creates an object graph type (from GraphQL) with the associated metadata field retrieved from a MongoDB database.
+    ///     Creates an object graph type (from GraphQL) with the associated metadata field retrieved from a MongoDB database.
     /// </summary>
     /// <typeparam name="T">The type which contains the data for which the metadata is associated.</typeparam>
     public abstract class ObjectGraphTypeWithMetadata<T> : ObjectGraphType<T>
     {
-        protected ObjectGraphTypeWithMetadata(IMetadataService metadataService, string metadataDocumentName)
+        protected ObjectGraphTypeWithMetadata(IMetadataService metadataService, string datasourceId)
         {
             Field<StoredMetadataType>()
-                .ResolveAsync(async _ => await metadataService.GetMetadata(metadataDocumentName))
+                .ResolveAsync(async _ => await metadataService.GetMetadata(datasourceId))
                 .Name("metadata")
-                .Description($"Metadata for a data source with the name {metadataDocumentName}.");
+                .Description($"Metadata for a data source with id {datasourceId}.");
         }
     }
 }

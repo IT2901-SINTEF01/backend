@@ -11,7 +11,7 @@ namespace Backend.Models.Base.Metadata.POCO
         [BsonRepresentation(BsonType.ObjectId)]
         [JsonPropertyName("_id")]
         public string Id { get; set; }
-        
+
         [BsonElement("datasource_id")]
         [JsonPropertyName("datasource_id")]
         public string DatasourceId { get; set; }

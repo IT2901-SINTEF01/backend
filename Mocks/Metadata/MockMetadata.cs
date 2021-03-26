@@ -32,7 +32,7 @@ namespace Backend.Mocks.Metadata
             var storedMetadata = new Faker<StoredMetadata>()
                 .StrictMode(true)
                 .RuleFor(o => o.Id, f => f.Random.Uuid().ToString())
-                .RuleFor(o => o.DatasourceId, f => f.Name.JobTitle())
+                .RuleFor(o => o.DatasourceId, f => f.Name.JobArea())
                 .RuleFor(o => o.Description, f => f.Lorem.Paragraph())
                 .RuleFor(o => o.Name, f => f.Name.JobArea())
                 .RuleFor(o => o.Published, f => f.Date.Recent().ToLongDateString())
