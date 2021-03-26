@@ -2,7 +2,7 @@ namespace Backend.Models.Base.Metadata.POCO
 {
     public class DatasourceId
     {
-        private DatasourceId(string value)
+        public DatasourceId(string value)
         {
             Value = value;
         }
