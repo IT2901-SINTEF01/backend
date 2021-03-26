@@ -9,7 +9,7 @@ namespace Backend.Models.Base.Metadata.GraphQLTypes
         {
             Field(visualisation => visualisation.Axes, false, typeof(AxesType));
             Field(visualisation => visualisation.Segments, false, typeof(ListGraphType<SegmentType>));
-            Field(visualisation => visualisation.Threshold);
+            Field(visualisation => visualisation.Threshold, true);
             Field(visualisation => visualisation.Type);
         }
     }
