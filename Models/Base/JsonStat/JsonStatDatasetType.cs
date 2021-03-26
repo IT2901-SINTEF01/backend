@@ -2,8 +2,8 @@ using GraphQL.Types;
 
 namespace Backend.Models.Base.JsonStat
 {
-    public abstract class JsonStatDatasetType<T, TU> : ObjectGraphType<JsonStatDataset<T>>
-        where T : AbstractJsonStatDimension
+    public abstract class JsonStatDatasetType<T1, T2> : ObjectGraphType<JsonStatDataset<T1>>
+        where T1 : AbstractJsonStatDimension
     {
         /// <summary>
         /// Set of JSONStat Dataset Type resolution.
@@ -18,7 +18,7 @@ namespace Backend.Models.Base.JsonStat
             if (!overrideValueResolution)
                 Field(poco => poco.Value, false, typeof(ListGraphType<IntGraphType>));
 
-            Field(poco => poco.Dimension, false, typeof(TU));
+            Field(poco => poco.Dimension, false, typeof(T2));
         }
     }
 }
