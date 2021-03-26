@@ -17,7 +17,7 @@ namespace BackendTests.GraphQLTests
             var forecastObjectType = new ForecastType(new MetadataServiceMocked());
             var fields = forecastObjectType.Fields.ToList();
             fields.Count.ShouldBe(4);
-            fields[0].Description.ShouldBe("Metadata for a data source with the name MetAPI Forecast.");
+            fields[0].Description.ShouldBe("Metadata for a data source with id MET_API.");
             fields[0].Type.ShouldBe(typeof(StoredMetadataType));
             fields[1].Description.ShouldBe("The Geo-Data used in the query");
             fields[1].Type.ShouldBe(typeof(GeometryType));
