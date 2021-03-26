@@ -3,6 +3,9 @@ using GraphQL.Types;
 
 namespace Backend.Models.SSBPopulationStatistics.GraphQLTypes
 {
+    /// <summary>
+    /// The population for a set of years, labeled with the municipality for which it is associated.
+    /// </summary>
     public class LabeledValueType : ObjectGraphType<LabeledValue>
     {
         public LabeledValueType()
