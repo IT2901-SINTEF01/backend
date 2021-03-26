@@ -10,12 +10,12 @@ namespace BackendTests.UnitTests
 {
     public sealed class PopulationInNorwayTypeTests
     {
-        private readonly PopulationInNorwayType objectGraph = new(new MetadataServiceMocked());
+        private readonly PopulationInNorwayType _objectGraph = new(new MetadataServiceMocked());
         
         [Fact]
         public void MunicipalitiesWithKeys()
         {
-            var field = objectGraph.GetField("municipalitiesWithKeys");
+            var field = _objectGraph.GetField("municipalitiesWithKeys");
             field.ShouldNotBeNull();
             
             var result = (IEnumerable<List<string>>) field.Resolver.Resolve(new ResolveFieldContext());
@@ -28,7 +28,7 @@ namespace BackendTests.UnitTests
         [Fact]
         public void Years()
         {
-            var field = objectGraph.GetField("years");
+            var field = _objectGraph.GetField("years");
             field.ShouldNotBeNull();
             
             var result = (IEnumerable<string>) field.Resolver.Resolve(new ResolveFieldContext());
