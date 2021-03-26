@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Backend.Models.SSBPopulationStatistics.POCO
 {
-    public class PopulationForYear
+    public class PopulationForAGivenYear
     {
         [JsonPropertyName("year")] public string Year { get; init; }
 

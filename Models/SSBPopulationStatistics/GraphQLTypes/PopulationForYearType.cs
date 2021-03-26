@@ -3,7 +3,7 @@ using GraphQL.Types;
 
 namespace Backend.Models.SSBPopulationStatistics.GraphQLTypes
 {
-    public class PopulationForYearType : ObjectGraphType<PopulationForYear>
+    public class PopulationForYearType : ObjectGraphType<PopulationForAGivenYear>
     {
         public PopulationForYearType()
         {
