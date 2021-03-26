@@ -23,7 +23,7 @@ namespace BackendTests.UnitTests
             var expected = new LabeledValue
             {
                 Municipality = "Halden",
-                PopulationForYear = new Collection<PopulationForYear>
+                PopulationForYear = new Collection<PopulationForAGivenYear>
                 {
                     new()
                     {
@@ -71,7 +71,7 @@ namespace BackendTests.UnitTests
             var expected = new LabeledValue
             {
                 Municipality = "Moss",
-                PopulationForYear = new Collection<PopulationForYear>
+                PopulationForYear = new Collection<PopulationForAGivenYear>
                 {
                     new()
                     {
