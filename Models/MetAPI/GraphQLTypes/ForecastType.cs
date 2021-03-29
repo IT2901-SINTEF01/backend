@@ -1,8 +1,6 @@
 ﻿using Backend.API.Services;
-using Backend.Models.Base.Metadata.GraphQLTypes;
 using Backend.Models.MetAPI.POCO;
 using Backend.utils.GraphQLTypes;
-using GraphQL.Types;
 
 namespace Backend.Models.MetAPI.GraphQLTypes
 {

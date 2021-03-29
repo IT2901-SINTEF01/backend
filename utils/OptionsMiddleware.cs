@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Http;
 namespace Backend.utils
 {
     /// <summary>
-    /// Due to the IApplicationBuilder.useCors() not working with our dotnet graphql server, we have to create
-    /// our own middleware which intercepts the requests and applies preflight information in the case where the method
-    /// is OPTIONS.
+    ///     Due to the IApplicationBuilder.useCors() not working with our dotnet graphql server, we have to create
+    ///     our own middleware which intercepts the requests and applies preflight information in the case where the method
+    ///     is OPTIONS.
     /// </summary>
     public class OptionsMiddleware
     {

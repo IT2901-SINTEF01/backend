@@ -11,7 +11,7 @@ namespace BackendTests.MockHelpers
     public static class HttpClientMocker
     {
         /// <summary>
-        /// Creates a HTTP-client with overridden return value used for mocking purposes.
+        ///     Creates a HTTP-client with overridden return value used for mocking purposes.
         /// </summary>
         /// <param name="url">URL that should be mocked.</param>
         /// <param name="responseValue">Serialised object that should be returned.</param>
@@ -26,16 +26,16 @@ namespace BackendTests.MockHelpers
                     ItExpr.IsAny<HttpRequestMessage>(),
                     ItExpr.IsAny<CancellationToken>()
                 )
-                .ReturnsAsync(new HttpResponseMessage()
+                .ReturnsAsync(new HttpResponseMessage
                 {
                     StatusCode = HttpStatusCode.OK,
-                    Content = new StringContent(responseValue),
+                    Content = new StringContent(responseValue)
                 })
                 .Verifiable();
 
             var httpClient = new HttpClient(handlerMock.Object)
             {
-                BaseAddress = new Uri(url),
+                BaseAddress = new Uri(url)
             };
 
             return httpClient;
