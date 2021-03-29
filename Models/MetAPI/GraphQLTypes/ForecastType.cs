@@ -7,7 +7,7 @@ namespace Backend.Models.MetAPI.GraphQLTypes
 {
     public sealed class ForecastType : ObjectGraphTypeWithMetadata<Forecast>
     {
-        public ForecastType(IMetadataService metadataService) : base(metadataService, DatasourceId.MET_API.Value)
+        public ForecastType(IMetadataService metadataService) : base(metadataService, DatasourceId.MET_API)
         {
             Field(forecast => forecast.ForecastGeometry, false, typeof(GeometryType))
                 .Description("The Geo-Data used in the query");

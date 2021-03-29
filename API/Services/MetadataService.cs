@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Backend.Mocks.Metadata;
 using Backend.Models.Base.Metadata;
@@ -10,7 +11,7 @@ namespace Backend.API.Services
 {
     public interface IMetadataService
     {
-        public Task<StoredMetadata> GetMetadata(string datasourceId);
+        public Task<StoredMetadata> GetMetadata(DatasourceId datasourceId);
         public Task<Collection<StoredMetadata>> GetAllMetadata();
     }
 
@@ -28,10 +29,10 @@ namespace Backend.API.Services
             _storedMetadata = database.GetCollection<StoredMetadata>(settings.MetadataCollectionName);
         }
 
-        public async Task<StoredMetadata> GetMetadata(string datasourceId)
+        public async Task<StoredMetadata> GetMetadata(DatasourceId datasourceId)
         {
-            return await Task.FromResult(_storedMetadata.Find(data => data.DatasourceId == datasourceId)
-                .FirstOrDefault()).ConfigureAwait(false);
+            var cursor = await _storedMetadata.FindAsync(data => data.DatasourceId == datasourceId.Value);
+            return cursor.Current.First();
         }
 
         public async Task<Collection<StoredMetadata>> GetAllMetadata()
@@ -43,7 +44,7 @@ namespace Backend.API.Services
 
     public class MetadataServiceMocked : IMetadataService
     {
-        public async Task<StoredMetadata> GetMetadata(string datasourceId)
+        public async Task<StoredMetadata> GetMetadata(DatasourceId datasourceId)
         {
             return await Task.FromResult(MockMetadata.GenerateStoredMetadata());
         }

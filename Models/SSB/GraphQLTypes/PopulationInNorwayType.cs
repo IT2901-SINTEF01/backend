@@ -8,7 +8,7 @@ namespace Backend.Models.SSB.GraphQLTypes
     public sealed class PopulationInNorwayType : ObjectGraphTypeWithMetadata<PopulationPerMunicipalityNorway>
     {
         public PopulationInNorwayType(IMetadataService metadataService) : base(metadataService,
-            DatasourceId.SSB_POPULATION.Value)
+            DatasourceId.SSB_POPULATION)
         {
             Field(poco => poco.Dataset, false, typeof(PopulationInNorwayDatasetType))
                 .Description("Dataset containing population statistics for Norway.");
