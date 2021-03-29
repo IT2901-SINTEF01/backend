@@ -2,7 +2,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Backend.Mocks.SSB;
-using Backend.Models.SSB.POCO;
+using Backend.Models.SSBPopulationStatistics.POCO;
 
 namespace Backend.API.Services
 {
@@ -32,7 +32,8 @@ namespace Backend.API.Services
     {
         public async Task<PopulationPerMunicipalityNorway> GetPopulationsInNorway()
         {
-            return await Task.FromResult(MockPopulationInNorway.GenerateSamplePopulationsInNorway()).ConfigureAwait(false);
+            return await Task.FromResult(MockPopulationInNorway.GenerateSamplePopulationsInNorway())
+                .ConfigureAwait(false);
         }
     }
 }
