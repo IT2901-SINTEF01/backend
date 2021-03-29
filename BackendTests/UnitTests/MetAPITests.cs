@@ -13,13 +13,12 @@ namespace BackendTests.UnitTests
         private readonly Forecast _forecast;
         private readonly float _lat;
         private readonly float _lon;
-        private readonly Random _random;
 
         public MetAPITests()
         {
-            _random = new Random();
-            _lon = (float) _random.NextDouble() * (63.433f - 63.42f) + 63.42f;
-            _lat = (float) _random.NextDouble() * (10.4f - 10.38f) + 10.38f;
+            var random = new Random();
+            _lon = (float) random.NextDouble() * (63.433f - 63.42f) + 63.42f;
+            _lat = (float) random.NextDouble() * (10.4f - 10.38f) + 10.38f;
             _forecast = Compact.GenerateSampleForecast(_lon, _lat);
         }
 
