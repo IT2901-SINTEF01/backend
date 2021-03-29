@@ -2,7 +2,7 @@
 using Backend.API.Services;
 using Backend.Models.Base.Metadata.GraphQLTypes;
 using Backend.Models.MetAPI.GraphQLTypes;
-using Backend.Models.SSB.GraphQLTypes;
+using Backend.Models.SSBPopulationStatistics.GraphQLTypes;
 using GraphQL;
 using GraphQL.Types;
 
@@ -14,7 +14,8 @@ namespace Backend.API.Queries
         {
             var metAPIService = (IMetAPIService) serviceProvider.GetService(typeof(IMetAPIService));
             var metadataService = (IMetadataService) serviceProvider.GetService(typeof(IMetadataService));
-            var populationService = (IPopulationInNorwayService) serviceProvider.GetService(typeof(IPopulationInNorwayService));
+            var populationService =
+                (IPopulationInNorwayService) serviceProvider.GetService(typeof(IPopulationInNorwayService));
 
             Field<ForecastType>("forecast", "Latitude and Longitude defaults to the coordinates of Trondheim",
                 new QueryArguments
@@ -40,7 +41,8 @@ namespace Backend.API.Queries
                 _ => metadataService?.GetAllMetadata());
 
             Field<PopulationInNorwayType>("populationsInNorway",
-                "Populations in Norway per municipality from 1986 to this year.", null,
+                "Populations in Norway per municipality from 1986 to this year.",
+                null,
                 _ => populationService?.GetPopulationsInNorway());
         }
     }

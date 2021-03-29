@@ -33,7 +33,7 @@ namespace Backend
         {
             // Inject configuration for use in metadata DB setup
             services.AddSingleton(Configuration);
-            
+
             // DP on database
             services.Configure<MetadataDatabaseSettings>(
                 Configuration.GetSection(nameof(MetadataDatabaseSettings)));
