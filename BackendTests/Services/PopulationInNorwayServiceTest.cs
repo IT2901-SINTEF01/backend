@@ -2,10 +2,10 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Backend.API.Services;
-using BackendTests.MockHelpers;
+using BackendTests.Helpers;
 using Xunit;
 
-namespace BackendTests.UnitTests
+namespace BackendTests.Services
 {
     public class PopulationInNorwayServiceTests
     {

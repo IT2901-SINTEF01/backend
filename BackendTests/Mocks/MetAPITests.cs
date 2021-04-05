@@ -5,7 +5,7 @@ using Backend.Models.MetAPI.POCO;
 using Backend.utils;
 using Xunit;
 
-namespace BackendTests.UnitTests
+namespace BackendTests.Mocks
 {
     [SuppressMessage("Rule Category", "CA5394", Justification = "No security threat on data mocking.")]
     public class MetAPITests

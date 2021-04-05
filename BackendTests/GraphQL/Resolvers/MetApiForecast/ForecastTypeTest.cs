@@ -7,9 +7,9 @@ using GraphQL;
 using Shouldly;
 using Xunit;
 
-namespace BackendTests.GraphQLTests
+namespace BackendTests.GraphQL.Resolvers.MetApiForecast
 {
-    public static class FieldBuilderTests
+    public static class ForecastTypeTest
     {
         [Fact]
         public static void ShouldHaveDescriptionAndType()

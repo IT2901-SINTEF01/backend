@@ -9,9 +9,9 @@ using GraphQL.Execution;
 using Shouldly;
 using Xunit;
 
-namespace BackendTests.UnitTests
+namespace BackendTests.GraphQL.Resolvers.PopulationInNorway
 {
-    public static class PopulationInNorwayDatasetTypeTests
+    public static class PopulationInNorwayDatasetTypeTest
     {
         [Fact]
         public static void PopulationInNorwayDatasetCorrectOutput()

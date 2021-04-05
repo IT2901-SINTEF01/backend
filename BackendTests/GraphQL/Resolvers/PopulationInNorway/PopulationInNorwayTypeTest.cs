@@ -6,9 +6,9 @@ using GraphQL;
 using Shouldly;
 using Xunit;
 
-namespace BackendTests.UnitTests
+namespace BackendTests.GraphQL.Resolvers.PopulationInNorway
 {
-    public sealed class PopulationInNorwayTypeTests
+    public sealed class PopulationInNorwayTypeTest
     {
         private readonly PopulationInNorwayType _objectGraph = new(new MetadataServiceMocked());
         

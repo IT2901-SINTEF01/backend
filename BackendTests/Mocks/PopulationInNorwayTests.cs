@@ -4,7 +4,7 @@ using Backend.Models.SSBPopulationStatistics.POCO;
 using Backend.utils;
 using Xunit;
 
-namespace BackendTests.UnitTests
+namespace BackendTests.Mocks
 {
     public class PopulationInNorwayTests
     {
