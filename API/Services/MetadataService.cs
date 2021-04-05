@@ -17,7 +17,7 @@ namespace Backend.API.Services
 
     public class MetadataService : IMetadataService
     {
-        public readonly IMongoCollection<StoredMetadata> StoredMetadata;
+        private readonly IMongoCollection<StoredMetadata> _storedMetadata;
 
         public MetadataService(IMetadataDatabaseSettings settings, IConfiguration configuration)
         {
@@ -26,18 +26,18 @@ namespace Backend.API.Services
             var client = new MongoClient(configuration.GetValue<string>("DATABASE:MONGODB_ATLAS:URL"));
             var database = client.GetDatabase(settings.DatabaseName);
 
-            StoredMetadata = database.GetCollection<StoredMetadata>(settings.MetadataCollectionName);
+            _storedMetadata = database.GetCollection<StoredMetadata>(settings.MetadataCollectionName);
         }
 
         public async Task<StoredMetadata> GetMetadata(DatasourceId datasourceId)
         {
-            var cursor = await StoredMetadata.FindAsync(data => data.DatasourceId == datasourceId.Value);
+            var cursor = await _storedMetadata.FindAsync(data => data.DatasourceId == datasourceId.Value);
             return cursor.Current.First();
         }
 
         public async Task<Collection<StoredMetadata>> GetAllMetadata()
         {
-            var result = await Task.FromResult(StoredMetadata.Find(metadata => true).ToList()).ConfigureAwait(false);
+            var result = await Task.FromResult(_storedMetadata.Find(metadata => true).ToList()).ConfigureAwait(false);
             return new Collection<StoredMetadata>(result);
         }
     }
