@@ -43,7 +43,7 @@ namespace BackendTests.Web
         }
 
         [Fact]
-        public void UseMiddleware()
+        public static void UseMiddleware()
         {
             IApplicationBuilder builder = new ApplicationBuilder(null!);
             Should.NotThrow(() => builder.UseOptions());
