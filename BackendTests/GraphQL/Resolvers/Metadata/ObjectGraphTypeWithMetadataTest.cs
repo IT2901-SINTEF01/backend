@@ -6,7 +6,7 @@ using GraphQL.Resolvers;
 using Shouldly;
 using Xunit;
 
-namespace BackendTests.GraphQL.Resolvers
+namespace BackendTests.GraphQL.Resolvers.Metadata
 {
     public class ObjectGraphTypeWithMetadataTest
     {
