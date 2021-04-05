@@ -40,6 +40,8 @@ namespace Backend.Models.SSBPopulationStatistics.GraphQLTypes
                 "The available years from which to retrieve population statistics",
                 null,
                 _ => NorwayTools.YearToYearString.Keys);
+
+            Name = "PopulationInNorwayType";
         }
     }
 }
