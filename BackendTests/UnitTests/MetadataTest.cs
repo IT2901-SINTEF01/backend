@@ -1,7 +1,6 @@
 using System.Collections.ObjectModel;
 using Backend.Mocks.Metadata;
 using Backend.Models.Base.Metadata.POCO;
-using Moq;
 using Shouldly;
 using Xunit;
 
