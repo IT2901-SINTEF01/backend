@@ -47,9 +47,9 @@ namespace Backend.utils
 
     public static class OptionsMiddlewareExtensions
     {
-        public static IApplicationBuilder UseOptions(this IApplicationBuilder builder)
+        public static void UseOptions(this IApplicationBuilder builder)
         {
-            return builder.UseMiddleware<OptionsMiddleware>();
+            builder.UseMiddleware<OptionsMiddleware>();
         }
     }
 }
