@@ -3,7 +3,7 @@ using Backend.API.Queries;
 using Moq;
 using Xunit;
 
-namespace BackendTests.UnitTests
+namespace BackendTests.GraphQL.Resolvers
 {
     public class RootQueryTests
     {

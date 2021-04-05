@@ -4,7 +4,7 @@ using Backend.API.Services;
 using Moq;
 using Xunit;
 
-namespace BackendTests.UnitTests
+namespace BackendTests.Services
 {
     [SuppressMessage("Rule Category", "CA5394", Justification = "No security threat on data mocking.")]
     public class MetAPIServiceTests

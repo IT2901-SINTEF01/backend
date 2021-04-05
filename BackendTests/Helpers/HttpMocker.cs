@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Moq;
 using Moq.Protected;
 
-namespace BackendTests.MockHelpers
+namespace BackendTests.Helpers
 {
     public static class HttpClientMocker
     {

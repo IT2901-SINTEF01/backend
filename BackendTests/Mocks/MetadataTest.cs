@@ -4,7 +4,7 @@ using Backend.Models.Base.Metadata.POCO;
 using Shouldly;
 using Xunit;
 
-namespace BackendTests.UnitTests
+namespace BackendTests.Mocks
 {
     public class MetadataTest
     {

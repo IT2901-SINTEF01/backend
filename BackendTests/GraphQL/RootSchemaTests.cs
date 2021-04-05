@@ -5,7 +5,7 @@ using Moq;
 using Shouldly;
 using Xunit;
 
-namespace BackendTests.UnitTests
+namespace BackendTests.GraphQL
 {
     public class RootSchemaTests
     {

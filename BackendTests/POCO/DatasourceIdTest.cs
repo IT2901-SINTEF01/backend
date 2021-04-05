@@ -1,7 +1,7 @@
 using Backend.Models.Base.Metadata.POCO;
 using Xunit;
 
-namespace BackendTests.UnitTests
+namespace BackendTests.POCO
 {
     public class DatasourceIdTest
     {

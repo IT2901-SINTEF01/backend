@@ -1,7 +1,7 @@
 using Backend.Models.Base.Metadata.GraphQLTypes;
 using Xunit;
 
-namespace BackendTests.GraphQLTests
+namespace BackendTests.GraphQL.Resolvers.Metadata
 {
     public class VisualisationTypeTest
     {
