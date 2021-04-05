@@ -19,10 +19,10 @@ namespace BackendTests.UnitTests
         }
 
         [Fact]
-        public void DatasourceIdHasExistingSources()
+        public static void DatasourceIdHasExistingSources()
         {
-            Assert.Equal("SSB_POPULATION", DatasourceId.SSB_POPULATION.Value);
-            Assert.Equal("MET_API", DatasourceId.MET_API.Value);
+            Assert.Equal("SSB_POPULATION", DatasourceId.SsbPopulation.Value);
+            Assert.Equal("MET_API", DatasourceId.MetAPI.Value);
         }
     }
 }

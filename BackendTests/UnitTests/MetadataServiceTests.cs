@@ -19,14 +19,14 @@ namespace BackendTests.UnitTests
         [Fact]
         public void MetadataServiceMockedIsCorrectType()
         {
-            Assert.IsType<Task<StoredMetadata>>(_metadataServiceMocked.GetMetadata(DatasourceId.MET_API));
+            Assert.IsType<Task<StoredMetadata>>(_metadataServiceMocked.GetMetadata(DatasourceId.MetAPI));
             Assert.IsType<Task<Collection<StoredMetadata>>>(_metadataServiceMocked.GetAllMetadata());
         }
 
         [Fact]
         public void MetadataServiceMockedIsNotNull()
         {
-            Assert.NotNull(_metadataServiceMocked.GetMetadata(DatasourceId.SSB_POPULATION));
+            Assert.NotNull(_metadataServiceMocked.GetMetadata(DatasourceId.SsbPopulation));
             Assert.NotNull(_metadataServiceMocked.GetAllMetadata());
         }
     }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Backend.API.Services;
+using Backend.Models.Base.Metadata.POCO;
 using Backend.Models.SSBPopulationStatistics.POCO;
 using Backend.utils;
 using Backend.utils.GraphQLTypes;
@@ -11,7 +12,7 @@ namespace Backend.Models.SSBPopulationStatistics.GraphQLTypes
     public sealed class PopulationInNorwayType : ObjectGraphTypeWithMetadata<PopulationPerMunicipalityNorway>
     {
         public PopulationInNorwayType(IMetadataService metadataService) : base(metadataService,
-            "Befolkning. Kommuner, pr. 1.1., 1986 - siste år")
+            DatasourceId.SsbPopulation)
         {
             Field(poco => poco.Dataset,
                     false, typeof(PopulationInNorwayDatasetType))
