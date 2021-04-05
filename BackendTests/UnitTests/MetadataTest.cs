@@ -1,44 +1,42 @@
 using System.Collections.ObjectModel;
 using Backend.Mocks.Metadata;
 using Backend.Models.Base.Metadata.POCO;
+using Moq;
+using Shouldly;
 using Xunit;
 
 namespace BackendTests.UnitTests
 {
     public class MetadataTest
     {
-        private readonly StoredMetadata _storedMetadata;
-        private readonly Collection<StoredMetadata> _storedMetadatas;
-
-        public MetadataTest()
-        {
-            _storedMetadata = MockMetadata.GenerateStoredMetadata();
-            _storedMetadatas = MockMetadata.GenerateMultipleStoredMetadata();
-        }
+        private readonly StoredMetadata _storedMetadata = MockMetadata.GenerateStoredMetadata();
+        private readonly Collection<StoredMetadata> _storedMetadatas = MockMetadata.GenerateMultipleStoredMetadata();
 
         [Fact]
         public void MetadataShouldReturnData()
         {
-            Assert.NotNull(_storedMetadata);
+            _storedMetadata.ShouldNotBeNull();
         }
 
         [Fact]
         public void MetadatasShouldReturnData()
         {
-            Assert.NotNull(_storedMetadatas);
+            _storedMetadatas.Count.ShouldBe(10);
         }
 
         [Fact]
-        public void MetaDataHasUrl()
+        public void MetadataHasUrl()
         {
-            Assert.Contains("http", _storedMetadata.Source);
+            _storedMetadata.Source.ShouldContain("http");
         }
 
-
         [Fact]
-        public void MetadatasHasGivenLength()
+        public void DatasourceIdIsCorrectType()
         {
-            Assert.Equal(10, _storedMetadatas.Count);
+            foreach (var storedMetadata in _storedMetadatas)
+            {
+                storedMetadata.DatasourceId.ShouldBeOneOf(DatasourceId.SsbPopulation.Value, DatasourceId.MetAPI.Value);
+            }
         }
     }
 }

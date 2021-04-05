@@ -1,8 +1,8 @@
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 using Backend.API.Services;
 using Backend.Models.Base.Metadata.POCO;
-using Bogus;
+using Moq;
+using Shouldly;
 using Xunit;
 
 namespace BackendTests.UnitTests
@@ -17,17 +17,23 @@ namespace BackendTests.UnitTests
         }
 
         [Fact]
-        public void MetadataServiceMockedIsCorrectType()
+        public void CorrectTypesAndNotNull()
         {
-            Assert.IsType<Task<StoredMetadata>>(_metadataServiceMocked.GetMetadata(DatasourceId.MetAPI));
-            Assert.IsType<Task<Collection<StoredMetadata>>>(_metadataServiceMocked.GetAllMetadata());
+            _metadataServiceMocked.GetMetadata(It.IsAny<DatasourceId>()).Result.ShouldBeOfType(typeof(StoredMetadata));
+            _metadataServiceMocked.GetAllMetadata().Result.ShouldBeAssignableTo(typeof(IEnumerable<StoredMetadata>));
         }
 
         [Fact]
-        public void MetadataServiceMockedIsNotNull()
+        public void OneStoredMetadata()
         {
-            Assert.NotNull(_metadataServiceMocked.GetMetadata(DatasourceId.SsbPopulation));
-            Assert.NotNull(_metadataServiceMocked.GetAllMetadata());
+            _metadataServiceMocked.GetMetadata(It.IsAny<DatasourceId>()).Result.ShouldNotBeNull();
+        }
+
+        [Fact]
+        public void ListOfStoredMetadata()
+        {
+            // Make sure we get back one or more items
+            _metadataServiceMocked.GetAllMetadata().Result.Count.ShouldBePositive();
         }
     }
 }
