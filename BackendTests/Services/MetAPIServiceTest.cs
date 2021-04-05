@@ -1,7 +1,15 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using System.Net.Http;
+using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
 using Backend.API.Services;
+using Backend.Mocks.MetAPI;
+using Backend.Models.MetAPI.POCO;
 using Moq;
+using Moq.Protected;
+using Shouldly;
 using Xunit;
 
 namespace BackendTests.Services
@@ -20,8 +28,22 @@ namespace BackendTests.Services
             _metAPIServiceMocked = new MetAPIServiceMocked();
             _lon = 63.42f;
             _lat = 10.38f;
-            var httpClient = Mock.Of<HttpClient>();
-            _metAPIService = new MetAPIService(httpClient);
+            
+            // Set up a handler to intercept HTTP requests and return a JSON serialised
+            // compact forecast object.
+            var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+            handlerMock
+                .Protected()
+                .Setup<Task<HttpResponseMessage>>("SendAsync",
+                    ItExpr.IsAny<HttpRequestMessage>(),
+                    ItExpr.IsAny<CancellationToken>())
+                .ReturnsAsync(new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.OK,
+                    Content = new StringContent(JsonSerializer.Serialize(Compact.GenerateSampleForecast(_lon, _lat)))
+                });
+            
+            _metAPIService = new MetAPIService(new HttpClient(handlerMock.Object));
         }
 
         [Fact]
@@ -34,6 +56,12 @@ namespace BackendTests.Services
         public void MetAPIServiceMockedIsCorrectType()
         {
             Assert.IsType<MetAPIServiceMocked>(_metAPIServiceMocked);
+        }
+
+        [Fact]
+        public void CorrectReturnedData()
+        {
+            _metAPIService.GetCompactForecast(_lat, _lon).Result.ShouldBeOfType<Forecast>();
         }
 
         [Fact]
