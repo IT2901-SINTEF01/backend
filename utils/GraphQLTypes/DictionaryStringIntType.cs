@@ -5,7 +5,7 @@ using GraphQL.Types;
 namespace Backend.utils.GraphQLTypes
 {
     [SuppressMessage("Rule Category", "CA1812", Justification = "The class is instantiated by GraphQL.")]
-    internal class DictionaryStringIntType : ObjectGraphType<Dictionary<string, int>>
+    public class DictionaryStringIntType : ObjectGraphType<Dictionary<string, int>>
     {
         public DictionaryStringIntType()
         {
