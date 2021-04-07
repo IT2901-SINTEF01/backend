@@ -15,8 +15,9 @@ namespace BackendTests.GraphQL.Resolvers.Metadata
         [Fact]
         public void RetrieveMetadataForObject()
         {
-            var resolvedMetadataTask = _forecastType.GetField("metadata").Resolver.ResolveAsync(new ResolveFieldContext());
-            
+            var resolvedMetadataTask =
+                _forecastType.GetField("metadata").Resolver.ResolveAsync(new ResolveFieldContext());
+
             resolvedMetadataTask.Result.ShouldBeOfType<StoredMetadata>();
             resolvedMetadataTask.Result.ShouldNotBeNull();
         }

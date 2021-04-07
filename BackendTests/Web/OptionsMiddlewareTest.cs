@@ -29,7 +29,7 @@ namespace BackendTests.Web
             context.Response.Headers["Access-Control-Allow-Methods"].ShouldBe(new[] {"GET, POST, OPTIONS"});
             context.Response.Headers["Access-Control-Allow-Credentials"].ShouldBe(new[] {"true"});
         }
-        
+
         [Fact]
         public async void BeginInvokeWithOptionsMethod()
         {

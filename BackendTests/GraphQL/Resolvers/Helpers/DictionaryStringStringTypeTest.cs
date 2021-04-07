@@ -14,10 +14,10 @@ namespace BackendTests.GraphQL.Resolvers.Helpers
         {
             return _dictionaryStringStringType.GetField(field).Resolver.Resolve(new ResolveFieldContext
             {
-                Source = new Dictionary<string, string>()
+                Source = new Dictionary<string, string>
                 {
                     {"key1", "value1"},
-                    {"key2", "value2"},
+                    {"key2", "value2"}
                 }
             });
         }

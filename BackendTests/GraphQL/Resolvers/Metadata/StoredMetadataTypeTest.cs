@@ -14,12 +14,12 @@ namespace BackendTests.GraphQL.Resolvers.Metadata
 
         private object ResolveField(string fieldName)
         {
-            return _storedMetadataType.GetField(fieldName).Resolver.Resolve(new ResolveFieldContext()
+            return _storedMetadataType.GetField(fieldName).Resolver.Resolve(new ResolveFieldContext
             {
                 Source = MockMetadata.GenerateStoredMetadata().Generate()
             });
         }
-        
+
         [Fact]
         public void CorrectTypes()
         {
