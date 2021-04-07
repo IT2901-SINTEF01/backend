@@ -27,7 +27,7 @@ namespace Backend.Mocks.Metadata
                 .RuleFor(o => o.Axes, _ => axes.Generate())
                 .RuleFor(o => o.Segments, _ => new Collection<Segment>(segment.Generate(3)))
                 .RuleFor(o => o.Threshold, f => f.Random.Int(0, 200))
-                .RuleFor(o => o.Type, f => f.Random.ArrayElement(new [] { "linechart", "thresholdchart" }));
+                .RuleFor(o => o.Type, f => f.Random.ArrayElement(new[] {"linechart", "thresholdchart"}));
 
             var storedMetadata = new Faker<StoredMetadata>()
                 .StrictMode(true)

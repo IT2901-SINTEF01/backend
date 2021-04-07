@@ -10,7 +10,7 @@ namespace BackendTests.GraphQL.Resolvers.Metadata
     public class VisualisationTypeTest
     {
         private readonly VisualisationType _visualisationType = new();
-        
+
         private object ResolveField(string fieldName)
         {
             return _visualisationType.GetField(fieldName).Resolver.Resolve(new ResolveFieldContext
@@ -28,7 +28,7 @@ namespace BackendTests.GraphQL.Resolvers.Metadata
         [Fact]
         public void CorrectTypes()
         {
-            ResolveField("Type").ShouldBeOneOf("linechart", "thresholdchart");           
+            ResolveField("Type").ShouldBeOneOf("linechart", "thresholdchart");
         }
     }
 }
