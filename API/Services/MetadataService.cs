@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using Backend.Mocks.Metadata;
 using Backend.Models.Base.Metadata;
@@ -31,8 +30,9 @@ namespace Backend.API.Services
 
         public async Task<StoredMetadata> GetMetadata(DatasourceId datasourceId)
         {
-            var cursor = await _storedMetadata.FindAsync(data => data.DatasourceId == datasourceId.Value);
-            return cursor.Current.First();
+            return await Task
+                .FromResult(_storedMetadata.Find(data => data.DatasourceId == datasourceId.Value).FirstOrDefault())
+                .ConfigureAwait(false);
         }
 
         public async Task<Collection<StoredMetadata>> GetAllMetadata()
