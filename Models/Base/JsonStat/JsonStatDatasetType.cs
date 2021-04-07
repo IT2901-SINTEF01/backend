@@ -6,9 +6,12 @@ namespace Backend.Models.Base.JsonStat
         where T1 : AbstractJsonStatDimension
     {
         /// <summary>
-        /// Set of JSONStat Dataset Type resolution.
+        ///     Set of JSONStat Dataset Type resolution.
         /// </summary>
-        /// <param name="overrideValueResolution">Since you can only declare a field once, we have to add the option to override the resolution of the field.</param>
+        /// <param name="overrideValueResolution">
+        ///     Since you can only declare a field once, we have to add the option to override
+        ///     the resolution of the field.
+        /// </param>
         protected JsonStatDatasetType(bool overrideValueResolution = false)
         {
             Field(poco => poco.Label);

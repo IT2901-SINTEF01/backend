@@ -31,7 +31,7 @@ namespace Backend.Models.SSBPopulationStatistics.GraphQLTypes
                     var values = NorwayTools.MunicipalityCodeToMunicipalityName.Values;
 
                     return keys.Zip(values)
-                        .Select<(string, string), List<string>>(el => new List<string>() {el.Item1, el.Item2});
+                        .Select<(string, string), List<string>>(el => new List<string> {el.Item1, el.Item2});
                 }
             );
 

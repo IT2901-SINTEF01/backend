@@ -29,11 +29,11 @@ namespace Backend.Models.SSBPopulationStatistics.GraphQLTypes
                             .Skip(NorwayTools.MunicipalityCodeToIndex[municipality] * municipalityEntrySize)
                             .Take(municipalityEntrySize)
                             .ToList()
-                        select new LabeledValue()
+                        select new LabeledValue
                         {
                             Municipality = NorwayTools.MunicipalityCodeToMunicipalityName[municipality],
                             PopulationForYear = new Collection<PopulationForAGivenYear>(years.Select(year =>
-                                    new PopulationForAGivenYear()
+                                    new PopulationForAGivenYear
                                         {Year = year, Population = municipalityYears[NorwayTools.YearToIndex[year]]})
                                 .ToList())
                         }).ToList();
