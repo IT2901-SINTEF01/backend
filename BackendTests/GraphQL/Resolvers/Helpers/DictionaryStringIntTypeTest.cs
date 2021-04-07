@@ -14,7 +14,7 @@ namespace BackendTests.GraphQL.Resolvers.Helpers
         {
             return _dictionaryStringIntType.GetField(field).Resolver.Resolve(new ResolveFieldContext
             {
-                Source = new Dictionary<string, int>()
+                Source = new Dictionary<string, int>
                 {
                     {"key1", 123},
                     {"key2", 456}

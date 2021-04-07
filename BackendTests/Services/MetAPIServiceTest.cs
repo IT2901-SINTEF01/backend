@@ -28,7 +28,7 @@ namespace BackendTests.Services
             _metAPIServiceMocked = new MetAPIServiceMocked();
             _lon = 63.42f;
             _lat = 10.38f;
-            
+
             // Set up a handler to intercept HTTP requests and return a JSON serialised
             // compact forecast object.
             var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
@@ -37,12 +37,12 @@ namespace BackendTests.Services
                 .Setup<Task<HttpResponseMessage>>("SendAsync",
                     ItExpr.IsAny<HttpRequestMessage>(),
                     ItExpr.IsAny<CancellationToken>())
-                .ReturnsAsync(new HttpResponseMessage()
+                .ReturnsAsync(new HttpResponseMessage
                 {
                     StatusCode = HttpStatusCode.OK,
                     Content = new StringContent(JsonSerializer.Serialize(Compact.GenerateSampleForecast(_lon, _lat)))
                 });
-            
+
             _metAPIService = new MetAPIService(new HttpClient(handlerMock.Object));
         }
 
