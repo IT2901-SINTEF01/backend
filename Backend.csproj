@@ -15,7 +15,7 @@
         <PackageReference Include="GraphQL.Server.Transports.AspNetCore.SystemTextJson" Version="5.0.1" />
         <PackageReference Include="GraphQL.Server.Transports.WebSockets" Version="4.4.1" />
         <PackageReference Include="GraphQL.Server.Ui.Playground" Version="5.0.1" />
-        <PackageReference Include="MongoDB.Driver" Version="2.12.1" />
+        <PackageReference Include="MongoDB.Driver" Version="2.12.2" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.1" />
     </ItemGroup>
 
