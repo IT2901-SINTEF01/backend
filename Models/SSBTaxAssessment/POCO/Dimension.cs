@@ -48,9 +48,9 @@ namespace Backend.Models.SSBTaxAssessment.POCO
 
     public class Role
     {
-        [JsonPropertyName("time")] public Collection<string> Time { get; set; }
+        [JsonPropertyName("time")] public Collection<string> Time { get; }
 
-        [JsonPropertyName("metric")] public Collection<string> Metric { get; set; }
+        [JsonPropertyName("metric")] public Collection<string> Metric { get; }
     }
 
     public class Category
@@ -64,7 +64,7 @@ namespace Backend.Models.SSBTaxAssessment.POCO
 
     public class Link
     {
-        [JsonPropertyName("describedby")] public Collection<Describedby> Describedby { get; set; }
+        [JsonPropertyName("describedby")] public Collection<Describedby> Describedby { get; }
     }
 
     public class Describedby
