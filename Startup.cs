@@ -53,6 +53,7 @@ namespace Backend
             {
                 services.AddSingleton<IMetAPIService, MetAPIServiceMocked>();
                 services.AddSingleton<IPopulationInNorwayService, PopulationInNorwayServiceMocked>();
+                services.AddSingleton<ITaxAssesmentService, TaxAssesmentServiceMocked>();
             }
             else
             {
@@ -71,6 +72,13 @@ namespace Backend
                             "DVT/1.0 (fredrik.malmo@icloud.com)");
                     }
                 );
+                services.AddHttpClient<ITaxAssesmentService, TaxAssesmentService>(client =>
+                {
+                    client.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.UserAgent.ParseAdd(
+                        "DVT/1.0 (fredrik.malmo@icloud.com)");
+                });
             }
 
             services
