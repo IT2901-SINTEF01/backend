@@ -5,14 +5,13 @@ namespace Backend.Models.SSBTaxAssessment.POCO
 {
     public class TaxAssessment
     {
-        [JsonPropertyName("dataset")] public JsonStatDataset<TaxAssesmentDimension> Dataset { get; set; }
+        [JsonPropertyName("dataset")] public JsonStatDataset<TaxAssessmentDimension> Dataset { get; set; }
 
-        public sealed class TaxAssesmentDimension : AbstractJsonStatDimension
+        public sealed class TaxAssessmentDimension : AbstractJsonStatDimension
         {
             [JsonPropertyName("Region")] public JsonStatDimensionContent Region { get; set; }
-            
+
             [JsonPropertyName("Tid")] public JsonStatDimensionContent Tid { get; set; }
         }
-        
     }
 }

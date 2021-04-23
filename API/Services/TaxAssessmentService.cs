@@ -1,37 +1,38 @@
+using System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using Backend.Mocks.SSB;
 using Backend.Models.SSBTaxAssessment.POCO;
 
 namespace Backend.API.Services
 {
-    public interface ITaxAssesmentService
+    public interface ITaxAssessmentService
     {
-        public Task<TaxAssessment> GetTaxAssesment();
+        public Task<TaxAssessment> GetTaxAssessment();
     }
-    public class TaxAssesmentService : ITaxAssesmentService
+
+    public class TaxAssessmentService : ITaxAssessmentService
     {
         private readonly HttpClient _httpClient;
 
-        public TaxAssesmentService(HttpClient httpClient)
+        public TaxAssessmentService(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
 
-        public async Task<TaxAssessment> GetTaxAssesment()
+        public async Task<TaxAssessment> GetTaxAssessment()
         {
-            var response = 
+            var response =
                 await _httpClient.GetAsync("https://data.ssb.no/api/v0/dataset/49613.json?lang=no");
             return await response.Content.ReadFromJsonAsync<TaxAssessment>();
         }
     }
-    
-    public class TaxAssesmentServiceMocked : ITaxAssesmentService
+
+    public class TaxAssessmentServiceMocked : ITaxAssessmentService
     {
-        public Task<TaxAssessment> GetTaxAssesment()
+        public Task<TaxAssessment> GetTaxAssessment()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

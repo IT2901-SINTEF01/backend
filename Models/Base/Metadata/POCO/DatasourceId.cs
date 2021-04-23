@@ -13,5 +13,7 @@ namespace Backend.Models.Base.Metadata.POCO
         public static DatasourceId SsbPopulation => new("SSB_POPULATION");
 
         public static DatasourceId MetAPI => new("MET_API");
+
+        public static DatasourceId SsbTax => new("SSB_TAX");
     }
 }

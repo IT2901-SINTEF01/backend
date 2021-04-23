@@ -3,7 +3,7 @@ using Backend.Models.SSBTaxAssessment.POCO;
 
 namespace Backend.Models.SSBTaxAssessment.GraphQLTypes
 {
-    public class TaxAssessmentDimensionType : AbstractJsonStatDimensionType<TaxAssessment.TaxAssesmentDimension>
+    public class TaxAssessmentDimensionType : AbstractJsonStatDimensionType<TaxAssessment.TaxAssessmentDimension>
     {
         public TaxAssessmentDimensionType()
         {
