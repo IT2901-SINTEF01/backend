@@ -4,7 +4,8 @@ using GraphQL.Types;
 
 namespace Backend.Models.SSBTaxAssessment.GraphQLTypes
 {
-    public class TaxAssessmentDatasetType : JsonStatDatasetType<TaxAssessment.TaxAssesmentDimension, TaxAssessmentDimensionType>
+    public class
+        TaxAssessmentDatasetType : JsonStatDatasetType<TaxAssessment.TaxAssessmentDimension, TaxAssessmentDimensionType>
     {
         public TaxAssessmentDatasetType() : base(true)
         {

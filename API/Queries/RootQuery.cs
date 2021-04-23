@@ -17,7 +17,8 @@ namespace Backend.API.Queries
             var metadataService = (IMetadataService) serviceProvider.GetService(typeof(IMetadataService));
             var populationService =
                 (IPopulationInNorwayService) serviceProvider.GetService(typeof(IPopulationInNorwayService));
-            var taxAssesmentService = (ITaxAssesmentService) serviceProvider.GetService(typeof(ITaxAssesmentService));
+            var taxAssessmentService =
+                (ITaxAssessmentService) serviceProvider.GetService(typeof(ITaxAssessmentService));
             Field<ForecastType>("forecast", "Latitude and Longitude defaults to the coordinates of Trondheim",
                 new QueryArguments
                 {
@@ -46,9 +47,9 @@ namespace Backend.API.Queries
                 null,
                 _ => populationService?.GetPopulationsInNorway());
 
-            Field<TaxAssesmentType>("taxAssesment",
+            Field<TaxAssessmentType>("taxAssesment",
                 "Main entries from the tax assessment. Residents, by age. Average (NOK). Counties, 1999 - latest year",
-                null, _ => taxAssesmentService?.GetTaxAssesment());
+                null, _ => taxAssessmentService?.GetTaxAssessment());
         }
     }
 }
