@@ -23,7 +23,7 @@ namespace Backend.API.Services
         public async Task<TaxAssessment> GetTaxAssessment()
         {
             var response =
-                await _httpClient.GetAsync("https://data.ssb.no/api/v0/dataset/49613.json?lang=no");
+                await _httpClient.GetAsync("https://data.ssb.no/api/v0/dataset/49607.json?lang=no");
             return await response.Content.ReadFromJsonAsync<TaxAssessment>();
         }
     }
