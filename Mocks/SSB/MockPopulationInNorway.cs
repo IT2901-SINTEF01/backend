@@ -20,7 +20,7 @@ namespace Backend.Mocks.SSB
         [SuppressMessage("Rule Category", "CA5394", Justification = "No security threat on data mocking.")]
         public static PopulationPerMunicipalityNorway GenerateSamplePopulationsInNorway()
         {
-            var numYears = NorwayTools.YearToIndex.Count;
+            var numYears = NorwayTools.YearToIndexPopulation.Count;
             var numMunicipalities = NorwayTools.MunicipalityCodeToIndex.Count;
             const int approxPopulationNorway = 5391369;
 
@@ -34,7 +34,7 @@ namespace Backend.Mocks.SSB
             var time = new Faker<JsonStatDimensionContent>()
                 .RuleFor(o => o.Category, _ => new JsonStatDimensionCategory
                 {
-                    Index = NorwayTools.YearToIndex,
+                    Index = NorwayTools.YearToIndexPopulation,
                     Label = NorwayTools.YearToYearString
                 })
                 .RuleFor(o => o.Label, _ => "År");
