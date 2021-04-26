@@ -7,8 +7,7 @@ namespace Backend.Models.SSBTaxAssessment.POCO
         /// <summary>
         ///     Class names are derived from SSB's own codes in their documentation.
         /// </summary>
-        [JsonPropertyName("year")]
-        public string Year { get; init; }
+        [JsonPropertyName("year")] public string Year { get; init; }
 
         [JsonPropertyName("Brutto")] public int Brutto { get; set; }
 
