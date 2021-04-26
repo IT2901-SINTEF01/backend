@@ -22,9 +22,10 @@ namespace Backend.Models.SSBTaxAssessment.GraphQLTypes
                     var years = context.Parent.GetArgument<List<string>>("years");
                     var skipSize = context.Source.Dimension.Size[3];
                     var municipalityEntrySize = context.Source.Dimension.Size[0];
+                    var totalRowsPerMunicipality = context.Source.Dimension.Size[2] * context.Source.Dimension.Size[3];
                     return (from municipality in municipalities
                         let municipalityYears = context.Source.Value
-                            .Skip(NorwayTools.MunicipalityCodeToIndexTaxes[municipality] * 294)
+                            .Skip(NorwayTools.MunicipalityCodeToIndexTaxes[municipality] * totalRowsPerMunicipality)
                             .Take(municipalityEntrySize)
                             .ToList()
                         select new LabeledValueTax
