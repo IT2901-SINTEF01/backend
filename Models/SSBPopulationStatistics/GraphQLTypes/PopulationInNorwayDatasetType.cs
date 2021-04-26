@@ -34,7 +34,10 @@ namespace Backend.Models.SSBPopulationStatistics.GraphQLTypes
                             Municipality = NorwayTools.MunicipalityCodeToMunicipalityName[municipality],
                             PopulationForYear = new Collection<PopulationForAGivenYear>(years.Select(year =>
                                     new PopulationForAGivenYear
-                                        {Year = year, Population = municipalityYears[NorwayTools.YearToIndexPopulation[year]]})
+                                    {
+                                        Year = year,
+                                        Population = municipalityYears[NorwayTools.YearToIndexPopulation[year]]
+                                    })
                                 .ToList())
                         }).ToList();
                 }
