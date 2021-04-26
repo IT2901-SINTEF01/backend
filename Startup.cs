@@ -64,21 +64,8 @@ namespace Backend
                     client.DefaultRequestHeaders.UserAgent.ParseAdd(
                         "DVT/1.0 (fredrik.malmo@icloud.com)");
                 });
-                services.AddHttpClient<IPopulationInNorwayService, PopulationInNorwayService>(client =>
-                    {
-                        client.DefaultRequestHeaders.Accept.Add(
-                            new MediaTypeWithQualityHeaderValue("application/json"));
-                        client.DefaultRequestHeaders.UserAgent.ParseAdd(
-                            "DVT/1.0 (fredrik.malmo@icloud.com)");
-                    }
-                );
-                services.AddHttpClient<ITaxAssessmentService, TaxAssessmentService>(client =>
-                {
-                    client.DefaultRequestHeaders.Accept.Add(
-                        new MediaTypeWithQualityHeaderValue("application/json"));
-                    client.DefaultRequestHeaders.UserAgent.ParseAdd(
-                        "DVT/1.0 (fredrik.malmo@icloud.com)");
-                });
+                services.AddHttpClient<IPopulationInNorwayService, PopulationInNorwayService>();
+                services.AddHttpClient<ITaxAssessmentService, TaxAssessmentService>();
             }
 
             services
