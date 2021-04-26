@@ -9,6 +9,6 @@ namespace Backend.Models.SSBTaxAssessment.POCO
 
         /// Format: [ [ year, taxes ] ]
         [JsonPropertyName("taxesForYear")]
-        public Collection<TaxesForAGivenYear> TaxesForYear { get; init; }
+        public Collection<AnnualTaxes> TaxesForYear { get; init; }
     }
 }

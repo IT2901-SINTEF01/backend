@@ -3,7 +3,7 @@ using GraphQL.Types;
 
 namespace Backend.Models.SSBTaxAssessment.GraphQLTypes
 {
-    public class TaxesForYearType : ObjectGraphType<TaxesForAGivenYear>
+    public class TaxesForYearType : ObjectGraphType<AnnualTaxes>
     {
         public TaxesForYearType()
         {
