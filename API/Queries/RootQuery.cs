@@ -19,6 +19,7 @@ namespace Backend.API.Queries
                 (IPopulationInNorwayService) serviceProvider.GetService(typeof(IPopulationInNorwayService));
             var taxAssessmentService =
                 (ITaxAssessmentService) serviceProvider.GetService(typeof(ITaxAssessmentService));
+            
             Field<ForecastType>("forecast", "Latitude and Longitude defaults to the coordinates of Trondheim",
                 new QueryArguments
                 {
