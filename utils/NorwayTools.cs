@@ -1305,7 +1305,7 @@ namespace Backend.utils
             {"2025", 505},
             {"2027", 506},
             {"2028", 507},
-            {"2030", 508},
+            {"2030", 508}
         };
 
         public static readonly Dictionary<string, string> MunicipalityCodeToMunicipalityNameTaxes = new()
@@ -1818,7 +1818,7 @@ namespace Backend.utils
             {"2025", "Deatnu - Tana (-2019)"},
             {"2027", "Unjárga - Nesseby (-2019)"},
             {"2028", "Båtsfjord (1955-2019)"},
-            {"2030", "Sør-Varanger (-2019)"},
+            {"2030", "Sør-Varanger (-2019)"}
         };
 
         public static readonly Dictionary<string, string> YearToYearString = new()

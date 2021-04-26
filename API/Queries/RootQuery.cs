@@ -47,8 +47,8 @@ namespace Backend.API.Queries
                 null,
                 _ => populationService?.GetPopulationsInNorway());
 
-            Field<TaxAssessmentType>("taxAssesment",
-                "Main entries from the tax assessment. Residents, by age. Average (NOK). Counties, 1999 - latest year",
+            Field<TaxAssessmentType>("taxAssessment",
+                "Main entries from the tax assessment. Residents, by age. Average and median (NOK). Municipalities, 1999 - latest year",
                 null, _ => taxAssessmentService?.GetTaxAssessment());
         }
     }

@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Backend.Models.Base.JsonStat;
-using Backend.Models.SSBPopulationStatistics.GraphQLTypes;
 using Backend.Models.SSBTaxAssessment.POCO;
 using Backend.utils;
 using GraphQL;
@@ -22,12 +20,11 @@ namespace Backend.Models.SSBTaxAssessment.GraphQLTypes
                 {
                     var municipalities = context.Parent.GetArgument<List<string>>("municipalities");
                     var years = context.Parent.GetArgument<List<string>>("years");
-
+                    var skipSize = context.Source.Dimension.Size[3];
                     var municipalityEntrySize = context.Source.Dimension.Size[0];
-
                     return (from municipality in municipalities
                         let municipalityYears = context.Source.Value
-                            .Skip(NorwayTools.MunicipalityCodeToIndexTaxes[municipality] * municipalityEntrySize)
+                            .Skip(NorwayTools.MunicipalityCodeToIndexTaxes[municipality] * 294)
                             .Take(municipalityEntrySize)
                             .ToList()
                         select new LabeledValueTax
@@ -35,7 +32,31 @@ namespace Backend.Models.SSBTaxAssessment.GraphQLTypes
                             Municipality = NorwayTools.MunicipalityCodeToMunicipalityNameTaxes[municipality],
                             TaxesForYear = new Collection<TaxesForAGivenYear>(years.Select(year =>
                                     new TaxesForAGivenYear
-                                        {Year = year, Taxes = municipalityYears[NorwayTools.YearToIndexTaxes[year]]})
+                                    {
+                                        Year = year,
+                                        Brutto = municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize],
+                                        LonnInnt = municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 1],
+                                        Uskstt = municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 2],
+                                        AllmennInnt =
+                                            municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 3],
+                                        BankInn = municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 4],
+                                        BrFormue = municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 5],
+                                        Gjeld = municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 6],
+                                        MedianBtoInnt =
+                                            municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 7],
+                                        MedianLonnInnt =
+                                            municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 8],
+                                        MedianUtlignSkatt =
+                                            municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 9],
+                                        MedianAlmInnt =
+                                            municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 10],
+                                        MedianBankInns =
+                                            municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 11],
+                                        MedianBtoFormue =
+                                            municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 12],
+                                        MedianGjeld =
+                                            municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 13]
+                                    })
                                 .ToList())
                         }).ToList();
                 });
