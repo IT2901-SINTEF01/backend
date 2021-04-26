@@ -1,7 +1,7 @@
-using System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Backend.Mocks.SSB;
 using Backend.Models.SSBTaxAssessment.POCO;
 
 namespace Backend.API.Services
@@ -30,9 +30,10 @@ namespace Backend.API.Services
 
     public class TaxAssessmentServiceMocked : ITaxAssessmentService
     {
-        public Task<TaxAssessment> GetTaxAssessment()
+        public async Task<TaxAssessment> GetTaxAssessment()
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(MockTaxAssessmentInNorway.GenerateSampleTaxAssessments())
+                .ConfigureAwait(false);
         }
     }
 }
