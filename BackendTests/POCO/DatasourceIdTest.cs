@@ -23,6 +23,7 @@ namespace BackendTests.POCO
         {
             Assert.Equal("SSB_POPULATION", DatasourceId.SsbPopulation.Value);
             Assert.Equal("MET_API", DatasourceId.MetAPI.Value);
+            Assert.Equal("SSB_TAX", DatasourceId.SsbTax.Value);
         }
     }
 }
