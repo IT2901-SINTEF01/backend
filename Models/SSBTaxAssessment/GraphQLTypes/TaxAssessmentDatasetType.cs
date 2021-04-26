@@ -31,8 +31,8 @@ namespace Backend.Models.SSBTaxAssessment.GraphQLTypes
                         select new LabeledValueTax
                         {
                             Municipality = NorwayTools.MunicipalityCodeToMunicipalityNameTaxes[municipality],
-                            TaxesForYear = new Collection<TaxesForAGivenYear>(years.Select(year =>
-                                    new TaxesForAGivenYear
+                            TaxesForYear = new Collection<AnnualTaxes>(years.Select(year =>
+                                    new AnnualTaxes
                                     {
                                         Year = year,
                                         Brutto = municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize],

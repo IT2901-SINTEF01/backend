@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Backend.Models.SSBTaxAssessment.POCO
 {
-    public class TaxesForAGivenYear
+    public class AnnualTaxes
     {
         /// <summary>
         ///     Class names are derived from SSB's own codes in their documentation.
