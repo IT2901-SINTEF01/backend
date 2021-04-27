@@ -32,32 +32,28 @@ namespace Backend.Models.SSBTaxAssessment.GraphQLTypes
                         {
                             Municipality = NorwayTools.MunicipalityCodeToMunicipalityNameTaxes[municipality],
                             TaxesForYear = new Collection<AnnualTaxes>(years.Select(year =>
-                                    new AnnualTaxes
                                     {
-                                        Year = year,
-                                        Brutto = municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize],
-                                        LonnInnt = municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 1],
-                                        Uskstt = municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 2],
-                                        AllmennInnt =
-                                            municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 3],
-                                        BankInn = municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 4],
-                                        BrFormue = municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 5],
-                                        Gjeld = municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 6],
-                                        MedianBtoInnt =
-                                            municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 7],
-                                        MedianLonnInnt =
-                                            municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 8],
-                                        MedianUtlignSkatt =
-                                            municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 9],
-                                        MedianAlmInnt =
-                                            municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 10],
-                                        MedianBankInns =
-                                            municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 11],
-                                        MedianBtoFormue =
-                                            municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 12],
-                                        MedianGjeld =
-                                            municipalityYears[NorwayTools.YearToIndexTaxes[year] * skipSize + 13]
-                                    })
+                                        var yearIndex = NorwayTools.YearToIndexTaxes[year];
+                                        return new AnnualTaxes
+                                        {
+                                            Year = year,
+                                            Brutto = municipalityYears[yearIndex * skipSize],
+                                            LonnInnt = municipalityYears[yearIndex * skipSize + 1],
+                                            Uskstt = municipalityYears[yearIndex * skipSize + 2],
+                                            AllmennInnt = municipalityYears[yearIndex * skipSize + 3],
+                                            BankInn = municipalityYears[yearIndex * skipSize + 4],
+                                            BrFormue = municipalityYears[yearIndex * skipSize + 5],
+                                            Gjeld = municipalityYears[yearIndex * skipSize + 6],
+                                            MedianBtoInnt = municipalityYears[yearIndex * skipSize + 7],
+                                            MedianLonnInnt = municipalityYears[yearIndex * skipSize + 8],
+                                            MedianUtlignSkatt = municipalityYears[yearIndex * skipSize + 9],
+                                            MedianAlmInnt = municipalityYears[yearIndex * skipSize + 10],
+                                            MedianBankInns = municipalityYears[yearIndex * skipSize + 11],
+                                            MedianBtoFormue = municipalityYears[yearIndex * skipSize + 12],
+                                            MedianGjeld = municipalityYears[yearIndex * skipSize + 13]
+                                        };
+                                    }
+                                )
                                 .ToList())
                         }).ToList();
                 });
