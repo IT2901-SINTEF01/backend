@@ -3,6 +3,7 @@ using Backend.API.Services;
 using Backend.Models.Base.Metadata.GraphQLTypes;
 using Backend.Models.MetAPI.GraphQLTypes;
 using Backend.Models.SSBPopulationStatistics.GraphQLTypes;
+using Backend.Models.SSBTaxAssessment.GraphQLTypes;
 using GraphQL;
 using GraphQL.Types;
 
@@ -16,7 +17,9 @@ namespace Backend.API.Queries
             var metadataService = (IMetadataService) serviceProvider.GetService(typeof(IMetadataService));
             var populationService =
                 (IPopulationInNorwayService) serviceProvider.GetService(typeof(IPopulationInNorwayService));
-
+            var taxAssessmentService =
+                (ITaxAssessmentService) serviceProvider.GetService(typeof(ITaxAssessmentService));
+            
             Field<ForecastType>("forecast", "Latitude and Longitude defaults to the coordinates of Trondheim",
                 new QueryArguments
                 {
@@ -44,6 +47,10 @@ namespace Backend.API.Queries
                 "Populations in Norway per municipality from 1986 to this year.",
                 null,
                 _ => populationService?.GetPopulationsInNorway());
+
+            Field<TaxAssessmentType>("taxAssessment",
+                "Main entries from the tax assessment. Residents, by age. Average and median (NOK). Municipalities, 1999 - latest year",
+                null, _ => taxAssessmentService?.GetTaxAssessment());
         }
     }
 }

@@ -9,7 +9,7 @@ namespace BackendTests.Mocks
     public class PopulationInNorwayTests
     {
         private readonly int _numMunicipalities = NorwayTools.MunicipalityCodeToIndex.Count;
-        private readonly int _numYears = NorwayTools.YearToIndex.Count;
+        private readonly int _numYears = NorwayTools.YearToIndexPopulation.Count;
         private readonly PopulationPerMunicipalityNorway _population;
         private readonly Random _r;
 
