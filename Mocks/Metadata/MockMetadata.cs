@@ -36,7 +36,7 @@ namespace Backend.Mocks.Metadata
                     f => f.Random.ArrayElement(new[] {DatasourceId.SsbPopulation.Value, DatasourceId.MetAPI.Value}))
                 .RuleFor(o => o.Description, f => f.Lorem.Paragraph())
                 .RuleFor(o => o.Name, f => f.Name.JobArea())
-                .RuleFor(o => o.Published, f => f.Date.Recent().ToLongDateString())
+                .RuleFor(o => o.Published, f => f.Date.Recent().ToString("u").Replace(' ', 'T'))
                 .RuleFor(o => o.Updated, f => f.Date.Recent().ToLongDateString())
                 .RuleFor(o => o.Source, f => f.Internet.Url())
                 .RuleFor(o => o.Tags, f => new Collection<string>(f.Make(3, () => f.System.CommonFileName())))
