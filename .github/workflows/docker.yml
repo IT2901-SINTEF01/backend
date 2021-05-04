@@ -23,7 +23,7 @@ jobs:
                 uses: actions/checkout@v2
             -   name: Docker metainformation
                 id: docker_meta
-                uses: crazy-max/ghaction-docker-meta@v2.3.0
+                uses: crazy-max/ghaction-docker-meta@v2.4.0
                 with:
                     images: |
                         ghcr.io/it2901-sintef01/backend
