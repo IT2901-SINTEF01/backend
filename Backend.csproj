@@ -10,7 +10,7 @@
         <PackageReference Include="Bogus" Version="33.0.2" />
         <PackageReference Include="dotenv.net" Version="3.0.0" />
         <PackageReference Include="GraphQL" Version="4.4.0" />
-        <PackageReference Include="GraphQL.DataLoader" Version="4.4.0" />
+        <PackageReference Include="GraphQL.DataLoader" Version="4.5.0" />
         <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="5.0.2" />
         <PackageReference Include="GraphQL.Server.Transports.AspNetCore.SystemTextJson" Version="5.0.2" />
         <PackageReference Include="GraphQL.Server.Transports.WebSockets" Version="4.4.1" />
