@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:6.0.300 AS build-env
 WORKDIR /app
 
 # Restore project
@@ -13,7 +13,7 @@ RUN dotnet publish Backend.csproj -c Debug -o out
 EXPOSE 80/tcp
 
 # Start server
-FROM mcr.microsoft.com/dotnet/sdk:5.0
+FROM mcr.microsoft.com/dotnet/sdk:6.0.300
 
 # Label for GCR
 LABEL org.opencontainers.image.source=https://github.com/it2901-sintef01/backend
